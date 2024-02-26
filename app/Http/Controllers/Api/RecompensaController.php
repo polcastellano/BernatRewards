@@ -20,6 +20,7 @@ class RecompensaController extends Controller
             'descripcion' => 'required|max:150',
             'precio' => 'required',
             'imagen' => 'nullable',
+            'nivel_desbloqueo' => 'required',
         ]);
 
         $recompensa = $request->all();

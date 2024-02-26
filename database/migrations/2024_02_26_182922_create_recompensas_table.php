@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->double('precio');
             $table->string('imagen')->nullable();
+            $table->unsignedBigInteger('nivel_desbloqueo');
             $table->timestamps();
         });
     }

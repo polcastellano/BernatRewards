@@ -14,5 +14,6 @@ class Recompensa extends Model
         'descripcion',
         'precio',
         'imagen',
+        'nivel_desbloqueo',
     ];
 }
