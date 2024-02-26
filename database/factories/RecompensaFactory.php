@@ -18,6 +18,8 @@ class RecompensaFactory extends Factory
     {
         return [
             //
+
+            
         ];
     }
 }
