@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ExerciseController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\api\RecompensaController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\Api\UserController;
@@ -23,6 +24,14 @@ Route::post('tasks/', [TaskController::class, 'store']);
 Route::put('tasks/update/{id}', [TaskController::class, 'update']);
 Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 Route::get('tasks/{id}', [TaskController::class, 'edit']);
+
+Route::get('recompensas', [RecompensaController::class, 'index']);
+Route::post('recompensas/', [RecompensaController::class, 'store']);
+Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
+Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
+
+
+
 
 
 
