@@ -19,16 +19,27 @@ use PHPUnit\Framework\Attributes\Ticket;
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
 
+//Api Tareas
 Route::get('tasks', [TaskController::class, 'index']);
 Route::post('tasks/', [TaskController::class, 'store']);
 Route::put('tasks/update/{id}', [TaskController::class, 'update']);
 Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 Route::get('tasks/{id}', [TaskController::class, 'edit']);
 
+//Api Recompensas
 Route::get('recompensas', [RecompensaController::class, 'index']);
 Route::post('recompensas/', [RecompensaController::class, 'store']);
 Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
+
+//Api Categorias
+
+//Api Pedidos
+
+//Api Usuarios
+
+//Api Niveles
+
 
 
 
