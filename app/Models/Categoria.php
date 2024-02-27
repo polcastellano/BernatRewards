@@ -12,4 +12,8 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    public function recompensas(){
+        return $this->belongsToMany(Recompensa::class,'id');
+    }
 }

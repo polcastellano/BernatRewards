@@ -16,4 +16,11 @@ class Recompensa extends Model
         'imagen',
         'nivel_desbloqueo',
     ];
+
+    public function categorias(){
+        return $this->belongsToMany(Categoria::class, 'id');
+    }
+
 }
+
+
