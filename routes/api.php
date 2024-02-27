@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ExerciseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\api\RecompensaController;
+use App\Http\Controllers\api\CategoriaController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\Api\UserController;
@@ -33,10 +34,10 @@ Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
 
 // //Api Categorias
-// Route::get('categorias', [CategoriaController::class, 'index']);
-// Route::post('categorias/', [CategoriaController::class, 'store']);
-// Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
-// Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
+Route::get('categorias', [CategoriaController::class, 'index']);
+Route::post('categorias/', [CategoriaController::class, 'store']);
+Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
+Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 
 // //Api Pedidos
 // Route::get('pedidos', [PedidoController::class, 'index']);
