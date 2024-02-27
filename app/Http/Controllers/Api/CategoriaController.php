@@ -47,7 +47,7 @@ class CategoriaController extends Controller
 
         $categoria->delete();
 
-        return response()->json(['success' => true, 'data' => 'categoria eliminada correctamente']);
+        return response()->json(['success' => true, 'data' => 'Categoria eliminada correctamente']);
 
     }
 }

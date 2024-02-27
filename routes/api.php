@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ExerciseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\api\RecompensaController;
 use App\Http\Controllers\api\CategoriaController;
+use App\Http\Controllers\api\PedidoController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\Api\UserController;
@@ -33,17 +34,17 @@ Route::post('recompensas/', [RecompensaController::class, 'store']);
 Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
 
-// //Api Categorias
+//Api Categorias
 Route::get('categorias', [CategoriaController::class, 'index']);
 Route::post('categorias/', [CategoriaController::class, 'store']);
 Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 
-// //Api Pedidos
-// Route::get('pedidos', [PedidoController::class, 'index']);
-// Route::post('pedidos/', [PedidoController::class, 'store']);
-// Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
-// Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
+//Api Pedidos
+Route::get('pedidos', [PedidoController::class, 'index']);
+Route::post('pedidos/', [PedidoController::class, 'store']);
+Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
+Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 
 // //Api Usuarios
 // Route::get('usuarios', [UsuarioController::class, 'index']);
