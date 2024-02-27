@@ -42,10 +42,10 @@ Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 
 // //Api Pedidos
-// Route::get('pedidos', [PedidoController::class, 'index']);
-// Route::post('pedidos/', [PedidoController::class, 'store']);
-// Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
-// Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
+Route::get('pedidos', [PedidoController::class, 'index']);
+Route::post('pedidos/', [PedidoController::class, 'store']);
+Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
+Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 
 // //Api Usuarios
 Route::get('usuarios', [UsuarioController::class, 'index']);
