@@ -10,6 +10,7 @@ use App\Http\Controllers\api\CategoriaController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\api\UsuarioController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,16 +41,16 @@ Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 
 // //Api Pedidos
-// Route::get('pedidos', [PedidoController::class, 'index']);
-// Route::post('pedidos/', [PedidoController::class, 'store']);
-// Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
-// Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
+Route::get('pedidos', [PedidoController::class, 'index']);
+Route::post('pedidos/', [PedidoController::class, 'store']);
+Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
+Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 
 // //Api Usuarios
-// Route::get('usuarios', [UsuarioController::class, 'index']);
-// Route::post('usuarios/', [UsuarioController::class, 'store']);
-// Route::put('usuarios/update/{id}', [UsuarioController::class, 'update']);
-// Route::delete('usuarios/{id}', [UsuarioController::class, 'destroy']);
+Route::get('usuarios', [UsuarioController::class, 'index']);
+Route::post('usuarios/', [UsuarioController::class, 'store']);
+Route::put('usuarios/update/{id}', [UsuarioController::class, 'update']);
+Route::delete('usuarios/{id}', [UsuarioController::class, 'destroy']);
 
 // //Api Niveles
 // Route::get('niveles', [NivelController::class, 'index']);
