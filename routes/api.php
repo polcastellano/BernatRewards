@@ -48,12 +48,6 @@ Route::post('pedidos/', [PedidoController::class, 'store']);
 Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
 Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 
-// //Api Usuarios
-Route::get('usuarios', [UsuarioController::class, 'index']);
-Route::post('usuarios/', [UsuarioController::class, 'store']);
-Route::put('usuarios/update/{id}', [UsuarioController::class, 'update']);
-Route::delete('usuarios/{id}', [UsuarioController::class, 'destroy']);
-
 // //Api Niveles
 Route::get('niveles', [NivelController::class, 'index']);
 Route::post('niveles/', [NivelController::class, 'store']);

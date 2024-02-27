@@ -14,6 +14,6 @@ class Categoria extends Model
     ];
 
     public function recompensas(){
-        return $this->belongsToMany(Recompensa::class,'id');
+        return $this->belongsToMany(Recompensa::class, 'categorias_recompensas', 'categoria_id', 'recompensa_id');
     }
 }
