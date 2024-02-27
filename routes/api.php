@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ExerciseController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\api\RecompensaController;
 use App\Http\Controllers\api\CategoriaController;
+use App\Http\Controllers\api\NivelController;
 use App\Http\Controllers\api\PedidoController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
@@ -54,10 +55,10 @@ Route::put('usuarios/update/{id}', [UsuarioController::class, 'update']);
 Route::delete('usuarios/{id}', [UsuarioController::class, 'destroy']);
 
 // //Api Niveles
-// Route::get('niveles', [NivelController::class, 'index']);
-// Route::post('niveles/', [NivelController::class, 'store']);
-// Route::put('niveles/update/{id}', [NivelController::class, 'update']);
-// Route::delete('niveles/{id}', [NivelController::class, 'destroy']);
+Route::get('niveles', [NivelController::class, 'index']);
+Route::post('niveles/', [NivelController::class, 'store']);
+Route::put('niveles/update/{id}', [NivelController::class, 'update']);
+Route::delete('niveles/{id}', [NivelController::class, 'destroy']);
 
 
 
