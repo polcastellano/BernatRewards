@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('recompensa_id')->references('id')->on('recompensas')->onDelete('cascade');
             $table->primary(['categoria_id', 'recompensa_id']);
+            $table->timestamps();
+
         });
     }
 
