@@ -4,13 +4,16 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pedido;
+use App\Models\Recompensa;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
     public function index(){
         
-        $pedidos = Pedido::with('recompensas')->get();
+        // $recompensas = Recompensa::with('categorias')->get(); duda
+
+        $pedidos = Pedido::with('recompensas.categorias')->get();
         return $pedidos;
     }
 
