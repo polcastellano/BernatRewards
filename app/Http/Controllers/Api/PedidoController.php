@@ -10,8 +10,8 @@ class PedidoController extends Controller
 {
     public function index(){
         
-        $recompensas = Pedido::all()->toArray();
-        return $recompensas;
+        $pedidos = Pedido::with('recompensas')->get();
+        return $pedidos;
     }
 
     public function store(Request $request){
