@@ -37,20 +37,5 @@ class RecompensaTableSeeder extends Seeder
             ['categoria_id' => '1', 'recompensa_id' => '2']
         ];
         $recompensa->categorias()->attach($r);
-
-        // $categoriaRecompensa1 = CategoriaRecompensa::create([
-        //     'categoria_id' => '3',
-        //     'recompensa_id' => '1',
-        // ]);
-
-        // $categoriaRecompensa11 = CategoriaRecompensa::create([
-        //     'categoria_id' => '2',
-        //     'recompensa_id' => '1',
-        // ]);
-
-        // $categoriaRecompensa2 = CategoriaRecompensa::create([
-        //     'categoria_id' => '1',
-        //     'recompensa_id' => '2',
-        // ]);
     }
 }

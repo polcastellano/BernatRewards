@@ -15,4 +15,9 @@ class Pedido extends Model
         'usuario_id',
         'fecha',
     ];
+
+    public function recompensas(){
+
+        return $this->belongsToMany(Recompensa::class, 'pedidos_recompensas');
+    }
 }

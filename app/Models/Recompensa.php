@@ -24,6 +24,11 @@ class Recompensa extends Model
         return $this->belongsToMany(Categoria::class, 'categorias_recompensas');
     }
 
+    public function pedidos(){
+
+        return $this->belongsToMany(Pedido::class, 'pedidos_recompensas');
+    }
+
 }
 
 
