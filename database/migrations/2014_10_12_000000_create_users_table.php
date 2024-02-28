@@ -1,6 +1,5 @@
 <?php
 
-use Database\Factories\UserFactory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +12,6 @@ return new class extends Migration
      * @return void
      */
 
-    protected $model = UserFactory::class;
 
     public function up()
     {
