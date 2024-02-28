@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('categorias_recompensas', function (Blueprint $table) {
             $table->unsignedBigInteger('categoria_id');
-            $table->unsignedBigInteger('recompensa_id');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+
+            $table->unsignedBigInteger('recompensa_id');
             $table->foreign('recompensa_id')->references('id')->on('recompensas')->onDelete('cascade');
+            
             $table->primary(['categoria_id', 'recompensa_id']);
             $table->timestamps();
 

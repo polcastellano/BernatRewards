@@ -10,7 +10,7 @@ class RecompensaController extends Controller
 {
     public function index(){
         
-        $recompensas = Recompensa::all()->toArray();
+        $recompensas = Recompensa::with('categorias')->get();
         return $recompensas;
     }
 

@@ -10,8 +10,8 @@ class CategoriaController extends Controller
 {
     public function index(){
         
-        $recompensas = Categoria::all()->toArray();
-        return $recompensas;
+        $categorias = Categoria::with('recompensas')->get();
+        return $categorias;
     }
 
     public function store(Request $request){

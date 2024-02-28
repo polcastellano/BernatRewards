@@ -30,19 +30,27 @@ class RecompensaTableSeeder extends Seeder
             'nivel_desbloqueo' => '5',
         ]);
 
-        $categoriaRecompensa1 = CategoriaRecompensa::create([
-            'categoria_id' => '3',
-            'recompensa_id' => '1',
-        ]);
+        $r = 
+        [
+            ['categoria_id' => '3', 'recompensa_id' => '1'],
+            ['categoria_id' => '2', 'recompensa_id' => '1'],
+            ['categoria_id' => '1', 'recompensa_id' => '2']
+        ];
+        $recompensa->categorias()->attach($r);
 
-        $categoriaRecompensa11 = CategoriaRecompensa::create([
-            'categoria_id' => '2',
-            'recompensa_id' => '1',
-        ]);
+        // $categoriaRecompensa1 = CategoriaRecompensa::create([
+        //     'categoria_id' => '3',
+        //     'recompensa_id' => '1',
+        // ]);
 
-        $categoriaRecompensa2 = CategoriaRecompensa::create([
-            'categoria_id' => '1',
-            'recompensa_id' => '2',
-        ]);
+        // $categoriaRecompensa11 = CategoriaRecompensa::create([
+        //     'categoria_id' => '2',
+        //     'recompensa_id' => '1',
+        // ]);
+
+        // $categoriaRecompensa2 = CategoriaRecompensa::create([
+        //     'categoria_id' => '1',
+        //     'recompensa_id' => '2',
+        // ]);
     }
 }

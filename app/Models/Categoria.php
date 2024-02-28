@@ -9,11 +9,13 @@ class Categoria extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     protected $fillable = [
         'nombre',
     ];
 
     public function recompensas(){
-        return $this->belongsToMany(Recompensa::class, 'categorias_recompensas', 'categoria_id', 'recompensa_id');
+        return $this->belongsToMany(Recompensa::class, 'categorias_recompensas');
     }
 }
