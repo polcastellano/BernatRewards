@@ -26,6 +26,7 @@ class User extends Authenticatable
         'age',
         'telephone',
         'experience',
+        'id_nivel',
     ];
 
     /**

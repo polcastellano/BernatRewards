@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(PermissionTableSeeder::class);
+        $this->call(NivelTableSeeder::class); //Poner delante de ADMINUSER SEEDER
+
         $this->call(CreateAdminUserSeeder::class);
         $this->call(CategoriaTableSeeder::class);
         $this->call(RecompensaTableSeeder::class);
-        $this->call(NivelTableSeeder::class); //Poner delante de ADMINUSER SEEDER
         $this->call(PedidoTableSeeder::class);
 
 

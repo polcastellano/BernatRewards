@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('age')->nullable();
             $table->unsignedBigInteger('telephone')->nullable();
             $table->unsignedBigInteger('nivel_id')->default(0);
-            // $table->foreign('nivel_id')->references('id')->on('niveles')->onDelete('cascade');
+            $table->foreign('nivel_id')->references('id')->on('niveles')->onDelete('cascade');
             $table->unsignedBigInteger('experience')->default(0);
             $table->rememberToken();
             $table->timestamps();
