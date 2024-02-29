@@ -13,6 +13,11 @@ class NivelTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $nivel0 = Nivel::create([
+            'numero' => '0',
+            'experiencia' => '0',
+        ]);
+
         $nivel1 = Nivel::create([
             'numero' => '1',
             'experiencia' => '1000',

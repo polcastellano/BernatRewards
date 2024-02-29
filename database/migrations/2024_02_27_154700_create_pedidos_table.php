@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cantidad');
             $table->double('precio_total');
             $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('fecha');
             $table->timestamps();
         });
