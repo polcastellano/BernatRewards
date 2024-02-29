@@ -21,11 +21,19 @@ class RecompensaController extends Controller
             'precio' => 'required',
             'imagen' => 'nullable',
             'nivel_desbloqueo' => 'required',
+            'categorias' => 'required',
         ]);
 
         $recompensa = $request->all();
 
         $data = Recompensa::create($recompensa);
+
+        $categorias = $request->get('categorias');
+        
+        $categoriasSeparadas = explode(',', $categorias);
+
+        $data->categorias()->attach($categoriasSeparadas);
+        
 
         return response()->json(['success' => true, 'data' => $data]);
 
