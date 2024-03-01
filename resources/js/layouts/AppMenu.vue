@@ -42,6 +42,12 @@ const model = ref([
         items: [
             { label: 'Posts', icon: 'pi pi-fw pi-id-card', to: '/admin/posts', permision: 'post-list' }
         ]
+    },
+    {
+        label: 'Recompensas',
+        items: [
+            { label: 'Recompensas', icon: 'pi pi-fw pi-bookmark', to: '/admin/recompensas', permision: 'all' }//DUDA DEL PERMISION
+        ]
     }
 ]);
 </script>

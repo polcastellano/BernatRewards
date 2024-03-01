@@ -35,6 +35,7 @@ Route::get('recompensas', [RecompensaController::class, 'index']);
 Route::post('recompensas/', [RecompensaController::class, 'store']);
 Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
+Route::get('recompensas/{id}', [RecompensaController::class, 'edit']);
 
 //Api Categorias
 Route::get('categorias', [CategoriaController::class, 'index']);

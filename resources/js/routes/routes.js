@@ -13,6 +13,9 @@ const ExercisesEdit  = ()  => import('../views/admin/exercises/Edit.vue');
 const TasksList  = ()  => import('../views/admin/tasks/Index.vue');
 const TasksCreate  = ()  => import('../views/admin/tasks/Create.vue');
 const TasksUpdate  = ()  => import('../views/admin/tasks/Update.vue');
+const RecompensasList  = ()  => import('../views/admin/recompensas/Index.vue');
+const RecompensasCreate  = ()  => import('../views/admin/recompensas/Create.vue');
+const RecompensasUpdate  = ()  => import('../views/admin/recompensas/Update.vue');
 
 
 function requireLogin(to, from, next) {
@@ -152,6 +155,35 @@ export default [
                         path: 'update/:id',
                         component: TasksUpdate,
                         meta: { breadCrumb: 'Editar tarea',
+                        linked: false,}
+                    }
+                ]
+            },
+
+            
+
+            {
+                name: 'recompensas',
+                path: 'recompensas',
+                meta: { breadCrumb: 'Recompensas'},
+                children: [
+                    {
+                        name: 'recompensas.index',
+                        path: '',
+                        component: RecompensasList,
+                        meta: { breadCrumb: 'Listado recompensas' }
+                    },
+                    {
+                        name: 'recompensas.create',
+                        path: 'create',
+                        component: RecompensasCreate,
+                        meta: { breadCrumb: 'Crear recompensa' }
+                    },
+                    {
+                        name: 'recompensas.update',
+                        path: 'update/:id',
+                        component: RecompensasUpdate,
+                        meta: { breadCrumb: 'Editar recompensa',
                         linked: false,}
                     }
                 ]

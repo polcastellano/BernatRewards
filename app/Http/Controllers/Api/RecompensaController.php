@@ -66,4 +66,11 @@ class RecompensaController extends Controller
         return response()->json(['success' => true, 'data' => 'Recompensa eliminada correctamente']);
 
     }
+
+    public function edit($id){
+        $recompensa = Recompensa::find($id);
+
+        return response()->json(['success' => true, 'data' => $recompensa]);
+
+    }
 }

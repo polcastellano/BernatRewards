@@ -46,7 +46,7 @@
                     <input class="form-control" type="number" v-model="recompensa.nivel_desbloqueo" name="Nivel desbloqueo" />
                 </div>
 
-                <!-- <div class="mb-3">
+                <div class="mb-3">
                           
                     <MultiSelect v-model="recompensa.categorias" filter :options="categoryList" dataKey="id"
                         optionLabel="name" placeholder="Seleciona una categoría" display="chip"
@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                </div> -->
+                </div>
                 
 
                 <button type="submit" @click="saveRecompensa(recompensa.id)" class="btn btn-primary mt-4 mb-4">Añadir Recompensa</button>
