@@ -36,7 +36,12 @@ class CreateAdminUserSeeder extends Seeder
             'exercise-create',
             'exercise-edit',
             'exercise-all',
-            'exercise-delete'
+            'exercise-delete',
+            'recompensa-list',
+            'recompensa-create',
+            'recompensa-edit',
+            'recompensa-all',
+            'recompensa-delete'
         ];
         $role2->syncPermissions($permissions);
         Category::create(['name' => 'Vue.js']);

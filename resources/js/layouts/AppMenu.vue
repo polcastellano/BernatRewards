@@ -46,7 +46,7 @@ const model = ref([
     {
         label: 'Recompensas',
         items: [
-            { label: 'Recompensas', icon: 'pi pi-fw pi-bookmark', to: '/admin/recompensas', permision: 'all' }//DUDA DEL PERMISION
+            { label: 'Recompensas', icon: 'pi pi-fw pi-bookmark', to: '/admin/recompensas', permision: 'all' }
         ]
     }
 ]);
