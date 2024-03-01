@@ -1,7 +1,7 @@
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
-            <img src="/images/bernatRewards.svg" alt="logo" />
+            <img src="/images/bernatRewards_Titulo.svg" alt="logo" />
             <span></span>
         </router-link>
 
