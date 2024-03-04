@@ -18,10 +18,10 @@
                                     </div>
                                 </div>
                                 <!-- Password -->
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <input v-model="loginForm.password" id="password" type="password" class="form-control inputLogin" required autocomplete="current-password" :placeholder="$t('password')">
                                     <!-- Validation Errors -->
-                                    <div class="text-danger-600 mt-1">
+                                    <div class="text-danger-600 mt-2">
                                         <div v-for="message in validationErrors?.password">
                                             {{ message }}
                                         </div>
@@ -29,7 +29,7 @@
                                     <router-link :to="{name: 'auth.forgot-password'}" class="forgotPass">{{ $t('forgot_password')}}</router-link>
 
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mt-5">
+                                <div class="d-flex justify-content-between align-items-center mt-3">
                                     <!-- Remember me -->
                                     <div class="form-check p-0 align-items-center pl-4">
                                         <input class="form-check-input" type="checkbox" name="remember" v-model="loginForm.remember" id="flexCheckIndeterminate">

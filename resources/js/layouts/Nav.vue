@@ -4,11 +4,10 @@
 
         <router-link to="/" class="d-flex align-items-center container-logo">
             <img src="/images/bernatRewards_Titulo.svg" class="logo" alt="logo" />
-            <ul class="navbar-nav mt-2 mt-lg-0 me-auto ms-3 mb-2 mb-lg-0">
-                    <LocaleSwitcher />
-            </ul>
         </router-link>
-        
+        <ul class="navbar-nav mt-2 mt-lg-0 me-auto ms-3 mb-2 mb-lg-0">
+                    <LocaleSwitcher />
+        </ul>
 
 
             <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +62,7 @@ import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 
 <style>
 .container-logo{
-    width: 300px;
+    width: fit-content;
 }
 
 .logo{
