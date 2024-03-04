@@ -14,9 +14,9 @@ class CategoriaTableSeeder extends Seeder
     public function run(): void
     {
         $categorias = [
-            'subastas',
-            'ventajas',
-            'comodidades'
+            'Subastas',
+            'Ventajas',
+            'Comodidades'
         ];
 
         foreach ($categorias as $categoria) {
