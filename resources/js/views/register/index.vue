@@ -27,7 +27,7 @@
                                     </div>
                                 </div>
                                 <!-- Password -->
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <input v-model="registerForm.password" id="password" type="password" class="form-control inputRegister" autocomplete="current-password" :placeholder="$t('password')">
                                     <!-- Validation Errors -->
                                     <div class="text-danger-600 mt-1">
@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <input v-model="registerForm.password_confirmation" id="password_confirmation" type="password" class="form-control inputRegister" autocomplete="current-password" :placeholder="$t('confirm_password')">
                                     <!-- Validation Errors -->
                                     <div class="text-danger-600 mt-1">
@@ -48,7 +48,7 @@
 
                                 <!-- Buttons -->
                                 <div class="flex justify-content-end align-items-center mt-5">
-                                    <button class="btn btn-primary" :class="{ 'opacity-25': processing }" :disabled="processing">
+                                    <button class="btn btn-primary buttonRegister" :class="{ 'opacity-25': processing }" :disabled="processing">
                                         {{ $t('register') }}
                                     </button>
                                 </div>
@@ -85,7 +85,7 @@ const { registerForm, validationErrors, processing, submitRegister } = useAuth()
     font-size: small;
 }
 
-button{
+.buttonRegister{
     background-color: #145A79 !important;
     border-radius: 100px !important;
 

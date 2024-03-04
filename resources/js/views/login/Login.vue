@@ -40,7 +40,7 @@
 
                                     <!-- Buttons -->
                                     <div class="flex align-items-center">
-                                        <button class="btn btn-primary" :class="{ 'opacity-25': processing }" :disabled="processing">
+                                        <button class="btn btn-primary buttonLogin" :class="{ 'opacity-25': processing }" :disabled="processing">
                                             {{ $t('login') }}
                                         </button>
                                     </div>
@@ -79,7 +79,7 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
     color: #145A79;
 }
 
-button{
+.buttonLogin{
     background-color: #145A79 !important;
     border-radius: 100px !important;
 

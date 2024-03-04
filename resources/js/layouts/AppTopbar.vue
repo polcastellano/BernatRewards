@@ -3,6 +3,7 @@
         <router-link to="/" class="layout-topbar-logo">
             <img src="/images/bernatRewards_Titulo.svg" alt="logo" />
             <span></span>
+            
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
