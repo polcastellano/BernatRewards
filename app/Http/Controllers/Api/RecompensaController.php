@@ -10,11 +10,14 @@ class RecompensaController extends Controller
 {
     public function index(){
         
+        $this->authorize('recompensa-list');
         $recompensas = Recompensa::with('categorias')->get();
         return $recompensas;
     }
 
     public function store(Request $request){
+
+        $this->authorize('recompensa-create');
         $request->validate([
             'nombre' => 'required|max:15',
             'descripcion' => 'required|max:150',
@@ -40,6 +43,8 @@ class RecompensaController extends Controller
     }
 
     public function update($id, Request $request){
+
+        $this->authorize('recompensa-edit');
         $recompensa = Recompensa::find($id);
 
         $request->validate([
@@ -59,6 +64,8 @@ class RecompensaController extends Controller
     }
 
     public function destroy($id){
+        
+        $this->authorize('recompensa-delete');
         $recompensa = Recompensa::find($id);
 
         $recompensa->delete();
@@ -69,6 +76,8 @@ class RecompensaController extends Controller
 
     public function edit($id){
         $recompensa = Recompensa::find($id);
+
+        $recompensa->categorias;
 
         return response()->json(['success' => true, 'data' => $recompensa]);
 

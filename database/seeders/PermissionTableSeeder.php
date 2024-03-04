@@ -41,7 +41,12 @@ class PermissionTableSeeder extends Seeder
             'category-list',
             'category-create',
             'category-edit',
-            'category-delete'
+            'category-delete',
+            'recompensa-list',
+            'recompensa-create',
+            'recompensa-edit',
+            'recompensa-all',
+            'recompensa-delete'
         ];
 
         foreach ($permissions as $permission) {

@@ -20,7 +20,7 @@
 
             <form @submit.prevent="saveRecompensa">
 
-
+                
                 <div class="form-group mb-2">
                     <label>Nombre</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="recompensa.nombre" placeholder="Nombre recompensa">
@@ -47,8 +47,11 @@
                 </div>
 
                 <div class="mb-3">
-                          
-                    <MultiSelect v-model="recompensa.categorias" filter :options="categoryList" dataKey="id"
+                        
+                    <h6 class="mt-3">Categorías</h6>
+
+                    <!-- :options="listaCategorias" -->
+                    <MultiSelect v-model="recompensa.categorias" filter  dataKey="id" 
                         optionLabel="name" placeholder="Seleciona una categoría" display="chip"
                         class="w-full md:w-20rem">
                     </MultiSelect>
@@ -57,16 +60,16 @@
                         {{ errors }}
                     </div>
 
-                    <div class="text-danger mt-1">
-                        <div v-for="message in validationErrors?.categories">
+                    <!-- <div class="text-danger mt-1">
+                        <div v-for="message in validationErrors?.categorias">
                             {{ message }}
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 
 
-                <button type="submit" @click="saveRecompensa(recompensa.id)" class="btn btn-primary mt-4 mb-4">Añadir Recompensa</button>
+                <button type="submit" @click="saveRecompensa(recompensa.id)" class="btn btn-primary mt-4 mb-4">Actualizar Recompensa</button>
 
 
             </form>
@@ -105,13 +108,17 @@ const { value: nombre } = useField('nombre', null, { initialValue: '' });
 const { value: descripcion } = useField('descripcion', null, { initialValue: '' });
 const { value: precio } = useField('precio', null, { initialValue: '' });
 const { value: nivel_desbloqueo } = useField('nivel_desbloqueo', null, { initialValue: '' });
+const { value: categorias } = useField('categorias', null, { initialValue: ''});
+
+
 
 
 const recompensa = reactive({
     nombre,
     descripcion,
     precio,
-    nivel_desbloqueo
+    nivel_desbloqueo,
+    categorias
 })
 
 
@@ -126,6 +133,7 @@ onMounted(() => {
         recompensa.descripcion = response.data.data.descripcion;
         recompensa.precio = response.data.data.precio;
         recompensa.nivel_desbloqueo = response.data.data.nivel_desbloqueo;
+        recompensa.categorias = response.data.data.categorias;
     })
     .catch(function(error) {
         console.log(error);
