@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use App\Models\Recompensa;
 use Illuminate\Http\Request;
 
@@ -53,11 +54,16 @@ class RecompensaController extends Controller
             'precio' => 'required',
             'imagen' => 'nullable',
             'nivel_desbloqueo' => 'required',
+            'categorias' => 'required'
         ]);
 
         $dataToUpdate = $request->all();
 
         $recompensa->update($dataToUpdate);
+
+        $categorias = Categoria::findMany($request->categorias);
+
+        $recompensa->categorias()->sync($categorias);
 
         return response()->json(['success' => true, 'data' => $recompensa]);
 

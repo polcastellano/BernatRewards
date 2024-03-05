@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoriaResource;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Psy\Readline\Hoa\Console;
 
 class CategoriaController extends Controller
 {
@@ -49,5 +51,10 @@ class CategoriaController extends Controller
 
         return response()->json(['success' => true, 'data' => 'Categoria eliminada correctamente']);
 
+    }
+
+    public function getCategorias(){
+        return Categoria::all();
+        
     }
 }

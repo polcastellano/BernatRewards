@@ -50,26 +50,19 @@
                         
                     <h6 class="mt-3">Categorías</h6>
 
-                    {{ recompensa.categorias }}
-                    <!-- :options="listaCategorias" -->
-                    <MultiSelect v-model="recompensa.categorias" :options="recompensa.categorias.nombre" filter  dataKey="id" 
-                        optionLabel="name" placeholder="Seleciona una categoría" display="chip"
-                        class="w-full md:w-20rem">
+                    <MultiSelect v-model="recompensa.categorias"  :options="listaCategorias" filter  dataKey="id" 
+                        optionLabel="nombre" placeholder="Seleciona una categoría" display="chip"
+                        class="w-full md:w-30rem">
                     </MultiSelect>
 
-                    <div class="text-danger mt-1">
-                        {{ errors }}
-                    </div>
-
-                    <div class="text-danger mt-1">
+                    <!-- <div class="text-danger mt-1">
                         <div v-for="message in validationErrors?.categorias">
                             {{ message }}
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 
-
                 <button type="submit" @click="saveRecompensa(recompensa.id)" class="btn btn-primary mt-4 mb-4">Actualizar Recompensa</button>
 
 
@@ -88,6 +81,8 @@ import { useRoute, useRouter } from "vue-router";
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
+import usarCategorias from "@/composables/categorias";
+
 
 
 const schema =  yup.object({
@@ -110,6 +105,7 @@ const { value: descripcion } = useField('descripcion', null, { initialValue: '' 
 const { value: precio } = useField('precio', null, { initialValue: '' });
 const { value: nivel_desbloqueo } = useField('nivel_desbloqueo', null, { initialValue: '' });
 const { value: categorias } = useField('categorias', null, { initialValue: ''});
+const { listaCategorias, getListaCategorias } = usarCategorias()
 
 
 
@@ -128,6 +124,7 @@ const strError = ref();
 
 
 onMounted(() => {
+    getListaCategorias();
     axios.get('/api/recompensas/' + route.params.id)
     .then(response => {
         recompensa.nombre = response.data.data.nombre;
@@ -135,6 +132,7 @@ onMounted(() => {
         recompensa.precio = response.data.data.precio;
         recompensa.nivel_desbloqueo = response.data.data.nivel_desbloqueo;
         recompensa.categorias = response.data.data.categorias;
+        
     })
     .catch(function(error) {
         console.log(error);
@@ -144,10 +142,10 @@ onMounted(() => {
 
 function saveRecompensa() {
     validate().then(form => {
-        console.log('validate');
         if (form.valid){
             axios.put('/api/recompensas/update/'+route.params.id, recompensa)
             .then(response => {
+                console.log(response)
                 strError.value = ""
                 strSuccess.value = response.data.success
                 router.push({ name: 'recompensas.index'})

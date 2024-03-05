@@ -42,6 +42,7 @@ Route::get('categorias', [CategoriaController::class, 'index']);
 Route::post('categorias/', [CategoriaController::class, 'store']);
 Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
+Route::get('lista-categorias', [CategoriaController::class, 'getCategorias']);
 
 // //Api Pedidos
 Route::get('pedidos', [PedidoController::class, 'index']);
