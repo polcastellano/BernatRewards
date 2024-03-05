@@ -50,8 +50,9 @@
                         
                     <h6 class="mt-3">Categorías</h6>
 
+                    {{ recompensa.categorias }}
                     <!-- :options="listaCategorias" -->
-                    <MultiSelect v-model="recompensa.categorias" filter  dataKey="id" 
+                    <MultiSelect v-model="recompensa.categorias" :options="recompensa.categorias.nombre" filter  dataKey="id" 
                         optionLabel="name" placeholder="Seleciona una categoría" display="chip"
                         class="w-full md:w-20rem">
                     </MultiSelect>
@@ -60,11 +61,11 @@
                         {{ errors }}
                     </div>
 
-                    <!-- <div class="text-danger mt-1">
+                    <div class="text-danger mt-1">
                         <div v-for="message in validationErrors?.categorias">
                             {{ message }}
                         </div>
-                    </div> -->
+                    </div>
 
                 </div>
                 
