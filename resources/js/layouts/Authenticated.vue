@@ -1,7 +1,8 @@
 <template>
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
-        <div class="layout-sidebar">
+
+        <div class="layout-sidebar d-flex">
             <app-sidebar></app-sidebar>
         </div>
         
@@ -92,7 +93,7 @@ function selected(crumb) {
      //Console.log(crumb);
 }
 
-const { layoutConfig, layoutState, isSidebarActive } = useLayout();
+const { onMenuToggle,layoutConfig, layoutState, isSidebarActive } = useLayout();
 
 const outsideClickListener = ref(null);
 
@@ -162,4 +163,9 @@ ol {
     align-items: center;
     flex-wrap: nowrap;
 }
+
+.layout-sidebar{
+    padding-right: 30px;
+}
+
 </style>

@@ -1,15 +1,19 @@
 <template>
     <div class="layout-topbar">
-        <router-link to="/" class="layout-topbar-logo">
-            <img src="/images/bernatRewards_Titulo.svg" alt="logo" />
-            <span></span>
-            
-        </router-link>
+        
+        <div class="d-flex align-items-center h-100">
+            <div class="divLogo d-flex align-items-start justify-content-end me-4">
+                <button class="botonMenu p-link layout-menu-button layout-topbar-button" @click="onMenuToggle(),cambiarFlecha()">
+                    <i :class="classFlecha"></i>
+                </button>
+            </div>
 
-        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
-            <i class="pi pi-bars"></i>
-        </button>
-
+            <router-link to="/" class="layout-topbar-logo">
+                <img src="/images/bernatRewards_Titulo.svg" alt="logo" />
+                <span></span>
+            </router-link>
+        </div>
+        
         <button class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
             <i class="pi pi-ellipsis-v"></i>
         </button>
@@ -68,16 +72,68 @@ const topbarMenuClasses = computed(() => {
     };
 });
 
+const display = ref(true);
+
+const cambiarFlecha = () => {
+  display.value = !display.value; 
+};
+
+const classFlecha = computed(() => {
+  return display.value ? 'pi pi-angle-left' : 'pi pi-angle-right';
+});
 
 </script>
 
 <style lang="scss" scoped>
+
 .layout-topbar-button-c,
-.layout-topbar-button-c:hover {
+    .layout-topbar-button-c:hover {
     width: auto;
     background-color: rgb(255, 255, 255, 0);
     border: 0;
     border-radius: 0%;
     padding: 1em;
 }
+
+.layout-topbar-logo{
+    width: fit-content;  
+}
+
+
+.layout-topbar{
+    padding-left: 0px !important;
+}
+
+.divLogo {
+    height: 100%;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: var(--bs-box-shadow);
+}
+
+.botonMenu{
+    height: 100%;
+    background-color: #d6d5d5;
+    margin-left: 0px;
+    border-radius: 0px 10px 10px 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dbdbdb;
+    fill: #000; 
+    transition: color 0.25s ease 0.25s, background-color 0.25s ease 0.25s; 
+}
+
+.botonMenu:hover{
+    height: 100%;
+    background-color: #145A79;
+    margin-left: 0px;
+    border-radius: 0px 10px 10px 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dbdbdb;
+    color: #ffffff;
+    transition: color 0.2s ease 0.2s, background-color 0.2s ease 0.2s; 
+}
+
+
 </style>
