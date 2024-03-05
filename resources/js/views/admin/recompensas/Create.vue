@@ -41,6 +41,14 @@
                     <input v-model="recompensa.nivel_desbloqueo" class="form-control" type="number" name="Nivel desbloqueo"/>
                 </div>
 
+                <div class="form-gorup mb-2">
+                    <h6 class="mt-3">Categorías<span class="text-danger">*</span></h6>
+                    <MultiSelect v-model="recompensa.categorias"  :options="listaCategorias" filter  dataKey="id" 
+                        optionLabel="nombre" placeholder="Seleciona una categoría" display="chip"
+                        class="w-full md:w-30rem">
+                    </MultiSelect>
+                </div>
+                
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4">Añadir Recompensa</button>
 
@@ -55,7 +63,10 @@
 
 <script setup>
     import axios from "axios";
-    import { ref } from "vue";
+    import { onMounted, ref } from "vue";
+    import usarCategorias from "@/composables/categorias";
+
+    const { listaCategorias, getListaCategorias } = usarCategorias()
 
     const strError = ref();
     const strSuccess = ref();
@@ -63,6 +74,7 @@
     const recompensa = ref({});
 
     function addRecompensa(){
+        console.log(recompensa);
         axios.post('/api/recompensas', recompensa.value)
         .then(response =>{
             console.log(response)
@@ -76,7 +88,11 @@
 
         });
     }
-    
+
+    onMounted(() => {
+        getListaCategorias();
+        
+    });    
 
 </script>
 

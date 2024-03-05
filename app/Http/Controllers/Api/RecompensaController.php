@@ -29,15 +29,12 @@ class RecompensaController extends Controller
         ]);
 
         $recompensa = $request->all();
-
+       
         $data = Recompensa::create($recompensa);
 
-        $categorias = $request->get('categorias');
-        
-        $categoriasSeparadas = explode(',', $categorias);
+        $categorias = Categoria::findMany($request->categoria);
 
-        $data->categorias()->attach($categoriasSeparadas);
-        
+        $data->categorias()->attach($categorias);
 
         return response()->json(['success' => true, 'data' => $data]);
 
