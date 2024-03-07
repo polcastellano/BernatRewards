@@ -28,15 +28,20 @@ class RecompensaController extends Controller
             'categorias' => 'required',
         ]);
 
-        $recompensa = $request->all();
+        $data = $request->all();
        
-        $data = Recompensa::create($recompensa);
+        $recompensa = Recompensa::create($data);
 
-        $categorias = Categoria::findMany($request->categoria);
+        //Comprobar si tiene imagen y almacenarla
+        if ($request->hasFile('thumbnail')) {
+            $recompensa->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+        }
 
-        $data->categorias()->attach($categorias);
+        $categorias = Categoria::findMany($request->categorias);
 
-        return response()->json(['success' => true, 'data' => $data]);
+        $recompensa->categorias()->attach($categorias);
+
+        return response()->json(['success' => true, 'data' => $recompensa]);
 
     }
 

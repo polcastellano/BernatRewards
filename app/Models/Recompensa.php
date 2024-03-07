@@ -29,6 +29,12 @@ class Recompensa extends Model
         return $this->belongsToMany(Pedido::class, 'pedidos_recompensas');
     }
 
+    public function registerMediaCollections(): void{
+        $this->addMediaCollection('images/recompensas')
+        ->useFallbackUrl('/images/placeholder.jpg')
+        ->useFallbackPath(public_path('/images/placeholder.jpg'));
+    }
+
 }
 
 
