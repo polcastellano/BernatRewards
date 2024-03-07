@@ -22,6 +22,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'David',
             'email' => 'admin@demo.com',
             'password' => bcrypt('12345678'),
+            'puntos' => 99999,
             'nivel_id' => 1
         ]);
 

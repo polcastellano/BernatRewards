@@ -126,6 +126,7 @@ export default function useUsers() {
         users,
         user,
         getUsers,
+        getUserInfo,
         getUser,
         storeUser,
         updateUser,

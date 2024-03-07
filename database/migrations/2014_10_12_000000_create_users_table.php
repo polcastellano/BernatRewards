@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('age')->nullable();
             $table->unsignedBigInteger('telephone')->nullable();
+            $table->unsignedBigInteger('puntos')->default(0);
             $table->unsignedBigInteger('nivel_id')->default(0);
             $table->foreign('nivel_id')->references('id')->on('niveles')->onDelete('cascade');
             $table->unsignedBigInteger('experience')->default(0);

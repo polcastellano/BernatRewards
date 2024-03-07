@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'age',
         'telephone',
+        'puntos',
         'experience',
         'id_nivel',
     ];
