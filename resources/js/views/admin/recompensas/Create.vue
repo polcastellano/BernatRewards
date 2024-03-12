@@ -10,29 +10,21 @@
                 {{recompensa}}
                         <div class="form-group mb-2">
                             <label>Nombre</label><span class="text-danger"> *</span>
-                            <input v-model="recompensa.nombre" type="text" class="form-control" placeholder="Nombre recompensa">
+                            <input v-model="recompensa.nombre" type="text" class="form-control" placeholder="Nombre de la recompensa">
                             <div class="text-danger mt-1">
                                 {{ errors.nombre }}
-                            </div>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.nombre">
-                                    {{ message }}
-                                </div>
                             </div>
                         </div>
 
 
                         <div class="form-group mb-2">
-                            <label>Descripción</label><span class="text-danger"> *</span>
-                            <Textarea v-model="recompensa.descripcion" autoResize rows="1" cols="30"  class="form-control" placeholder="Descripción" />
-                            
+                            <!-- <FloatLabel> -->
+
+                                <label>Descripción</label><span class="text-danger"> *</span>
+                                <Textarea v-model="recompensa.descripcion" autoResize rows="1" cols="30"  class="form-control" placeholder="Descripción" />
+                            <!-- </FloatLabel> -->
                             <div class="text-danger mt-1">
                                 {{ errors.descripcion }}
-                            </div>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.descripcion">
-                                    {{ message }}
-                                </div>
                             </div>
                         </div>
 
@@ -43,11 +35,6 @@
                             <div class="text-danger mt-1">
                                 {{ errors.precio }}
                             </div>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.precio">
-                                    {{ message }}
-                                </div>
-                            </div>
                         </div>
 
 
@@ -56,11 +43,6 @@
                             <input v-model="recompensa.nivel_desbloqueo" class="form-control" type="number" name="Nivel desbloqueo"/>
                             <div class="text-danger mt-1">
                                 {{ errors.nivel_desbloqueo }}
-                            </div>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.nivel_desbloqueo">
-                                    {{ message }}
-                                </div>
                             </div>
                         </div>
 
@@ -103,9 +85,14 @@
                                 <span v-if="isLoading">Processing...</span>
                                 <span v-else>Save Draft</span>
                             </button> -->
-                            <button :disabled="cargando" class="btn btn-primary">
+                            <button v-if="!Object.keys(errors).length" :disabled="cargando" class="btn btn-primary">
                                 <div v-show="cargando" class=""></div>
-                                <span v-if="cargando">Processing...</span>
+                                <span v-if="cargando">Guardando...</span>
+                                <span v-else>Añadir recompensa</span>
+                            </button>
+                            <button v-else :disabled=1 class="btn btn-primary">
+                                <div v-show="cargando" class=""></div>
+                                <span v-if="cargando">Guardando...</span>
                                 <span v-else>Añadir recompensa</span>
                             </button>
                         </div>
@@ -118,31 +105,23 @@
                         </h6>
 
                         <div class="mb-3">
-                            <MultiSelect v-model="recompensa.categorias"  :options="listaCategorias" filter  dataKey="id" 
+                            <MultiSelect v-model="recompensa.categorias" optionValue="id" :options="listaCategorias" filter  dataKey="id" 
                                 optionLabel="nombre" placeholder="Seleciona una categoría" display="chip"
                                 class="w-full">
                             </MultiSelect>
                         </div>
                         <div class="text-danger mt-1">
                                 {{ errors.categorias }}
-                            </div>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.categorias">
-                                    {{ message }}
-                                </div>
-                            </div>
-
+                        </div>
                         <div class="mb-3">
                             <h6 class="mt-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                                </svg> Thumbnail
+                                </svg> Imagen
                             </h6>
                             <DropZone v-model="recompensa.imagen"/>
                             <div class="text-danger mt-1">
-                                <div v-for="message in validadorErrores?.imagen">
-                                    {{ message }}
-                                </div>
+                                {{ errors.imagen }}
                             </div>
                         </div>
                     </div>
@@ -154,7 +133,7 @@
 
 
 <script setup>
-    import { onMounted, ref, reactive } from "vue";
+    import { onMounted, ref, reactive, watch } from "vue";
     import DropZone from "@/components/DropZone.vue";
     import usarCategorias from "@/composables/categorias";
     import usarRecompensas from "@/composables/recompensas";
@@ -162,14 +141,30 @@
     import * as yup from 'yup';
     import { es } from 'yup-locales';
     import { setLocale } from 'yup';
+    setLocale(es);
 
     const schema = yup.object({
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().label('Precio'),
-        imagen: yup.mixed().required().label('Imagen'),
+        imagen: yup.mixed().required().label('Imagen').test('fileFormat', 'Solo se permiten PNG y JPG', value => {
+        if (value) {
+          const supportedFormats = ['png', 'jpg'];
+          return supportedFormats.includes(value.name.split('.').pop());
+        }
+        return true;
+        })
+        .test('fileSize', 'La imagen no puede superar los MB', value => {
+            if (value) {
+           
+            const tamano = value.size / 1024 / 1024
+            console.log(tamano)
+            return tamano <= 5;
+            }
+            return true;
+        }),
         nivel_desbloqueo: yup.number().integer().required().max(5).min(0).label('Nivel'),
-        categorias: yup.array().required(), //Como validar un array y con minimo 1 fila
+        categorias: yup.array().min(1).required().label('Categorias'),
     })
     
     const {validate, errors} = useForm({validationSchema: schema})
@@ -181,18 +176,16 @@
     const {value: categorias} = useField('categorias', null, {initialValue: ''});
 
     const { listaCategorias, getListaCategorias } = usarCategorias()
-    const {storeRecompensa, validadorErrores, cargando} = usarRecompensas()
-
-    setLocale(es);
+    const {storeRecompensa, cargando} = usarRecompensas()
 
     const recompensa = reactive({
-    nombre,
-    descripcion,
-    precio,
-    imagen,
-    nivel_desbloqueo,
-    categorias,
-})
+        nombre,
+        descripcion,
+        precio,
+        imagen,
+        nivel_desbloqueo,
+        categorias,
+    })
 
 
     function submitForm(){

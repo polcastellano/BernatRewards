@@ -7,13 +7,12 @@ export default function usarRecompensas(){
         nombre: '',
         descripcion: '',
         precio: '',
-        imagen: '',//O poner thumbnail
+        imagen: '',
         nivel_desbloqueo: '',
         categorias: '',
     })
 
     const router = useRouter()
-    const validadorErrores = ref({})
     const cargando = ref(false)
     const swal = inject('$swal')
 
@@ -21,13 +20,11 @@ export default function usarRecompensas(){
         if (cargando.value) return;
 
         cargando.value = true
-        validadorErrores.value = {}
 
         let serializedRecompensa = new FormData()
         for (let item in recompensa) {
             if (recompensa.hasOwnProperty(item)) {
                 serializedRecompensa.append(item, recompensa[item])
-                console.log(recompensa)
             }
         }
 
@@ -37,6 +34,7 @@ export default function usarRecompensas(){
             }
         })
         .then(response =>{
+            console.log(response)
             router.push({ name: 'recompensas.index' })
                 swal({
                     icon: 'success',
@@ -45,7 +43,7 @@ export default function usarRecompensas(){
         })
         .catch(error => {
             if (error.response?.data) {
-                validadorErrores.value = error.response.data.errors
+                return error.response.data.errors
             }
 
         })
@@ -56,7 +54,6 @@ export default function usarRecompensas(){
         recompensas,
         recompensa,
         storeRecompensa,
-        validadorErrores,
         cargando,
         router
     }

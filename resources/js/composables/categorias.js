@@ -8,10 +8,10 @@ export default function usarCategorias() {
         nombre: ''
     })
 
-    const router = useRouter()
-    const validationErrors = ref({})
-    const isLoading = ref(false)
-    const swal = inject('$swal')
+    // const router = useRouter()
+    // const validationErrors = ref({})
+    // const isLoading = ref(false)
+    // const swal = inject('$swal')
 
     const getListaCategorias = async () => {
         axios.get('/api/lista-categorias')

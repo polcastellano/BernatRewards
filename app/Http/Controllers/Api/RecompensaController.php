@@ -17,30 +17,19 @@ class RecompensaController extends Controller
     }
 
     public function store(Request $request){
-
         $this->authorize('recompensa-create');
-        $request->validate([
-            'nombre' => 'required|max:15',
-            'descripcion' => 'required|max:150',
-            'precio' => 'required',
-            'imagen' => 'nullable',
-            'nivel_desbloqueo' => 'required',
-            'categorias' => 'required',
-        ]);
 
-        $data = $request->all();
-       
-        $recompensa = Recompensa::create($data);
+        $validatedData = $request->validated();       
+        $recompensa = Recompensa::create($validatedData);
+
+        $categorias = explode(",", $request->categorias);
+        $categoria = Categoria::findMany($categorias);
+        $recompensa->categorias()->attach($categoria);
 
         //Comprobar si tiene imagen y almacenarla
-        if ($request->hasFile('thumbnail')) {
-            $recompensa->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-exercises');
+        if ($request->hasFile('imagen')) {
+            $recompensa->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recompensas');
         }
-
-        $categorias = Categoria::findMany($request->categorias);
-
-        $recompensa->categorias()->attach($categorias);
-
         return response()->json(['success' => true, 'data' => $recompensa]);
 
     }
