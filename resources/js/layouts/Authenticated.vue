@@ -165,7 +165,7 @@ ol {
 }
 
 .layout-sidebar{
-    padding-right: 30px;
+    padding: 0;
 }
 
 </style>
