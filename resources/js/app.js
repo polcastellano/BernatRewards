@@ -110,6 +110,9 @@ import ToastService from 'primevue/toastservice';
 //import TriStateCheckbox from 'primevue/tristatecheckbox';
 //import VirtualScroller from 'primevue/virtualscroller';
 
+import FloatLabel from 'primevue/floatlabel';
+
+
 //import BlockViewer from '@/components/BlockViewer.vue';
 
 
@@ -241,6 +244,8 @@ app.component('Textarea', Textarea);
 //app.component('TreeTable', TreeTable);
 //app.component('TriStateCheckbox', TriStateCheckbox);
 //app.component('VirtualScroller', VirtualScroller);
+app.component('FloatLabel', FloatLabel);
+
 
 
 

@@ -16,6 +16,13 @@ export default function usarRecompensas(){
     const cargando = ref(false)
     const swal = inject('$swal')
 
+    const getRecompensas = () =>{
+        axios.get('/api/recompensas')
+        .then(response => {
+            recompensas.value = response.data;
+        })
+    }
+
     const storeRecompensa = async (recompensa) => {
         if (cargando.value) return;
 
@@ -34,7 +41,6 @@ export default function usarRecompensas(){
             }
         })
         .then(response =>{
-            console.log(response)
             router.push({ name: 'recompensas.index' })
                 swal({
                     icon: 'success',
@@ -42,18 +48,52 @@ export default function usarRecompensas(){
                 })
         })
         .catch(error => {
-            if (error.response?.data) {
-                return error.response.data.errors
-            }
-
+            swal({
+                icon: 'error',
+                title: 'Recompensa guardada incorrectamente'
+            })
         })
         .finally(() => cargando.value = false)
+    }
+
+    const deleteRecompensa = (id) =>{
+        swal({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true
+        })
+        .then(result => {
+            if (result.isConfirmed) {
+                axios.delete('/api/recompensas/'+id)
+                .then(response =>{
+                    swal({
+                        icon: 'success',
+                        title: 'Recompensa Eliminada Correctamente',
+                    })
+                })
+                .catch(error => {
+                    swal({
+                        icon: 'error',
+                        title: 'No se ha podido eliminar la recompensa',
+                    })
+                })
+            }
+        })
+
     }
 
     return {
         recompensas,
         recompensa,
+        getRecompensas,
         storeRecompensa,
+        deleteRecompensa,
         cargando,
         router
     }

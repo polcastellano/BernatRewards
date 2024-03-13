@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRecompensaRequest;
+use App\Http\Resources\RecompensaResource;
 use App\Models\Categoria;
 use App\Models\Recompensa;
 use Illuminate\Http\Request;
@@ -10,15 +12,21 @@ use Illuminate\Http\Request;
 class RecompensaController extends Controller
 {
     public function index(){
-        
+        $orderColumn = 'created_at';
+        $orderDirection = 'desc';
         $this->authorize('recompensa-list');
-        $recompensas = Recompensa::with('categorias')->get();
-        return $recompensas;
+        
+        $recompensas = Recompensa::with('categorias')->with('media')->get();
+        // ->orderBy($orderColumn, $orderDirection)
+        // ->paginate(50)
+        // ;
+        return RecompensaResource::collection($recompensas);
     }
 
-    public function store(Request $request){
+    public function store(StoreRecompensaRequest $request){
+   
         $this->authorize('recompensa-create');
-
+        
         $validatedData = $request->validated();       
         $recompensa = Recompensa::create($validatedData);
 
@@ -28,9 +36,9 @@ class RecompensaController extends Controller
 
         //Comprobar si tiene imagen y almacenarla
         if ($request->hasFile('imagen')) {
-            $recompensa->addMediaFromRequest('thumbnail')->preservingOriginal()->toMediaCollection('images-recompensas');
+            $recompensa->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-recompensas');
         }
-        return response()->json(['success' => true, 'data' => $recompensa]);
+        return new RecompensaResource($recompensa);
 
     }
 

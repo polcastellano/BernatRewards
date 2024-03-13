@@ -16,13 +16,14 @@
                             </div>
                         </div>
 
-
                         <div class="form-group mb-2">
-                            <!-- <FloatLabel> -->
 
-                                <label>Descripción</label><span class="text-danger"> *</span>
-                                <Textarea v-model="recompensa.descripcion" autoResize rows="1" cols="30"  class="form-control" placeholder="Descripción" />
-                            <!-- </FloatLabel> -->
+                            <FloatLabel>
+
+                                <Textarea v-model="recompensa.descripcion" autoResize rows="1" cols="30"  class="form-control" />
+                                <label>Descripción <span class="text-danger"> *</span></label>
+
+                            </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.descripcion }}
                             </div>
@@ -85,12 +86,8 @@
                                 <span v-if="isLoading">Processing...</span>
                                 <span v-else>Save Draft</span>
                             </button> -->
-                            <button v-if="!Object.keys(errors).length" :disabled="cargando" class="btn btn-primary">
-                                <div v-show="cargando" class=""></div>
-                                <span v-if="cargando">Guardando...</span>
-                                <span v-else>Añadir recompensa</span>
-                            </button>
-                            <button v-else :disabled=1 class="btn btn-primary">
+                            <!-- cambiar lavel si esta cargando o no -->
+                            <button :disabled="Object.keys(errors).length != 0" :loading="cargando" class="btn btn-primary">
                                 <div v-show="cargando" class=""></div>
                                 <span v-if="cargando">Guardando...</span>
                                 <span v-else>Añadir recompensa</span>
@@ -147,22 +144,23 @@
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().label('Precio'),
-        imagen: yup.mixed().required().label('Imagen').test('fileFormat', 'Solo se permiten PNG y JPG', value => {
+        imagen: yup.mixed().required().label('Imagen')
+        .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
         if (value) {
           const supportedFormats = ['png', 'jpg'];
           return supportedFormats.includes(value.name.split('.').pop());
         }
         return true;
         })
-        .test('fileSize', 'La imagen no puede superar los MB', value => {
+        .test('fileSize', 'La imagen no puede superar los 5MB', value => {
             if (value) {
            
             const tamano = value.size / 1024 / 1024
-            console.log(tamano)
             return tamano <= 5;
             }
             return true;
-        }),
+        })
+        ,   
         nivel_desbloqueo: yup.number().integer().required().max(5).min(0).label('Nivel'),
         categorias: yup.array().min(1).required().label('Categorias'),
     })
@@ -182,7 +180,7 @@
         nombre,
         descripcion,
         precio,
-        imagen,
+        imagen: '',
         nivel_desbloqueo,
         categorias,
     })
