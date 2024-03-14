@@ -23,6 +23,13 @@ export default function usarRecompensas(){
         })
     }
 
+    const getRecompensa = (id) =>{
+        axios.get('/api/recompensas' + id)
+        .then(response => {
+            recompensas.value = response.data;
+        })
+    }
+
     const storeRecompensa = async (recompensa) => {
         if (cargando.value) return;
 
@@ -56,13 +63,40 @@ export default function usarRecompensas(){
         .finally(() => cargando.value = false)
     }
 
+    const updateRecompensa = async (recompensa) => {
+        if (cargando.value) return;
+
+        cargando.value = true
+
+        axios.post('/api/recompensas/update/' + recompensa.id, recompensa, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        })
+        .then(response => {
+            router.push({ name: 'recompensa.index' })
+            swal({
+                icon: 'success',
+                title: 'Recompensa guardada correctamente'
+            })
+        })
+        .catch(error => {
+            swal({
+                icon: 'error',
+                title: 'Recompensa guardada incorrectamente'
+            })
+        })
+        .finally(() => cargando.value = false)
+    }
+
     const deleteRecompensa = (id) =>{
         swal({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this action!',
+            title: 'Estas seguro?',
+            text: 'No puedes revertir esta acción!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Sí, eliminar!',
             confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
@@ -92,7 +126,9 @@ export default function usarRecompensas(){
         recompensas,
         recompensa,
         getRecompensas,
+        getRecompensa,
         storeRecompensa,
+        updateRecompensa,
         deleteRecompensa,
         cargando,
         router

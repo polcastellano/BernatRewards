@@ -9,44 +9,34 @@
                             <router-link :to="{name: 'recompensas.create'}" class="btn btn-success">Nueva recompensa</router-link>
                         </div>
                     </div>
-                    <DataTable :value="recompensas.data">
+                    <DataTable :value="recompensas.data" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
                         
                         <template #empty> No se ha encontrado ninguna recompensa. </template>
-                        <Column expander style="width: 3rem" />
+
                         <Column field="id" header="ID" sortable>
                             <template #body="{ data }">
                                 {{ data.id }}
                             </template>
                         </Column>
+
                         <Column field="imagen" header="Imagen">
                             <template #body="slotProps">
                                 <img :src="`${slotProps.data.original_image}`" :alt="slotProps.data.original_image"
                                     class="shadow-4 image-table" />
                             </template>
                         </Column>
+
                         <Column field="nombre" header="Nombre" sortable style="width: 25%"></Column>
-                        <Column header="categorias" sortable style="width: 25%" filterField="categorias.nombre"
+
+                        <Column header="Categorías" style="width: 25%" filterField="categorias.nombre"
                             sortField="categorias.nombre">
                             <template #body="slotProps">
                                 <span v-for="cat in slotProps.data.categorias" class="ms-2 badge  bg-secondary bg-gradient">
                                     {{ cat.nombre }}
                                 </span>
                             </template>
-
-                            <template #filter="{ filterModel }">
-                                <MultiSelect v-model="filterModel.value" :options="representatives" optionLabel="nombre"
-                                    placeholder="Any" class="p-column-filter">
-                                    <template #option="slotProps">
-                                        <div class="flex align-items-center gap-2">
-                                            <img :alt="slotProps.option.nombre"
-                                                :src="`https://primefaces.org/cdn/primevue/images/avatar/${slotProps.option.imagen}`"
-                                                style="width: 32px" />
-                                            <span>{{ slotProps.option.name }}</span>
-                                        </div>
-                                    </template>
-                                </MultiSelect>
-                            </template>
                         </Column>
+
                         <Column style="width:100px;" class="pe-0 me-0">
                             <template #body="slotProps">
 
@@ -68,6 +58,7 @@
 
                             </template>
                         </Column>
+
                     </DataTable>
                 </div>
             </div>
@@ -81,7 +72,7 @@
     import { useAbility } from '@casl/vue'
     import DataTable from 'primevue/datatable';
     import Column from 'primevue/column';
-    import {ref, onMounted} from "vue";
+    import {onMounted} from "vue";
 
     const {recompensas, getRecompensas, deleteRecompensa} = usarRecompensas()
     const { can } = useAbility()

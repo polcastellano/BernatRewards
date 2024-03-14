@@ -3,26 +3,25 @@
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm">
+                    {{recompensa}}
                     <div class="card-body">
-                        <div class="d-flex justify-content-between pb-2 mb-2">
+                        <div class="d-flex justify-content-between pb-2 mb-5">
                             <h5 class="card-title">Añade una recompensa nueva</h5>
                         </div>
-                {{recompensa}}
-                        <div class="form-group mb-2">
-                            <label>Nombre</label><span class="text-danger"> *</span>
-                            <input v-model="recompensa.nombre" type="text" class="form-control" placeholder="Nombre de la recompensa">
+                        <div class="form-group mb-5">
+                            <FloatLabel class="align-items-center">
+                                <InputText v-model="recompensa.nombre" type="text" class="form-control"/>
+                                <label class="font-bold block">Nombre<span class="text-danger"> *</span></label>
+                            </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.nombre }}
                             </div>
                         </div>
 
-                        <div class="form-group mb-2">
-
+                        <div class="form-group mb-5">
                             <FloatLabel>
-
                                 <Textarea v-model="recompensa.descripcion" autoResize rows="1" cols="30"  class="form-control" />
-                                <label>Descripción <span class="text-danger"> *</span></label>
-
+                                <label class="font-bold block">Descripción <span class="text-danger"> *</span></label>
                             </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.descripcion }}
@@ -30,45 +29,26 @@
                         </div>
 
 
-                        <div class="form-gorup mb-2">
-                            <label>Precio</label><span class="text-danger">*</span>
-                            <input v-model="recompensa.precio" class="form-control" type="number" name="Precio"/>
+                        <div class="form-group mb-5">
+                            <FloatLabel>
+                                <InputNumber class="d-flex" v-model="recompensa.precio" :min="0" name="Precio" />
+                                <label class="font-bold block">Precio<span class="text-danger">*</span></label>
+                            </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.precio }}
                             </div>
                         </div>
 
 
-                        <div class="form-gorup mb-2">
-                            <label>Nivel desbloqueo</label><span class="text-danger">*</span>
-                            <input v-model="recompensa.nivel_desbloqueo" class="form-control" type="number" name="Nivel desbloqueo"/>
+                        <div class="form-group mb-5">
+                                <FloatLabel>
+                                    <InputNumber class="d-flex" v-model="recompensa.nivel_desbloqueo" :min="0" name="Nivel desbloqueo" />   
+                                    <label class="font-bold block">Nivel desbloqueo<span class="text-danger">*</span></label>
+                                </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.nivel_desbloqueo }}
                             </div>
                         </div>
-
-                        <!-- <div class="flex flex-wrap gap-3">
-                            <div class="flex align-items-center">
-                                <RadioButton v-model="recompensa.nivel_desbloqueo" inputId="1" name="nivel1" value="Nivel 1" />
-                                <label for="ingredient1" class="ml-2">Nivel 1</label>
-                            </div>
-                            <div class="flex align-items-center">
-                                <RadioButton v-model="recompensa.nivel_desbloqueo" inputId="ingredient2" name="nivel2" value="Nivel 2" />
-                                <label for="ingredient2" class="ml-2">Nivel 2</label>
-                            </div>
-                            <div class="flex align-items-center">
-                                <RadioButton v-model="recompensa.nivel_desbloqueo" inputId="ingredient3" name="nivel3" value="Nivel 3" />
-                                <label for="ingredient3" class="ml-2">Nivel 3</label>
-                            </div>
-                            <div class="flex align-items-center">
-                                <RadioButton v-model="recompensa.nivel_desbloqueo" inputId="ingredient4" name="nivel4" value="Nivel 4" />
-                                <label for="ingredient4" class="ml-2">Nivel 4</label>
-                            </div>
-                            <div class="flex align-items-center">
-                                <RadioButton v-model="recompensa.nivel_desbloqueo" inputId="ingredient4" name="nivel4" value="Nivel 5" />
-                                <label for="ingredient4" class="ml-2">Nivel 5</label>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -78,17 +58,10 @@
                         <h6>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                            </svg> Action
+                            </svg> Acción
                         </h6>
                         <div class="mt-3 text-center">
-                            <!-- <button :disabled="isLoading" class="btn btn btn-outline-primary me-2">
-                                <div v-show="isLoading" class=""></div>
-                                <span v-if="isLoading">Processing...</span>
-                                <span v-else>Save Draft</span>
-                            </button> -->
-                            <!-- cambiar lavel si esta cargando o no -->
-                            <button :disabled="Object.keys(errors).length != 0" :loading="cargando" class="btn btn-primary">
-                                <div v-show="cargando" class=""></div>
+                            <button :disabled="Object.keys(errors).length != 0 || cargando" :loading="cargando" class="btn btn-primary">
                                 <span v-if="cargando">Guardando...</span>
                                 <span v-else>Añadir recompensa</span>
                             </button>
@@ -114,7 +87,9 @@
                             <h6 class="mt-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                                </svg> Imagen
+                                </svg>
+                                Imagen
+                                <span class="text-danger">*</span>
                             </h6>
                             <DropZone v-model="recompensa.imagen"/>
                             <div class="text-danger mt-1">
@@ -130,20 +105,21 @@
 
 
 <script setup>
-    import { onMounted, ref, reactive, watch } from "vue";
+    import { onMounted, reactive } from "vue";
     import DropZone from "@/components/DropZone.vue";
     import usarCategorias from "@/composables/categorias";
     import usarRecompensas from "@/composables/recompensas";
-    import {useForm, useField, defineRule} from "vee-validate";
+    import {useForm, useField} from "vee-validate";
     import * as yup from 'yup';
     import { es } from 'yup-locales';
     import { setLocale } from 'yup';
+
     setLocale(es);
 
     const schema = yup.object({
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
-        precio: yup.number().integer().required().label('Precio'),
+        precio: yup.number().integer().required().min(0).label('Precio'),
         imagen: yup.mixed().required().label('Imagen')
         .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
         if (value) {
@@ -152,26 +128,26 @@
         }
         return true;
         })
-        .test('fileSize', 'La imagen no puede superar los 5MB', value => {
+        .test('fileSize', 'La imagen no puede superar los 3MB', value => {
             if (value) {
            
             const tamano = value.size / 1024 / 1024
-            return tamano <= 5;
+            return tamano <= 3;
             }
             return true;
         })
         ,   
-        nivel_desbloqueo: yup.number().integer().required().max(5).min(0).label('Nivel'),
+        nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),
         categorias: yup.array().min(1).required().label('Categorias'),
     })
     
     const {validate, errors} = useForm({validationSchema: schema})
-    const {value: nombre} = useField('nombre', null, {initialValue: ''});
-    const {value: descripcion} = useField('descripcion', null, {initialValue: ''});
-    const {value: precio} = useField('precio', null, {initialValue: ''});
-    const {value: imagen} = useField('imagen', null, {initialValue: ''});
-    const {value: nivel_desbloqueo} = useField('nivel_desbloqueo', null, {initialValue: ''});
-    const {value: categorias} = useField('categorias', null, {initialValue: ''});
+    const {value: nombre} = useField('nombre', null);
+    const {value: descripcion} = useField('descripcion', null);
+    const {value: precio} = useField('precio', null);
+    const {value: imagen} = useField('imagen', null);
+    const {value: nivel_desbloqueo} = useField('nivel_desbloqueo', null);
+    const {value: categorias} = useField('categorias', null);
 
     const { listaCategorias, getListaCategorias } = usarCategorias()
     const {storeRecompensa, cargando} = usarRecompensas()
@@ -180,7 +156,7 @@
         nombre,
         descripcion,
         precio,
-        imagen: '',
+        imagen,
         nivel_desbloqueo,
         categorias,
     })

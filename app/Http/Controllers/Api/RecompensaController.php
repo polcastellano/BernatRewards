@@ -12,14 +12,11 @@ use Illuminate\Http\Request;
 class RecompensaController extends Controller
 {
     public function index(){
-        $orderColumn = 'created_at';
-        $orderDirection = 'desc';
+        
         $this->authorize('recompensa-list');
         
         $recompensas = Recompensa::with('categorias')->with('media')->get();
-        // ->orderBy($orderColumn, $orderDirection)
-        // ->paginate(50)
-        // ;
+
         return RecompensaResource::collection($recompensas);
     }
 
