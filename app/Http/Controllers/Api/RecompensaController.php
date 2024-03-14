@@ -76,12 +76,10 @@ class RecompensaController extends Controller
 
     }
 
-    public function edit($id){
-        $recompensa = Recompensa::find($id);
+    public function show(Recompensa $recompensa){
 
-        $recompensa->categorias;
-
-        return response()->json(['success' => true, 'data' => $recompensa]);
-
+        $this->authorize('recompensa-edit');
+        
+        return new RecompensaResource($recompensa);
     }
 }

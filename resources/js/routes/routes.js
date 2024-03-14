@@ -15,7 +15,7 @@ const TasksCreate  = ()  => import('../views/admin/tasks/Create.vue');
 const TasksUpdate  = ()  => import('../views/admin/tasks/Update.vue');
 const RecompensasList  = ()  => import('../views/admin/recompensas/Index.vue');
 const RecompensasCreate  = ()  => import('../views/admin/recompensas/Create.vue');
-const RecompensasUpdate  = ()  => import('../views/admin/recompensas/Update.vue');
+const RecompensasEdit  = ()  => import('../views/admin/recompensas/Edit.vue');
 
 
 function requireLogin(to, from, next) {
@@ -180,9 +180,9 @@ export default [
                         meta: { breadCrumb: 'Crear recompensa' }
                     },
                     {
-                        name: 'recompensas.update',
-                        path: 'update/:id',
-                        component: RecompensasUpdate,
+                        name: 'recompensas.edit',
+                        path: 'edit/:id',
+                        component: RecompensasEdit,
                         meta: { breadCrumb: 'Editar recompensa',
                         linked: false,}
                     }

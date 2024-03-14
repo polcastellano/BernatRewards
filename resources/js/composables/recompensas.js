@@ -23,11 +23,12 @@ export default function usarRecompensas(){
         })
     }
 
-    const getRecompensa = (id) =>{
+    const getRecompensa = async (id) =>{
         axios.get('/api/recompensas' + id)
-        .then(response => {
-            recompensas.value = response.data;
-        })
+            .then(response => {
+                console.log(response.data)
+                recompensas.value = response.data.data;
+            })
     }
 
     const storeRecompensa = async (recompensa) => {
