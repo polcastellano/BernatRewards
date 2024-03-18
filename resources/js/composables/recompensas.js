@@ -24,10 +24,9 @@ export default function usarRecompensas(){
     }
 
     const getRecompensa = async (id) =>{
-        axios.get('/api/recompensas' + id)
+        axios.get('/api/recompensas/' + id)
             .then(response => {
-                console.log(response.data)
-                recompensas.value = response.data.data;
+                recompensa.value = response.data.data;
             })
     }
 

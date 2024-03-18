@@ -2,8 +2,8 @@
     <form @submit.prevent="submitForm">
         <div class="row my-5">
             <div class="col-md-8">
-                <div class="card  border-0 shadow-sm">
-                    {{recompensa}}
+                {{ recompensa }}
+                <div class="card  border-0 shadow-sm">  
                     <div class="card-body">
                         <div class="d-flex justify-content-between pb-2 mb-5">
                             <h5 class="card-title">Editar {{ recompensa.nombre }}</h5>
@@ -125,17 +125,9 @@
         .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
         if (value) {
           const supportedFormats = ['png', 'jpg'];
-          return supportedFormats.includes(value.name.split('.').pop());
+          return supportedFormats.includes(value.split('.').pop());
         }
         return true;
-        })
-        .test('fileSize', 'La imagen no puede superar los 3MB', value => {
-            if (value) {
-           
-            const tamano = value.size / 1024 / 1024
-            return tamano <= 3;
-            }
-            return true;
         })
         ,   
         nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),
@@ -174,6 +166,17 @@
         getRecompensa(route.params.id);
         getListaCategorias();
     })
+
+    watchEffect(() => {
+        recompensa.id = recompensaData.value.id
+        recompensa.nombre = recompensaData.value.nombre
+        recompensa.descripcion = recompensaData.value.descripcion
+        recompensa.precio = parseInt(recompensaData.value.precio)
+        recompensa.categorias = recompensaData.value.categorias
+        recompensa.nivel_desbloqueo = parseInt(recompensaData.value.nivel_desbloqueo)
+        recompensa.imagen = recompensaData.value.original_image
+    })
+    console.log(recompensa)
 </script>
 
 
