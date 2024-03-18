@@ -23,7 +23,7 @@ class Recompensa extends Model implements HasMedia
     ];
 
     public function categorias(){
-
+        
         return $this->belongsToMany(Categoria::class, 'categorias_recompensas');
     }
 

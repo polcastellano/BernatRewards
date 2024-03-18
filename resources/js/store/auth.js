@@ -33,7 +33,7 @@ export default {
             })
         },
         getUser({commit}) {
-            return axios.get('/api/user').then(({data}) => {
+            return axios.get('/api/usuarioNivel').then(({data}) => {
                 if (data.success) {
                     commit('SET_USER', data.data)
                     commit('SET_AUTHENTICATED', true)

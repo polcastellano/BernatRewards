@@ -53,4 +53,10 @@ class User extends Authenticatable
     {
         $this->notify(new UserResetPasswordNotification($token));
     }
+
+    public function niveles()
+    {
+        return $this->belongsTo(Nivel::class, 'nivel_id');
+    }
+
 }

@@ -55,9 +55,8 @@ Route::get('niveles', [NivelController::class, 'index']);
 Route::post('niveles/', [NivelController::class, 'store']);
 Route::put('niveles/update/{id}', [NivelController::class, 'update']);
 Route::delete('niveles/{id}', [NivelController::class, 'destroy']);
-
-
-
+Route::get('allniveles', [NivelController::class, 'allniveles']);
+Route::get('siguintenivel/{id}', [NivelController::class, 'nivel']);
 
 
 
@@ -79,6 +78,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('category-list', [CategoryController::class, 'getList']);
     Route::get('/user', [ProfileController::class, 'user']);
     Route::put('/user', [ProfileController::class, 'update']);
+    Route::get('/usuarioNivel', [UserController::class, 'usuarioNivel']);
 
     Route::get('abilities', function(Request $request) {
         return $request->user()->roles()->with('permissions')

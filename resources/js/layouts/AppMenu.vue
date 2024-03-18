@@ -3,21 +3,18 @@
     <ul class="layout-menu">
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
-                <div class="imgUsuario">
-                    <img style="height: 3rem; width: 3rem;" src="/images/bernatPoints.svg" alt="Imagen de usuario">
-                </div>
+                <div class="imgUsuario" :style="{ 'background-image': `url('${usuario.img}')` }"></div>
                 <p class="ms-2" style="font-weight: bold;">{{ usuario.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
                 
                 <div class="d-flex justify-content-between">
-                    <p>Nv.{{ usuario.nivel_id - 1 }}</p>
-                    <p>{{ usuario.experience }}/{{ usuario.experience }}</p>
-                    <p>Nv.{{ usuario.nivel_id }}</p>
+                    <p>Nv.{{ usuario.niveles.numero }}</p>
+                    <p>{{ usuario.experience }}/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
+                    <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
                 </div>
-
                 <div class="barraNivel d-flex align-items-center">
-                    <div class="barraNivelReal" style="width: 75%;"></div>
+                    <div class="barraNivelReal" :style="{ width: procentajeRestante + '%' }"></div>
                 </div>
             </div> 
         </div>
@@ -31,24 +28,24 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 import {useAbility} from '@casl/vue'
 import store from "../store";
-
-
-const {can} = useAbility();
+import {storeNiveles} from "../store/niveles";
 
 const vela = "pepe";
 
-var usuario = store.state.auth.user;
-var niveles = store.state.auth.nivel;
+let usuario = store.state.auth.user;
 
-// console.log('--->');
-// console.log(niveles);
-// watch( store.state, (state) => console.table(state));
+let procentajeRestante = (usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10;
+// console.table(usuario);
+// watch( store.state.auth, (state) => console.table(state));
 
-
+onMounted(() =>{
+    storeNiveles().getNivelSiguiente(usuario.niveles.id);
+    let nivelSiguiente = storeNiveles().nivelUsu.numero;
+});
 
 const model = ref([
     {
@@ -111,9 +108,12 @@ const model = ref([
 }
 
 .imgUsuario{
-    border-radius: 100%;
-    padding: 0.2rem;
-    background-color: white;
+    height: 3.5rem; 
+    width: 3.5rem; 
+    border: 3px solid white; 
+    border-radius: 100%; 
+    background-position: center; 
+    background-size: 100% auto;
 }
 
 .nivelInfo{
