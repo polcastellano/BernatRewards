@@ -48,7 +48,7 @@
                                     </svg>
                                 </router-link>
 
-                                <span v-if="can('recompensa-delete')" @click.prevent="deleteRecompensa(slotProps.data.id)"
+                                <span v-if="can('recompensa-delete')" @click.prevent="deleteRecompensa(slotProps.data.id, slotProps.index)"
                                     class="ms-2 me-0 btn btn-danger">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                                         <path fill="#ffffff"
