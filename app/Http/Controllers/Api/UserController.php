@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -119,5 +120,19 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
+    }
+
+    public function usuarioNivel(Request $request)
+    {
+        $user = $request->user();
+    
+        if ($user) {
+            $userNivele = User::with('niveles')->find($user->id);
+            return $this->successResponse($userNivele, 'User found');
+
+        } else {
+
+            return response()->json(['message' => 'Usuario no autenticado'], 401);
+        }
     }
 }

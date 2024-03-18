@@ -16,4 +16,9 @@ class Nivel extends Model
         'numero',
         'experiencia',
     ];
+
+    public function usuarios()
+    {
+        return $this->hasMany(User::class, 'nivel_id');
+    }
 }

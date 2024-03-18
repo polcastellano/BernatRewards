@@ -122,14 +122,19 @@ import '../css/theme.css';
 import "primevue/resources/themes/viva-light/theme.css";
 import "primeicons/primeicons.css";
 
+import { createPinia } from 'pinia'
+
+
 const app = createApp({
     created() {
         useAuth().getUser()
     }
 });
 
+const pinia = createPinia()
 
 
+app.use(pinia)
 app.use(router)
 app.use(store)
 app.use(VueSweetalert2)
