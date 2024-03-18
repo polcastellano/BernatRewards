@@ -89,7 +89,7 @@ export default function usarRecompensas(){
         .finally(() => cargando.value = false)
     }
 
-    const deleteRecompensa = (id) =>{
+    const deleteRecompensa = (id, index) =>{
         swal({
             title: 'Estas seguro?',
             text: 'No puedes revertir esta acción!',
@@ -106,6 +106,8 @@ export default function usarRecompensas(){
             if (result.isConfirmed) {
                 axios.delete('/api/recompensas/'+id)
                 .then(response =>{
+
+                    recompensas.value.splice(index,1);
                     swal({
                         icon: 'success',
                         title: 'Recompensa Eliminada Correctamente',
