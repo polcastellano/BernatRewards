@@ -2,8 +2,8 @@
     <form @submit.prevent="submitForm">
         <div class="row my-5">
             <div class="col-md-8">
-                {{ recompensa }}
-                <div class="card  border-0 shadow-sm">  
+                <div class="card  border-0 shadow-sm"> 
+            {{ recompensa }} 
                     <div class="card-body">
                         <div class="d-flex justify-content-between pb-2 mb-5">
                             <h5 class="card-title">Editar {{ recompensa.nombre }}</h5>
@@ -63,7 +63,7 @@
                         <div class="mt-3 text-center">
                             <button :disabled="Object.keys(errors).length != 0 || cargando" :loading="cargando" class="btn btn-primary">
                                 <span v-if="cargando">Guardando...</span>
-                                <span v-else>Añadir recompensa</span>
+                                <span v-else>Guardar recompensa</span>
                             </button>
                         </div>
                         <h6 class="mt-3">
@@ -75,7 +75,7 @@
                         </h6>
 
                         <div class="mb-3">
-                            <MultiSelect v-model="recompensa.categorias" optionValue="id" :options="listaCategorias" filter  dataKey="id" 
+                            <MultiSelect v-model="recompensa.categorias" :options="listaCategorias" filter  dataKey="id" 
                                 optionLabel="nombre" placeholder="Seleciona una categoría" display="chip"
                                 class="w-full">
                             </MultiSelect>
@@ -135,6 +135,7 @@
     })
     
     const {validate, errors} = useForm({validationSchema: schema})
+    
     const {value: nombre} = useField('nombre', null);
     const {value: descripcion} = useField('descripcion', null);
     const {value: precio} = useField('precio', null);
@@ -163,8 +164,8 @@
     }
 
     onMounted(() => {
-        getRecompensa(route.params.id);
-        getListaCategorias();
+        getRecompensa(route.params.id)
+        getListaCategorias()
     })
 
     watchEffect(() => {
@@ -177,6 +178,7 @@
         recompensa.imagen = recompensaData.value.original_image
     })
     console.log(recompensa)
+    console.log(schema)
 </script>
 
 

@@ -34,7 +34,7 @@ Route::get('tasks/{id}', [TaskController::class, 'edit']);
 Route::get('recompensas', [RecompensaController::class, 'index']);
 Route::post('recompensas/', [RecompensaController::class, 'store']);
 Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
-Route::delete('recompensas/{id}', [RecompensaController::class, 'destroy']);
+Route::delete('recompensas/{recompensa}', [RecompensaController::class, 'destroy']);
 Route::get('recompensas/{recompensa}', [RecompensaController::class, 'show']);
 
 //Api Categorias
@@ -44,13 +44,13 @@ Route::put('categorias/update/{id}', [CategoriaController::class, 'update']);
 Route::delete('categorias/{id}', [CategoriaController::class, 'destroy']);
 Route::get('lista-categorias', [CategoriaController::class, 'getCategorias']);
 
-// //Api Pedidos
+//Api Pedidos
 Route::get('pedidos', [PedidoController::class, 'index']);
 Route::post('pedidos/', [PedidoController::class, 'store']);
 Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
 Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 
-// //Api Niveles
+//Api Niveles
 Route::get('niveles', [NivelController::class, 'index']);
 Route::post('niveles/', [NivelController::class, 'store']);
 Route::put('niveles/update/{id}', [NivelController::class, 'update']);

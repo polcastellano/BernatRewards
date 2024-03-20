@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-
+                {{ exercise }}
                         <div class="mb-3">
                             <label for="exercise-title" class="form-label"> Título</label>
                             <input v-model="exercise.title" id="exercise-title" type="text" class="form-control">
@@ -132,4 +132,6 @@ watchEffect(() => {
     exercise.thumbnail = exerciseData.value.original_image
     exercise.categories = exerciseData.value.categories
 })
+console.log(exercise)
+console.log(schema)
 </script>
