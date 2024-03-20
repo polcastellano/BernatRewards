@@ -2,7 +2,7 @@ import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default function usarRecompensas(){
-    const recompensas = ref({})
+    const recompensas = ref([])
     const recompensa = ref({
         nombre: '',
         descripcion: '',
@@ -41,7 +41,7 @@ export default function usarRecompensas(){
                 serializedRecompensa.append(item, recompensa[item])
             }
         }
-
+        console.log(serializedRecompensa)
         axios.post('/api/recompensas', serializedRecompensa,{
             headers: {
                 "content-type": "multipart/form-data"
@@ -68,7 +68,7 @@ export default function usarRecompensas(){
 
         cargando.value = true
 
-        axios.post('/api/recompensas/update/' + recompensa.id, recompensa, {
+        axios.put('/api/recompensas/update/' + recompensa.id, recompensa, {
             headers: {
                 "content-type": "multipart/form-data"
             }
@@ -77,13 +77,14 @@ export default function usarRecompensas(){
             router.push({ name: 'recompensa.index' })
             swal({
                 icon: 'success',
-                title: 'Recompensa guardada correctamente'
+                title: 'Recompensa editada correctamente'
             })
         })
         .catch(error => {
+            console.log(error)
             swal({
                 icon: 'error',
-                title: 'Recompensa guardada incorrectamente'
+                title: 'Recompensa editada incorrectamente'
             })
         })
         .finally(() => cargando.value = false)
@@ -104,10 +105,9 @@ export default function usarRecompensas(){
         })
         .then(result => {
             if (result.isConfirmed) {
-                axios.delete('/api/recompensas/'+id)
-                .then(response =>{
-
-                    recompensas.value.splice(index,1);
+                axios.delete('/api/recompensas/' + id)
+                .then(response =>{  
+                    recompensas.value.data.splice(index, 1);                    
                     swal({
                         icon: 'success',
                         title: 'Recompensa Eliminada Correctamente',
