@@ -39,8 +39,11 @@ export default function useUsers() {
     }
 
     const storeUser = async (user) => {
-        if (isLoading.value) return;
+        console.log("USER:");
+        console.log(user);
 
+        if (isLoading.value) return;
+        
         isLoading.value = true
         validationErrors.value = {}
 
@@ -51,20 +54,30 @@ export default function useUsers() {
             }
         }
 
-        axios.post('/api/users', serializedPost)
-            .then(response => {
-                router.push({name: 'users.index'})
-                swal({
-                    icon: 'success',
-                    title: 'User saved successfully'
-                })
-            })
-            .catch(error => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+        console.log("SERIAL:")
+        console.log(serializedPost);
+        
+        axios.post('/api/users', serializedPost,{
+                headers: {
+                    "content-type": "multipart/form-data"
                 }
             })
-            .finally(() => isLoading.value = false)
+            .then(response =>{
+                router.push({ name: 'users.index' })
+                    swal({
+                        icon: 'success',
+                        title: 'Usuario creado correctamente'
+                    })
+            })
+            .catch(error => {
+                swal({
+                    icon: 'error',
+                    title: 'Error al crear el usuario'
+                })
+            })
+            .finally(() => cargando.value = false)
+
+
     }
 
     const updateUser = async (user) => {
@@ -126,7 +139,6 @@ export default function useUsers() {
         users,
         user,
         getUsers,
-        getUserInfo,
         getUser,
         storeUser,
         updateUser,

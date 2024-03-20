@@ -9,10 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -23,11 +27,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'imagen',
         'age',
         'telephone',
         'puntos',
         'experience',
-        'id_nivel',
+        'id_nivel'
     ];
 
     /**
@@ -57,6 +62,22 @@ class User extends Authenticatable
     public function niveles()
     {
         return $this->belongsTo(Nivel::class, 'nivel_id');
+    }
+
+    public function registerMediaCollections(): void{
+        $this->addMediaCollection('images/usuarios')
+        ->useFallbackUrl('/images/placeholder.jpg')
+        ->useFallbackPath(public_path('/images/placeholder.jpg'));
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        if (env('RESIZE_IMAGE') === true) {
+
+            $this->addMediaConversion('resized-image')
+                ->width(env('IMAGE_WIDTH', 300))
+                ->height(env('IMAGE_HEIGHT', 300));
+        }
     }
 
 }
