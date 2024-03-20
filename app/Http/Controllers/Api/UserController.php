@@ -63,6 +63,11 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
+        //Comprobar si tiene imagen y almacenarla
+        if ($request->hasFile('imagen')) {
+            $user->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
+        }
+
         if ($user->save()) {
             if ($role) {
                 $user->assignRole($role);

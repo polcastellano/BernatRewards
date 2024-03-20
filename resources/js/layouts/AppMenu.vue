@@ -10,12 +10,21 @@
                 
                 <div class="d-flex justify-content-between">
                     <p>Nv.{{ usuario.niveles.numero }}</p>
-                    <p>{{ usuario.experience }}/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
+                    <p><span style="font-weight: bold;">{{ usuario.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
                     <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
                 </div>
+
                 <div class="barraNivel d-flex align-items-center">
-                    <div class="barraNivelReal" :style="{ width: procentajeRestante + '%' }"></div>
+                    <div class="barraNivelReal"
+                        :style="{ width: ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                        :class="{
+                            'bg-warning': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
+                            'bg-info': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
+                            'bg-success': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                        }"
+                    ></div>
                 </div>
+
             </div> 
         </div>
         <div style="padding: 0.5rem 1rem 1rem 1rem;">
@@ -28,7 +37,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 import {useAbility} from '@casl/vue'
 import store from "../store";
@@ -38,13 +47,13 @@ const vela = "pepe";
 
 let usuario = store.state.auth.user;
 
-let procentajeRestante = (usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10;
+const porcentajeRestante = ref(0);
+// let porcentajeRestante = 50;
+
 // console.table(usuario);
-// watch( store.state.auth, (state) => console.table(state));
 
 onMounted(() =>{
-    storeNiveles().getNivelSiguiente(usuario.niveles.id);
-    let nivelSiguiente = storeNiveles().nivelUsu.numero;
+    storeNiveles().getNivelSiguiente(usuario.niveles.id); 
 });
 
 const model = ref([
@@ -58,15 +67,14 @@ const model = ref([
             { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/campus', permision: 'all' }
         ]
     },
-    {
+    {        
         label: 'Panel de Administrador',
+    },
+    {
+        label: 'Recompensas',
         items: [
             { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'all' }
         ]
-    },
-    {
-        label: 'Home',
-        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/admin', permision: 'all'}]
     },
     {
         label: 'Usuarios',
@@ -132,7 +140,11 @@ const model = ref([
 .barraNivelReal{
     height: 0.5rem;
     border-radius: 25px;
-    background-color: #34a6d6;
+    // background-color: #34a6d6;
+}
+
+.separador{
+    color: Red !important;
 }
 
 </style>
