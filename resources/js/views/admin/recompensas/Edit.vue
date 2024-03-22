@@ -121,13 +121,8 @@
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().min(0).label('Precio'),
-        imagen: yup.mixed().required().label('Imagen')
-        .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
-        if (value) {
-          const supportedFormats = ['png', 'jpg'];
-          return supportedFormats.includes(value.split('.').pop());
-        }
-        return true;
+        imagen: yup.mixed().required().label('Imagen').test('fileFormat', 'Solo se permiten PNG y JPG', (value)=> {
+            return value.type == 'image/jpeg' || value.type == 'image/png'
         })
         ,   
         nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),

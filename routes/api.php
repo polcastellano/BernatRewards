@@ -33,7 +33,7 @@ Route::get('tasks/{id}', [TaskController::class, 'edit']);
 //Api Recompensas
 Route::get('recompensas', [RecompensaController::class, 'index']);
 Route::post('recompensas/', [RecompensaController::class, 'store']);
-Route::put('recompensas/update/{id}', [RecompensaController::class, 'update']);
+Route::post('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{recompensa}', [RecompensaController::class, 'destroy']);
 Route::get('recompensas/{recompensa}', [RecompensaController::class, 'show']);
 

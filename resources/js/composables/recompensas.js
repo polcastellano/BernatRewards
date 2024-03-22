@@ -41,14 +41,14 @@ export default function usarRecompensas(){
                 serializedRecompensa.append(item, recompensa[item])
             }
         }
-        console.log(serializedRecompensa)
+
         axios.post('/api/recompensas', serializedRecompensa,{
             headers: {
                 "content-type": "multipart/form-data"
             }
         })
         .then(response =>{
-            router.push({ name: 'recompensas.index' })
+            // router.push({ name: 'recompensas.index' })
                 swal({
                     icon: 'success',
                     title: 'Recompensa guardada correctamente'
@@ -68,13 +68,13 @@ export default function usarRecompensas(){
 
         cargando.value = true
 
-        axios.put('/api/recompensas/update/' + recompensa.id, recompensa, {
+        axios.post('/api/recompensas/update/' + recompensa.id, recompensa, {
             headers: {
                 "content-type": "multipart/form-data"
             }
         })
         .then(response => {
-            router.push({ name: 'recompensa.index' })
+            router.push({ name: 'recompensas.index' })
             swal({
                 icon: 'success',
                 title: 'Recompensa editada correctamente'
@@ -107,7 +107,9 @@ export default function usarRecompensas(){
             if (result.isConfirmed) {
                 axios.delete('/api/recompensas/' + id)
                 .then(response =>{  
-                    recompensas.value.data.splice(index, 1);                    
+                    console.log(recompensas.value.data)
+                    // recompensas.value.data.splice(index, 1); //cambiar por find en samples/products
+                    recompensas.value.data = recompensas.value.data.filter(recompensa => recompensa.id !== id);                   
                     swal({
                         icon: 'success',
                         title: 'Recompensa Eliminada Correctamente',
