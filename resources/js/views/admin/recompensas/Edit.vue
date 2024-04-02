@@ -116,13 +116,14 @@
     import usarRecompensas from "@/composables/recompensas";
 
     setLocale(es);
+    
 
     const schema = yup.object({
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().min(0).label('Precio'),
         imagen: yup.mixed().required().label('Imagen').test('fileFormat', 'Solo se permiten PNG y JPG', (value)=> {
-            return value.type == 'image/jpeg' || value.type == 'image/png'
+            return value.type == 'image/jpeg' || value.type == 'image/png';
         })
         ,   
         nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),
@@ -172,8 +173,6 @@
         recompensa.nivel_desbloqueo = parseInt(recompensaData.value.nivel_desbloqueo)
         recompensa.imagen = recompensaData.value.original_image
     })
-    console.log(recompensa)
-    console.log(schema)
 </script>
 
 
