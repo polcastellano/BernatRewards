@@ -28,6 +28,8 @@
 
                         <Column field="nombre" header="Nombre" sortable style="width: 25%"></Column>
 
+                        <Column field="usuario_id" header="Usuario"></Column>
+
                         <Column header="Categorías" style="width: 25%" filterField="categorias.nombre"
                             sortField="categorias.nombre">
                             <template #body="slotProps">

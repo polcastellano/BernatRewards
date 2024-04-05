@@ -1,6 +1,6 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-center">
-        <div class="container">
+    <nav class="navbar navbar-expand-md navbar-light bg-red-500 shadow-sm d-flex justify-content-center">
+        <div class="bg-blue-500 col-11 d-flex align-items-center">
 
         <router-link to="/" class="d-flex align-items-center container-logo">
             <img src="/images/bernatRewards_Titulo.svg" class="logo" alt="logo" />
@@ -15,7 +15,7 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
+                <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
                         </li>
@@ -38,7 +38,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                            <li><router-link to="/admin/posts" class="dropdown-item">Post</router-link></li>
+                            <li><router-link to="/admin/recompensas" class="dropdown-item">Recompensas</router-link></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
                         </ul>

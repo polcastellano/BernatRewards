@@ -20,7 +20,13 @@ class Recompensa extends Model implements HasMedia
         'precio',
         'imagen',
         'nivel_desbloqueo',
+        'usuario_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function categorias(){
         

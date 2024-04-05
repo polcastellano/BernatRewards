@@ -26,7 +26,15 @@ export default function usarRecompensas(){
     const getRecompensa = async (id) =>{
         axios.get('/api/recompensas/' + id)
             .then(response => {
-                recompensa.value = response.data.data;
+                if(response.data.status == 405){
+                    router.push({ name: 'recompensas.index' })
+                    swal({
+                        icon: 'error',
+                        title: response.data.message
+                    })
+                }else{
+                    recompensa.value = response.data.data;
+                }
             })
     }
 
@@ -74,7 +82,7 @@ export default function usarRecompensas(){
             }
         })
         .then(response => {
-            router.push({ name: 'recompensa.index' })
+            router.push({ name: 'recompensas.index' })
             swal({
                 icon: 'success',
                 title: 'Recompensa editada correctamente'
@@ -107,11 +115,21 @@ export default function usarRecompensas(){
             if (result.isConfirmed) {
                 axios.delete('/api/recompensas/' + id)
                 .then(response =>{  
-                    recompensas.value.data.splice(index, 1);                    
-                    swal({
-                        icon: 'success',
-                        title: 'Recompensa Eliminada Correctamente',
-                    })
+                    console.log(response)
+                    // recompensas.value.data.splice(index, 1); //cambiar por find en samples/products
+                    if(response.status == 405){
+                        router.push({ name: 'recompensas.index' })
+                        swal({
+                            icon: 'error',
+                            title: response.data.message
+                        })
+                    }else{
+                        recompensas.value.data = recompensas.value.data.filter(recompensa => recompensa.id !== id);
+                        swal({
+                            icon: 'success',
+                            title: 'Recompensa Eliminada Correctamente',
+                        })
+                    }                   
                 })
                 .catch(error => {
                     swal({

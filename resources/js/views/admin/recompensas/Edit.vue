@@ -105,7 +105,7 @@
 
 
 <script setup>
-    import { onMounted, reactive, watchEffect } from "vue";
+    import { onMounted, reactive, watchEffect, watch, ref } from "vue";
     import { useRoute } from "vue-router";
     import { useForm, useField} from "vee-validate";
     import DropZone from "@/components/DropZone.vue";
@@ -121,15 +121,18 @@
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().min(0).label('Precio'),
-        imagen: yup.mixed().required().label('Imagen')
-        .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
-        if (value) {
-          const supportedFormats = ['png', 'jpg'];
-          return supportedFormats.includes(value.split('.').pop());
-        }
-        return true;
-        })
-        ,   
+        imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
+            if (!value) {
+                // Si el valor está vacío, retornar un mensaje personalizado
+                    throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
+        } else if (typeof value === 'string') {
+                // Si es un string, es válido pero no debe estar vacío
+                return value.trim() !== ''; // Verificar que no esté vacío
+            } else {
+                // Si es un objeto de archivo, validar su tipo
+                return ['image/jpeg', 'image/png'].includes(value.type);
+            }
+        }).required().label('Imagen'),
         nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),
         categorias: yup.array().min(1).required().label('Categorias'),
     })
@@ -177,8 +180,6 @@
         recompensa.nivel_desbloqueo = parseInt(recompensaData.value.nivel_desbloqueo)
         recompensa.imagen = recompensaData.value.original_image
     })
-    console.log(recompensa)
-    console.log(schema)
 </script>
 
 

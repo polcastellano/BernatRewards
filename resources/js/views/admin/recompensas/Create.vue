@@ -120,15 +120,10 @@
         nombre: yup.string().required().label('Nombre'),
         descripcion: yup.string().required().label('Descripcion'),
         precio: yup.number().integer().required().min(0).label('Precio'),
-        imagen: yup.mixed().required().label('Imagen')
-        .test('fileFormat', 'Solo se permiten PNG y JPG', value => {
-        if (value) {
-          const supportedFormats = ['png', 'jpg'];
-          return supportedFormats.includes(value.name.split('.').pop());
-        }
-        return true;
+        imagen: yup.mixed().required().label('Imagen').test('fileFormat', 'Solo se permiten PNG y JPG', (value)=> {
+            return value.type == 'image/jpeg' || value.type == 'image/png'
         })
-        .test('fileSize', 'La imagen no puede superar los 3MB', value => {
+        .test('fileSize', 'La imagen no puede superar los 3MB', (value) => {
             if (value) {
            
             const tamano = value.size / 1024 / 1024

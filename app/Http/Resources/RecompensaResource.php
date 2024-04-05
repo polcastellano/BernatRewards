@@ -32,6 +32,7 @@ class RecompensaResource extends JsonResource
             'categorias' => $this->categorias,
             'descripcion' => $this->descripcion,
             'precio' => $this->precio,
+            'usuario_id' => $this->usuario_id,
             'nivel_desbloqueo' => $this->nivel_desbloqueo,
             'original_image' => count($this->getMedia('*')) > 0 ? $this->getMedia('*')[0]->getUrl() : null,
             'resized_image' => $resized_image,

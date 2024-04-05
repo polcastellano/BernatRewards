@@ -25,6 +25,7 @@ class RecompensaController extends Controller
         $this->authorize('recompensa-create');
         
         $validatedData = $request->validated();       
+        $validatedData['usuario_id'] = auth()->id();
         $recompensa = Recompensa::create($validatedData);
 
         $categorias = explode(",", $request->categorias);
@@ -45,8 +46,8 @@ class RecompensaController extends Controller
         
         $recompensa = Recompensa::find($id);
 
-        if ($recompensa->user_id !== auth()->id() && !auth()->user()->hasPermissionTo('recompensa-all')) {
-            return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes aditar tus propias recompensas']);
+        if ($recompensa->usuario_id !== auth()->id() && !auth()->user()->hasPermissionTo('recompensa-all')) {
+            return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes editar tus propias recompensas']);
         } else {
             $recompensa->update($request->validated());
             $categoria = Categoria::findMany($request->categorias);
@@ -64,18 +65,23 @@ class RecompensaController extends Controller
     public function destroy(Recompensa $recompensa){
         
         $this->authorize('recompensa-delete');
-        if ($recompensa->user_id !== auth()->id() && !auth()->user()->hasPermissionTo('recompensa-all')) {
-            return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes eliminar tus propias recompensas']);
-        } else {
-            $recompensa->delete();
-            return response()->noContent();
-        }
+        $recompensa = Recompensa::find($id);
+
+        $recompensa->delete();
+
+        return response()->json(['success' => true, 'data' => 'Recompensa eliminada correctamente']);
+
     }
 
     public function show(Recompensa $recompensa){
 
         $this->authorize('recompensa-edit');
         
-        return new RecompensaResource($recompensa);
+        if ($recompensa->usuario_id !== auth()->id() || !auth()->user()->hasPermissionTo('recompensa-all')) {
+            return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes editar tus propias recompensas']);
+        } else {
+            return new RecompensaResource($recompensa);
+    
+        }
     }
 }
