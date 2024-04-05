@@ -58,6 +58,10 @@ Route::delete('niveles/{id}', [NivelController::class, 'destroy']);
 Route::get('allniveles', [NivelController::class, 'allniveles']);
 Route::get('siguintenivel/{id}', [NivelController::class, 'nivel']);
 
+//Api User
+Route::get('getUserLogeado/{id}', [UserController::class, 'getUserLogeado']);
+Route::get('getUsuMedia/{id}', [UserController::class, 'getUsuMedia']);
+
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {

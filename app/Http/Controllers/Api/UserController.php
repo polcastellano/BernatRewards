@@ -60,6 +60,7 @@ class UserController extends Controller
         $role = Role::find($request->role_id);
         $user = new User();
         $user->name = $request->name;
+        $user->nivel_id = 1;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
@@ -139,5 +140,28 @@ class UserController extends Controller
 
             return response()->json(['message' => 'Usuario no autenticado'], 401);
         }
+    }
+
+    public function getUserLogeado($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $userNivele = User::with('niveles')->find($user->id);
+            return $this->successResponse($userNivele, 'User found');
+
+        } else {
+
+            return response()->json(['message' => 'Usuario no autenticado'], 401);
+        }
+    }
+
+    public function getUsuMedia($id) {
+        $user = User::find($id);
+        if (!$user) {
+            return $this->errorResponse('User not found', 404);
+        }
+
+        return $this->successResponse(new UserResource($user), 'User found');
     }
 }
