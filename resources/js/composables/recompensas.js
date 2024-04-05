@@ -56,7 +56,7 @@ export default function usarRecompensas(){
             }
         })
         .then(response =>{
-            // router.push({ name: 'recompensas.index' })
+            router.push({ name: 'recompensas.index' })
                 swal({
                     icon: 'success',
                     title: 'Recompensa guardada correctamente'
