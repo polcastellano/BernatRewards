@@ -3,24 +3,25 @@
     <ul class="layout-menu">
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
-                <div class="imgUsuario" :style="{ 'background-image': `url('${usuario.img}')` }"></div>
-                <p class="ms-2" style="font-weight: bold;">{{ usuario.name }}</p>
+                <div class="imgUsuario" :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }"></div>
+                <p class="ms-2" style="font-weight: bold;">{{ storeUsuarios().usuMedia.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
-                
+                {{ usuLogueado }}
                 <div class="d-flex justify-content-between">
-                    <p>Nv.{{ usuario.niveles.numero }}</p>
-                    <p><span style="font-weight: bold;">{{ usuario.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
+                    <p>Nv.{{ storeUsuarios().usuLogueado.niveles }}</p>
+                    <!-- <p>Nv.{{ storeUsuarios().usuLogueado.niveles.numero }}</p> -->
+                    <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
                     <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
                 </div>
 
                 <div class="barraNivel d-flex align-items-center">
                     <div class="barraNivelReal"
-                        :style="{ width: ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                        :style="{ width: ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
                         :class="{
-                            'bg-warning': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
-                            'bg-info': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
-                            'bg-success': ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((usuario.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                            'bg-warning': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
+                            'bg-info': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
+                            'bg-success': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
                         }"
                     ></div>
                 </div>
@@ -42,6 +43,7 @@ import AppMenuItem from './AppMenuItem.vue';
 import {useAbility} from '@casl/vue'
 import store from "../store";
 import {storeNiveles} from "../store/niveles";
+import {storeUsuarios} from "../store/usuarios";
 
 const vela = "pepe";
 
@@ -52,9 +54,14 @@ const porcentajeRestante = ref(0);
 
 // console.table(usuario);
 
+
+
 onMounted(() =>{
     storeNiveles().getNivelSiguiente(usuario.niveles.id); 
+    storeUsuarios().getUsuMedia(usuario.id); 
+    storeUsuarios().getUsuLogueado(usuario.id); 
 });
+
 
 const model = ref([
     {
