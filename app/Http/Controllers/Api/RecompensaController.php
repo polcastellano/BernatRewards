@@ -73,7 +73,7 @@ class RecompensaController extends Controller
             return response()->noContent();
         }
     }
-
+ 
     public function show(Recompensa $recompensa){
 
         $this->authorize('recompensa-edit');
