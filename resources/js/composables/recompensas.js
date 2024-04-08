@@ -49,7 +49,7 @@ export default function usarRecompensas(){
                 serializedRecompensa.append(item, recompensa[item])
             }
         }
-        console.log(serializedRecompensa)
+
         axios.post('/api/recompensas', serializedRecompensa,{
             headers: {
                 "content-type": "multipart/form-data"
@@ -76,7 +76,7 @@ export default function usarRecompensas(){
 
         cargando.value = true
 
-        axios.put('/api/recompensas/update/' + recompensa.id, recompensa, {
+        axios.post('/api/recompensas/update/' + recompensa.id, recompensa, {
             headers: {
                 "content-type": "multipart/form-data"
             }

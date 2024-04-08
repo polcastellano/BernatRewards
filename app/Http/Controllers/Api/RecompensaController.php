@@ -65,12 +65,13 @@ class RecompensaController extends Controller
     public function destroy(Recompensa $recompensa){
         
         $this->authorize('recompensa-delete');
-        $recompensa = Recompensa::find($id);
-
-        $recompensa->delete();
-
-        return response()->json(['success' => true, 'data' => 'Recompensa eliminada correctamente']);
-
+        
+        if ($recompensa->usuario_id !== auth()->id() || !auth()->user()->hasPermissionTo('recompensa-all')) {
+            return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes eliminar tus propias recompensas']);
+        } else {
+            $recompensa->delete();
+            return response()->noContent();
+        }
     }
 
     public function show(Recompensa $recompensa){
