@@ -56,10 +56,10 @@ const porcentajeRestante = ref(0);
 
 
 
-onMounted(() =>{
-    storeNiveles().getNivelSiguiente(usuario.niveles.id); 
-    storeUsuarios().getUsuMedia(usuario.id); 
+onMounted(() =>{    
     storeUsuarios().getUsuLogueado(usuario.id); 
+    storeUsuarios().getUsuMedia(usuario.id); 
+    storeNiveles().getNivelSiguiente(usuario.niveles.id); 
 });
 
 

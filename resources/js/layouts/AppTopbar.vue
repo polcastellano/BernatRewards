@@ -9,7 +9,7 @@
             </div>
 
             <router-link to="/" class="layout-topbar-logo">
-                <img src="/images/bernatRewards_Titulo.svg" alt="logo" />
+                <img src="/images/logo/bernatRewards_Titulo.svg" alt="logo" />
                 <span></span>
             </router-link>
         </div>

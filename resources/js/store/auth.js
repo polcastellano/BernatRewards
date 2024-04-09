@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {storeUsuarios} from "../store/usuarios";
 
 export default {
     namespaced: true,
@@ -35,8 +36,8 @@ export default {
         getUser({commit}) {
             return axios.get('/api/usuarioNivel').then(({data}) => {
                 if (data.success) {
-                    commit('SET_USER', data.data)
-                    commit('SET_AUTHENTICATED', true)
+                    commit('SET_USER', data.data);
+                    commit('SET_AUTHENTICATED', true);
                     // router.push({name: 'dashboard'})
                 }
                 // else {
