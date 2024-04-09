@@ -1,7 +1,7 @@
 <template>
     <div class="grid">
         <div class="col-12">
-            <div class="card">
+            <div class="card">  
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las recompensas</h5>
@@ -9,7 +9,8 @@
                             <router-link :to="{name: 'recompensas.create'}" class="btn btn-success">Nueva recompensa</router-link>
                         </div>
                     </div>
-                    <DataTable :value="recompensas.data" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+                    <!-- :rowsPerPageOptions="[5, 10, 20, 50]" -->
+                    <DataTable :value="recompensas.data" paginator :rows="5" tableStyle="min-width: 50rem">
                         
                         <template #empty> No se ha encontrado ninguna recompensa. </template>
 
