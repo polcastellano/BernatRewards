@@ -73,12 +73,10 @@ const model = ref([
             { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/campus', permision: 'all' }
         ]
     },
-    {        
-        label: 'Panel de Administrador',
-    },
     {
-        label: 'Recompensas',
+        label: 'Panel de Administrador',
         items: [
+            
             { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'all' }
         ]
     },

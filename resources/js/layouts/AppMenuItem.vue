@@ -100,7 +100,7 @@ const checkActiveRoute = (item) => {
 <style lang="scss" scoped>
 
 .puntosIcon:before {        
-    content: url("/images/bernatPoints.svg");
+    content: url("/images/iconos/bernatPoints.svg");
     display: block;
 }
 
