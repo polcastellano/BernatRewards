@@ -33,5 +33,10 @@
     "login_with": "Inicia Sessió amb",
     "register_with": "Registre amb",
     "ubicacion": "Carrer Ntra. Sra. de Lourdes, 34, 08750 Molins de Rei, Barcelona",
-    "horario": "8:00a.m - 21:30p.m"
+    "horario": "8:00a.m - 21:30p.m",
+    "tituloPolit": "Polítiques del lloc web",
+    "avisLegal": "Avís legal",
+    "polPriv": "Política de privacitat",
+    "polCook": "Política de cookies"
+    
 }

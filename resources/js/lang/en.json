@@ -38,5 +38,9 @@
     "failed_to_verify_email": "Failed to verify email.",
     "verify_email_address": "We sent you an email with an the verification link.",
     "ubicacion": "Carrer Ntra. Sra. de Lourdes, 34, 08750 Molins de Rei, Barcelona",
-    "horario": "8:00a.m - 21:30p.m"
+    "horario": "8:00a.m - 21:30p.m",
+    "tituloPolit": "Website Policies",
+    "avisLegal": "Legal Notice",
+    "polPriv": "Privacy Policy",
+    "polCook": "Cookie Policy"
 }
