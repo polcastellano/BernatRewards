@@ -9,7 +9,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        {{ usuLogueado }}
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-0 ps-4 d-lg-none">
@@ -29,7 +29,7 @@
                     <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{ name : 'public-posts.index'}" class="nav-link">Blog</router-link>
+                    <router-link :to="{ name : 'public-posts.index'}" class="nav-link">Recompensas</router-link>
                 </li>
             </ul> 
 
@@ -75,7 +75,9 @@
                         </li>
                     </ul>
                     <div class="puntosUsuario d-flex px-1 justify-content-between align-items-center">
-                        <p>0000</p> 
+                        <p></p>
+                        <p v-if="storeUsuarios().usuLogueado.puntos <= 9999" class="pe-1 puntos">{{storeUsuarios().usuLogueado.puntos }}</p> 
+                        <p v-else class="pe-1 puntos"><img src="/images/iconos/plus.svg" style="height: 15px;" alt="logo" />9999</p> 
                         <img src="/images/iconos/bernatPoints.svg" class="bernatCoin" alt="logo" />       
                     </div>
                 </div>
@@ -128,7 +130,6 @@ import {storeUsuarios} from "../store/usuarios";
     const store = useStore();
     const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
-    
 </script>
 
 <style>
@@ -185,7 +186,7 @@ import {storeUsuarios} from "../store/usuarios";
 
 .puntosUsuario{
     background-color: #D0D0D0;
-    width: 5rem;
+    width: 6rem;
     border-radius: 25px; 
 }
 
@@ -198,6 +199,8 @@ import {storeUsuarios} from "../store/usuarios";
     font-size: 15px;
     font-family: Raleway;
     font-weight: bold;
+    max-width: 230px;
+    overflow:hidden;
 }
 
 .bernatCoin{
