@@ -80,7 +80,7 @@ const model = ref([
     {
         label: 'Recompensas',
         items: [
-            { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'all' }
+            { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'recompensa-list' }
         ]
     },
     {

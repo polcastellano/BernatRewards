@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
 
 
         //Llamada a factory de usuario
-        \App\Models\User::factory()->create();
+        // \App\Models\User::factory()->create();
     }
 }

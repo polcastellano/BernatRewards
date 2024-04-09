@@ -31,5 +31,11 @@
     "password_updated": "¡Tu contraseña ha sido actualizada!",
     "new_password": "Nueva Contraseña",
     "login_with": "Iniciar Sesión con",
-    "register_with": "Registro con"
+    "register_with": "Registro con",
+    "ubicacion": "Carrer Ntra. Sra. de Lourdes, 34, 08750 Molins de Rei, Barcelona",
+    "horario": "8:00a.m - 21:30p.m",
+    "tituloPolit": "Políticas del sitio web",
+    "avisLegal": "Aviso legal",
+    "polPriv": "Política de privacidad",
+    "polCook": "Política de cookies"
 }

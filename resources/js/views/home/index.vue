@@ -4,9 +4,11 @@
                 <h1>{{ $t('welcome_starter_title') }}</h1>
             </div>
     </div>
+    <app-footer></app-footer>
 </template>
 
 <script setup>
+import AppFooter from '../../layouts/AppFooter.vue';
 </script>
 
 <style scoped>
