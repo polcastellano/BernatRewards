@@ -1,95 +1,117 @@
 <template>
-    <nav class="navbar navbar-expand-md d-flex justify-content-between justify-content-sm-center bg-white cabezera px-3">
-        <div class="d-flex align-items-center justify-content-sm-between me-3 w-100 flex-row flex-sm-column ">
-            <div class="">
-                <router-link to="/" class="d-flex align-items-center">
-                    <img src="/images/logo/bernatRewards_Titulo.svg" class="logo" alt="logo" />
-                </router-link>  
 
-            </div>
+    <nav class="cabezera navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <router-link to="/" class="d-flex align-items-center contenedorLogo navbar-brand">
+            <img src="/images/logo/bernatRewards_Titulo.svg" class="logo" alt="logo" />
+        </router-link>  
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-0 ps-4 d-lg-none">
+                <template v-if="!user?.name">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/login"
+                        >{{ $t('login') }}</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
+                    </li>
+                </template>
+            </ul>
+
+            <ul class="navbar-nav m-0 ps-4">
+                <li class="nav-item">
+                    <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{ name : 'public-posts.index'}" class="nav-link">Blog</router-link>
+                </li>
+            </ul> 
+
+
             
-            <div class="menuPrincipal collapse navbar-collapse justify-content-between bg-red-500" id="navbarSupportedContent">
-                <div class="d-flex">
-                    <ul class="navbar-nav m-0 ps-4">
-                        <li class="nav-item">
-                            <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name : 'public-posts.index'}" class="nav-link">Blog</router-link>
-                        </li>
-                    </ul>            
-
-                    <ul class="navbar-nav ps-4">
-                        <LocaleSwitcher />
-                    </ul>
-                </div>
-
-                <ul class="navbar-nav mt-2 mt-lg-0 m-0">
-                    <template v-if="!user?.name">
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/login"
-                            >{{ $t('login') }}</router-link
-                            >
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
-                        </li>
-                    </template>
-                </ul>
-                
-            </div>
-
-            <div v-if="user?.name" class="d-flex align-items-center">
-                <a class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </a>
-                <div class="infoUsuario p-0 m-0 d-flex flex-column">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="d-flex align-items-center">
-                                        <div class="imgUsuario" :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }"></div>
-                                        <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ storeUsuarios().usuMedia.name }}</p>
-                                    </div>                        
-                                </a>
-                                <ul class="menuUsu dropdown-menu dropdown-menu-end">
-                                    <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                                    <li><router-link to="/admin/recompensas" class="dropdown-item">Recompensas</router-link></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="puntosUsuario d-flex px-1 justify-content-between align-items-center">
-                            <p>0000</p> 
-                            <img src="/images/iconos/bernatPoints.svg" class="bernatCoin" alt="logo" />       
-                        </div>
-                    </div>
-                    <div class="nivelInfo d-flex flex-column">
-                        <div class="d-flex justify-content-between">
-                            <p>Nv.<!--{{ storeUsuarios().usuLogueado.niveles }}--></p>
-                            <!-- <p>Nv.{{ storeUsuarios().usuLogueado.niveles.numero }}</p> -->
-                            <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>                            <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
-                        </div>
-
-                        <div class="barraNivel d-flex align-items-center">
-                            <div class="barraNivelReal"
-                                :style="{ width: ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
-                                :class="{
-                                    'bg-warning': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
-                                    'bg-info': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
-                                    'bg-success': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
-                                }"
-                            ></div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-
+            <ul class="navbar-nav ps-lg-0 ps-4 prueba">
+                <LocaleSwitcher />
+            </ul>
 
 
         </div>
+        
+        <div class=" d-lg-block d-none d-flex flex-row ">
+            <ul class="navbar-nav m-0 ps-4">
+                <template v-if="!user?.name">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+        
+            <div v-if="user?.name" class="infoUsuario p-0 m-0 d-flex flex-column d-lg-block d-none">
+                <div class="d-flex align-items-center justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="imgUsuario" :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }"></div>
+                                    <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ storeUsuarios().usuMedia.name }}</p>
+                                </div>                        
+                            </a>
+                            <ul class="menuDesp dropdown-menu dropdown-menu-end">
+                                <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
+                                <li><router-link to="/admin/recompensas" class="dropdown-item">Recompensas</router-link></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="puntosUsuario d-flex px-1 justify-content-between align-items-center">
+                        <p>0000</p> 
+                        <img src="/images/iconos/bernatPoints.svg" class="bernatCoin" alt="logo" />       
+                    </div>
+                </div>
+                <div class="nivelInfo d-flex flex-column">
+                    <div class="d-flex justify-content-between">
+                        <p>Nv.<!--{{ storeUsuarios().usuLogueado.niveles }}--></p>
+                        <!-- <p>Nv.{{ storeUsuarios().usuLogueado.niveles.numero }}</p> -->
+                        <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>                            <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
+                    </div>
+
+                    <div class="barraNivel d-flex align-items-center">
+                        <div class="barraNivelReal"
+                            :style="{ width: ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                            :class="{
+                                'bg-warning': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
+                                'bg-info': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
+                                'bg-success': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                            }"
+                        ></div>
+                    </div>
+                </div> 
+            </div>
+        
+        
+
+            
+
+
+
+
+
+
+
+
+
+    </div>
     </nav>
 </template>
 
@@ -106,23 +128,14 @@ import {storeUsuarios} from "../store/usuarios";
     const store = useStore();
     const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
-
-    let usuario = store.state.auth.user;
-
-    const porcentajeRestante = ref(0);
-
-    onMounted(() =>{    
-        storeUsuarios().getUsuLogueado(usuario.id); 
-        storeUsuarios().getUsuMedia(usuario.id); 
-        storeNiveles().getNivelSiguiente(usuario.niveles.id); 
-    });
     
 </script>
 
 <style>
 .cabezera {
-  box-shadow: 10px black !important;
-  margin-bottom: 5px;
+    background-color: white !important;
+    box-shadow: 0px 0px 6px black !important;
+    margin-bottom: 5px;
 }
 
 .logo{
@@ -176,7 +189,7 @@ import {storeUsuarios} from "../store/usuarios";
     border-radius: 25px; 
 }
 
-.menuUsu{
+.menuDesp{
     position: absolute !important;
     z-index: 99;
 }

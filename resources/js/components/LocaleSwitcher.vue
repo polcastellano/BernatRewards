@@ -5,7 +5,7 @@
         >
             {{ locales[locale] }}
         </a>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu menuDesp">
             <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
                @click.prevent="setLocale(key)"
             >
@@ -37,5 +37,8 @@ function setLocale(locale) {
 </script>
 
 <style scoped>
-
+.menuDesp{
+    position: absolute !important;
+    z-index: 99;
+}
 </style>
