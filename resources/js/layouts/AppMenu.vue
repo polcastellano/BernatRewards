@@ -9,8 +9,7 @@
             <div class="nivelInfo d-flex flex-column">
                 {{ usuLogueado }}
                 <div class="d-flex justify-content-between">
-                    <p>Nv.{{ storeUsuarios().usuLogueado.niveles }}</p>
-                    <!-- <p>Nv.{{ storeUsuarios().usuLogueado.niveles.numero }}</p> -->
+                    <p>Nv.{{ storeUsuarios().usuLogueado.niveles?.numero }}</p>
                     <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
                     <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
                 </div>
@@ -56,10 +55,10 @@ const porcentajeRestante = ref(0);
 
 
 
-onMounted(() =>{    
-    storeUsuarios().getUsuLogueado(usuario.id); 
-    storeUsuarios().getUsuMedia(usuario.id); 
+onMounted(() =>{
     storeNiveles().getNivelSiguiente(usuario.niveles.id); 
+    storeUsuarios().getUsuMedia(usuario.id); 
+    storeUsuarios().getUsuLogueado(usuario.id); 
 });
 
 
