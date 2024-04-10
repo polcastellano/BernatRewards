@@ -12,7 +12,7 @@ const logoUrl = computed(() => {
 <template>
     <div class="d-flex bg-cyan-900 p-5 flex-wrap justify-content-between">
         <div class="col-md-12 col-xl-4 d-flex justify-content-center mb-3">
-            <div>
+            <div class="d-flex">
                 <iframe width="250" height="250" class="rounded-4 border-0"
                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2992.329138143673!2d2.028863386729124!3d41.41037335131185!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49a9abc2c50f1%3A0x967c9dc9d440c41b!2sInstitut%20Bernat%20el%20Ferrer!5e0!3m2!1ses!2ses!4v1712599612391!5m2!1ses!2ses"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
