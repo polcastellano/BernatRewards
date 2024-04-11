@@ -96,21 +96,49 @@ class UserController extends Controller
      * @param User $user
      * @return UserResource
      */
-    public function update(UpdateUserRequest $request, User $user)
+
+    // public function update(UpdateUserRequest $request, User $user)
+    // {
+    //     $role = Role::find($request->role_id);
+
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     if(!empty($request->password)) {
+    //         $user->password = Hash::make($request->password) ?? $user->password;
+    //     }
+
+    //     if ($user->save()) {
+    //         if ($role) {
+    //             $user->syncRoles($role);
+    //         }
+    //         return new UserResource($user);
+    //     }
+    // }  
+
+    public function update($id, StoreUserRequest $request)
     {
+        $user = User::find($id);
+
         $role = Role::find($request->role_id);
 
         $user->name = $request->name;
         $user->email = $request->email;
+        
         if(!empty($request->password)) {
             $user->password = Hash::make($request->password) ?? $user->password;
+        }
+
+        if ($request->hasFile('imagen')) {
+            $user->media()->delete();
+            $user->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
         }
 
         if ($user->save()) {
             if ($role) {
                 $user->syncRoles($role);
             }
-            return new UserResource($user);
+            return UserResource::collection($user);
+             
         }
     }
 

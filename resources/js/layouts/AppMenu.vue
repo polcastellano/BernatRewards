@@ -10,17 +10,17 @@
                 {{ usuLogueado }}
                 <div class="d-flex justify-content-between">
                     <p>Nv.{{ storeUsuarios().usuLogueado.niveles?.numero }}</p>
-                    <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
+                    <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado?.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
                     <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
                 </div>
 
                 <div class="barraNivel d-flex align-items-center">
                     <div class="barraNivelReal"
-                        :style="{ width: ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                        :style="{ width: ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
                         :class="{
-                            'bg-warning': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
-                            'bg-info': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
-                            'bg-success': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                            'bg-warning': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
+                            'bg-info': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
+                            'bg-success': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
                         }"
                     ></div>
                 </div>

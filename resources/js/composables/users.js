@@ -9,7 +9,7 @@ export default function useUsers() {
 
     const router = useRouter()
     const validationErrors = ref({})
-    const isLoading = ref(false)
+    const cargando = ref(false)
     const swal = inject('$swal')
 
     const getUsers = async (
@@ -42,9 +42,9 @@ export default function useUsers() {
         console.log("USER:");
         console.log(user);
 
-        if (isLoading.value) return;
+        if (cargando.value) return;
         
-        isLoading.value = true
+        cargando.value = true
         validationErrors.value = {}
 
         let serializedPost = new FormData()
@@ -80,26 +80,54 @@ export default function useUsers() {
 
     }
 
+
+    // const updateUser = async (user) => {
+    //     if (isLoading.value) return;
+
+    //     isLoading.value = true
+    //     validationErrors.value = {}
+
+    //     axios.put('/api/users/' + user.id, user)
+    //         .then(response => {
+    //             router.push({name: 'users.index'})
+    //             swal({
+    //                 icon: 'success',
+    //                 title: 'User updated successfully'
+    //             })
+    //         })
+    //         .catch(error => {
+    //             if (error.response?.data) {
+    //                 validationErrors.value = error.response.data.errors
+    //             }
+    //         })
+    //         .finally(() => isLoading.value = false)
+    // }
+
     const updateUser = async (user) => {
-        if (isLoading.value) return;
+        if (cargando.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        cargando.value = true
 
-        axios.put('/api/users/' + user.id, user)
-            .then(response => {
-                router.push({name: 'users.index'})
-                swal({
-                    icon: 'success',
-                    title: 'User updated successfully'
-                })
+        axios.post('/api/users/update/' + user.id, user, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        })
+        .then(response => {
+            router.push({ name: 'user.index' })
+            swal({
+                icon: 'success',
+                title: 'User editado correctamente'
             })
-            .catch(error => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
-                }
+        })
+        .catch(error => {
+            console.log(error)
+            swal({
+                icon: 'error',
+                title: 'User editado incorrectamente'
             })
-            .finally(() => isLoading.value = false)
+        })
+        .finally(() => cargando.value = false)
     }
 
     const deleteUser = async (id) => {
@@ -144,6 +172,6 @@ export default function useUsers() {
         updateUser,
         deleteUser,
         validationErrors,
-        isLoading
+        cargando
     }
 }

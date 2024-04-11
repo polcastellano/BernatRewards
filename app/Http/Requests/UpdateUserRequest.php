@@ -23,8 +23,11 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            //Preguntar unique email
             'email' => 'required|string|email|max:255|unique:users,email,'.$this->user->id,
             'password' => ['nullable', 'string', 'min:8'],
+            'puntos' => ['required', 'int'],
+            'experience' => ['required', 'int'],
         ];
     }
 }

@@ -29,6 +29,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'role_id' => $this->roles,
+            'puntos' => $this->puntos,
+            'experience' => $this->experience,
             'roles' => $this->roles,
             'original_image' => count($this->getMedia('*')) > 0 ? $this->getMedia('*')[0]->getUrl() : null,
             'resized_image' => $resized_image,
