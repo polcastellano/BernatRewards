@@ -10,7 +10,7 @@ const logoUrl = computed(() => {
 </script>
 
 <template>
-    <div class="d-flex bg-cyan-900 p-5 flex-wrap justify-content-between">
+    <div class="footer-social-media d-flex p-5 flex-wrap justify-content-between" style="background-color: #145A79;">
         <div class="col-md-12 col-lg-6 d-sm-flex justify-content-center mb-3">
             <div class="d-flex">
                 <iframe width="250" height="250" class="rounded-4 border-0"
@@ -56,13 +56,27 @@ const logoUrl = computed(() => {
             </div>
         </div>
     </div>
-    <div class="col d-flex bg-green-900 p-5 justify-content-between border-top-1">
-
+    <div class="p-5 d-flex flex-column justify-content-center align-items-center border-top-1"  style="background-color: #145A79;">
+        <div class="container-fluid d-flex justify-content-center">
+            <img class="m-2" src="/images/iconos/instagram.svg"alt="Instagram" style="width: 2rem;"/>
+            <img class="m-2" src="/images/iconos/facebook.svg"alt="Facebook" style="width: 2rem;"/>
+            <img class="m-2" src="/images/iconos/twitter.svg"alt="Twitter" style="width: 2rem;"/>
+        </div>
+        <div>
+            <p class="text-footer">{{ $t('copyright') }}</p>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped>
 .text-footer{
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.footer-social-media{
+    background-image: url('/images/backgrounds/triangles.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+
 }
 </style>
