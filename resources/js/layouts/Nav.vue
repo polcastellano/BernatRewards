@@ -53,7 +53,7 @@
                         <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name : 'public-posts.index'}" class="nav-link">{{ $t('rewards') }}</router-link>
+                        <router-link :to="{ name : 'recompensas.index'}" class="nav-link">{{ $t('rewards') }}</router-link>
                     </li>
                 </ul> 
 

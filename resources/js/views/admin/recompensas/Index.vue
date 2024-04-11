@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Todas las recompensas</h5>
-                        <div>
+                        <div v-if="can('recompensa-create')">
                             <router-link :to="{name: 'recompensas.create'}" class="btn btn-success">Nueva recompensa</router-link>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <Column style="width:100px;" class="pe-0 me-0">
                             <template #body="slotProps">
 
-                                <router-link v-if="can('recompensa-edit')"
+                                <router-link v-if="can('recompensa-edit') && usuario.id == slotProps.data.usuario_id"
                                     :to="{ name: 'recompensas.edit', params: { id: slotProps.data.id } }" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                                         <path fill="#ffffff"
@@ -51,7 +51,7 @@
                                     </svg>
                                 </router-link>
 
-                                <span v-if="can('recompensa-delete')" @click.prevent="deleteRecompensa(slotProps.data.id, slotProps.index)"
+                                <span v-if="can('recompensa-delete') && usuario.id == slotProps.data.usuario_id" @click.prevent="deleteRecompensa(slotProps.data.id, slotProps.index)"
                                     class="ms-2 me-0 btn btn-danger">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                                         <path fill="#ffffff"
@@ -76,9 +76,12 @@
     import DataTable from 'primevue/datatable';
     import Column from 'primevue/column';
     import {onMounted} from "vue";
+    import store from "@/store";
+
 
     const {recompensas, getRecompensas, deleteRecompensa} = usarRecompensas()
     const { can } = useAbility()
+    const usuario = store.state.auth.user;
 
     onMounted(() =>{
         getRecompensas()

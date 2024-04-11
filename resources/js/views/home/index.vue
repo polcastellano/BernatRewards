@@ -1,6 +1,6 @@
 <template>
-    <div class="relative flex items-top justify-center min-h-screen bg-white dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <div class="col-11 bg-blue-300">
+    <div class="min-h-screen bg-white dark:bg-gray-900">
+            <div class="col-12 bg-principal">
                 <h1>{{ $t('welcome_starter_title') }}</h1>
             </div>
     </div>
