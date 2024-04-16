@@ -86,12 +86,12 @@
                         </h6>
 
                         <div class="mb-3">
-                            <MultiSelect v-model="user.role_id" :options="roleList" filter dataKey="id"
+                            <MultiSelect v-model="user.roles" :options="roleList" filter dataKey="id"
                                 optionLabel="name" placeholder="Seleciona un rol" display="chip" class="w-full">
                             </MultiSelect>
                         </div>
                         <div class="text-danger mt-1">
-                            {{ errors.role_id }}
+                            {{ errors.roles }}
                         </div>
 
                         <!-- Imagen -->
@@ -131,13 +131,12 @@
     const { roleList, getRoleList } = useRoles();
     const { updateUser, getUser, user: postData, cargando } = useUsers();
 
-    import { useForm, useField, defineRule } from "vee-validate";
+    import { useForm, useField } from "vee-validate";
 
 
     const schema = yup.object({
         name: yup.string().required().label('Nombre'),
         email: yup.string().required().label('Email'),
-        password: yup.string().required().label('Password'),
         puntos: yup.number().integer().required().min(0).label('Puntos'),
         experience: yup.number().integer().required().min(0).label('Nivel'),
         imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
@@ -152,28 +151,26 @@
                 return ['image/jpeg', 'image/png'].includes(value.type);
             }
         }).required().label('Imagen'),
+        roles: yup.array().min(1).required().label('Roles'),
         
     })
 
     // Create a form context with the validation schema
-    const { validate, errors, resetForm } = useForm({ validationSchema: schema })
+    const { validate, errors } = useForm({ validationSchema: schema })
     // Define actual fields for validation
     const { value: name } = useField('name', null, { initialValue: '' });
     const { value: email } = useField('email', null, { initialValue: '' });
     const { value: password } = useField('password', null, { initialValue: '' });
-    const { value: role_id } = useField('role_id', null, { initialValue: '', label: 'role' });
+    const { value: roles } = useField('roles', null, { initialValue: '', label: 'role' });
     const { value: imagen} = useField('imagen', null);
     const { value: puntos } = useField('puntos', null, { initialValue: 0, label: 'puntos' });
     const { value: experience } = useField('experience', null, { initialValue: 0, label: 'experience' });
-
-
-
 
     const user = reactive({
         name,
         email,
         password,
-        role_id,
+        roles,
         imagen,
         puntos,
         experience,
@@ -197,7 +194,7 @@
         user.id = postData.value.id
         user.name = postData.value.name
         user.email = postData.value.email
-        user.role_id = postData.value.role_id
+        user.roles = postData.value.roles
         user.imagen = postData.value.original_image
         user.puntos = postData.value.puntos
         user.experience = postData.value.experience

@@ -28,7 +28,6 @@ class UserResource extends JsonResource
             'id'   => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'role_id' => $this->roles,
             'puntos' => $this->puntos,
             'experience' => $this->experience,
             'roles' => $this->roles,
@@ -36,5 +35,6 @@ class UserResource extends JsonResource
             'resized_image' => $resized_image,
             'created_at' => $this->created_at->toDateString()
         ];
+        return parent::toArray($request);
     }
 }

@@ -115,30 +115,30 @@ class UserController extends Controller
     //     }
     // }  
 
-    public function update($id, StoreUserRequest $request)
+    public function update(User $user, UpdateUserRequest $request)
     {
-        $user = User::find($id);
-
-        $role = Role::find($request->role_id);
+        $roles = Role::find($request->roles);
 
         $user->name = $request->name;
         $user->email = $request->email;
-        
-        if(!empty($request->password)) {
+
+        if (!empty($request->password)) {
             $user->password = Hash::make($request->password) ?? $user->password;
         }
+
 
         if ($request->hasFile('imagen')) {
             $user->media()->delete();
             $user->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
         }
 
+
+
         if ($user->save()) {
-            if ($role) {
-                $user->syncRoles($role);
+            if ($roles) {
+                $user->syncRoles($roles);
             }
             return UserResource::collection($user);
-             
         }
     }
 
