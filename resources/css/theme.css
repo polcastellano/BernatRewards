@@ -1,5 +1,7 @@
 :root {
     --principal: #145A79;
+    --coins: #E19325;
+    --mejora: #A31666;
     --surface-a: #ffffff;
     --surface-b: #f8f9fa;
     --surface-c: #e9ecef;
@@ -251,6 +253,14 @@
 
 .bg-principal{
     background-color: var(--principal) !important;
+}
+
+.bg-coins{
+    background-color: var(--coins) !important;
+}
+
+.bg-mejora{
+    background-color: var(--mejora) !important;
 }
 
 .p-autocomplete .p-autocomplete-loader {

@@ -53,6 +53,18 @@ export default [
                 component: () => import('../views/home/index.vue'),
             },
             {
+                path: 'shop',
+                name: 'shop',
+                component: () => import('../views/shop/shop.vue'),
+            },
+            {
+                path: 'moodle',
+                name: 'moodle',
+                beforeEnter() {
+                    window.location.href = 'https://www.campus.bernatelferrer.cat/login/index.php';
+                }
+            },
+            {
                 path: 'posts',
                 name: 'public-posts.index',
                 component: () => import('../views/posts/index.vue'),
