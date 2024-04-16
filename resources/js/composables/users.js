@@ -4,7 +4,13 @@ import { useRouter } from 'vue-router'
 export default function useUsers() {
     const users = ref([])
     const user = ref({
-        name: ''
+        name: '',
+        email: '',
+        password: '',
+        roles: '',
+        imagen: '',
+        puntos: '',
+        experience: ''
     })
 
     const router = useRouter()
@@ -108,13 +114,15 @@ export default function useUsers() {
 
         cargando.value = true
 
+
         axios.post('/api/users/update/' + user.id, user, {
             headers: {
                 "content-type": "multipart/form-data"
             }
         })
         .then(response => {
-            router.push({ name: 'user.index' })
+            console.log(response)
+            // router.push({ name: 'user.index' })
             swal({
                 icon: 'success',
                 title: 'User editado correctamente'

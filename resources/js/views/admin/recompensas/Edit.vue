@@ -105,7 +105,7 @@
 
 
 <script setup>
-    import { onMounted, reactive, watchEffect, watch, ref } from "vue";
+    import { onMounted, reactive, watchEffect } from "vue";
     import { useRoute } from "vue-router";
     import { useForm, useField} from "vee-validate";
     import DropZone from "@/components/DropZone.vue";

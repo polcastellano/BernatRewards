@@ -12,13 +12,11 @@ use App\Http\Controllers\api\PedidoController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\api\UsuarioController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use PHPUnit\Framework\Attributes\Ticket;
 
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
@@ -66,7 +64,7 @@ Route::get('getUsuMedia/{id}', [UserController::class, 'getUsuMedia']);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
-    Route::post('users/update/{id}', [UserController::class, 'update']);
+    Route::post('users/update/{user}', [UserController::class, 'update']);
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('roles', RoleController::class);
