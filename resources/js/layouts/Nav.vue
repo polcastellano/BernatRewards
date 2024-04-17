@@ -161,6 +161,10 @@ import {storeUsuarios} from "../store/usuarios";
     const store = useStore();
     const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
+    const { nivelUsu } = storeNiveles();
+    const { usuLogueado, usuMedia } = storeUsuarios();
+
+
 </script>
 
 <style>

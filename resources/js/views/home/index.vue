@@ -1,6 +1,6 @@
 <template>
-    <section class="carusel ">
-        <div id="caruselPrincipal" class="w-100 carousel slide carousel-fade p-0" data-bs-ride="carousel">
+    <section>
+        <div id="caruselPrincipal" class="carousel slide carousel-fade p-0" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="caruselI1 d-flex justify-content-around align-items-center">
@@ -11,7 +11,8 @@
                                 mauris. Justo fusce habitasse massa nisi purus libero et, aenean suspe ndisse fringilla
                                 faucibus tempus fermentum.</p>
                         </div>
-                        <div class="imgInfo d-lg-block d-none" style="background-image: url('/images/pictures/imagenJuego.png'); "></div>
+                        <div class="imgInfo d-lg-block d-none"
+                            style="background-image: url('/images/pictures/imagenJuego.png'); "></div>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -53,40 +54,73 @@
     </section>
 
     <section>
-        <div class="w-100 d-flex">
-            <router-link to="/login" class="cuadradoInfo p-0">
-            <div class="bg-principal d-flex flex-column justify-content-center align-items-center p-4">
-                <img src="/images/iconos/login.svg" style="height: 13rem;" alt="">
-                <h2>Iniciar Sesion</h2>
-                <p>Inicia sesion para poder empezar a acumular puntos!</p>
-            </div>
-        </router-link>
-        
-        <router-link to="/shop" class="cuadradoInfo p-0">
-            <div class="bg-coins d-flex flex-column justify-content-center align-items-center p-4">
-                <img src="/images/iconos/bernatPoints_white.svg" style="height: 13rem;" alt="">
-                <h2>Compra</h2>
-                <p>Gasta tus puntos es ventajas o comodidades!</p>
-            </div>
-        </router-link>
+        <div class="flex lg:flex-row flex-column flex-column">
+            <router-link to="/login" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
+                <div class="bg-principal h-full d-flex flex-column justify-content-center align-items-center p-4">
+                    <img src="/images/iconos/login.svg" style="height: 13rem;" alt="">
+                    <h2 class="lg:h-5">Iniciar Sesion</h2>
+                    <p>Inicia sesion para poder empezar a acumular puntos!</p>
+                </div>
+            </router-link>
 
-        <router-link to="/moodle" class="cuadradoInfo p-0">
-            <div class="bg-mejora d-flex flex-column justify-content-center align-items-center p-4">
-                <img src="/images/iconos/mejora.svg" style="height: 13rem;" alt="">
-                <h2>Mejora</h2>
-                <p>Aprende mientras compites con tus amigos!</p>
-            </div>
-        </router-link>
+            <router-link to="/shop" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
+                <div class="bg-coins h-full d-flex flex-column justify-content-center align-items-center p-4">
+                    <img src="/images/iconos/bernatPoints_white.svg" style="height: 13rem;" alt="">
+                    <h2 class="lg:h-5">Compra</h2>
+                    <p>Gasta tus puntos es ventajas o comodidades!</p>
+                </div>
+            </router-link>
+
+            <router-link to="/moodle" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
+                <div class="bg-mejora h-full d-flex flex-column justify-content-center align-items-center p-4">
+                    <img src="/images/iconos/mejora.svg" style="height: 13rem;" alt="">
+                    <h2 class="lg:h-5">Mejora</h2>
+                    <p>Aprende mientras compites con tus amigos!</p>
+                </div>
+            </router-link>
         </div>
-        
     </section>
 
-
-    <div class="min-h-screen bg-white dark:bg-gray-900">
-        <div class="col-12 bg-principal">
-            <h1>{{ $t('welcome_starter_title') }}</h1>
+    <section>
+        <div class="w-full flex h-auto" style="height: 300px">
+            <div
+                class="lg:flex hidden seccionInfo1 w-6 h-6 border-round-xl border-noround-left d-flex align-items-center justify-content-center">
+                <img src="/images/iconos/points.svg" class="my-5" style="height: 17rem" alt="">
+            </div>
+            <div class="lg:w-6 w-full lg:p-5 p-4">
+                <h2 class="text-principal">Como ganar puntos?</h2>
+                <p>Participa activamente durante las clases, plantea preguntas que te ayuden a comprender mejor los
+                    temas y esfuérzate en tus tareas y actividades. Tus profesores valorarán tu compromiso y dedicación
+                    y te recompensarán con Bernat points, una moneda especial que podrás utilizar para obtener
+                    recompensas exclusivas y especiales.</p>
+                    <router-link to="/register">
+                        <button class="bg-principal p-2 px-5 border-round-3xl">Registrate</button>
+                    </router-link>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section>
+        <div class="w-full flex h-auto" style="height: 300px">
+            <div class="lg:w-6 w-full lg:p-5 p-4">
+                <h2 class="text-principal">Atento a las Subastas</h2>
+                <p>
+                    Mantente atento a las subastas temporales donde podrás usar tus puntos. Tus profesores te mantendrán
+                    informado sobre cuándo se llevarán a cabo estas subastas especiales, dándote la oportunidad de
+                    participar. Aprovecha esta oportunidad única para conseguir recompensas exclusivas con tus Bernat
+                    points.
+                </p>
+                <router-link to="/shop">
+                    <button class="bg-principal p-2 px-5 border-round-3xl">Subastas</button>
+                </router-link>
+            </div>
+            <div class="lg:flex hidden seccionInfo2 w-6 h-6 border-round-xl border-noround-right d-flex align-items-center justify-content-center">
+                <img src="/images/iconos/auction.svg" class="my-5 pt-5 " style="height: 15rem" alt="">
+            </div>
+
+        </div>
+    </section>
+    
     <app-footer></app-footer>
 </template>
 
@@ -96,8 +130,9 @@ import { onMounted,} from 'vue';
 import store from "../../../js/store/";
 import {storeNiveles} from "../../../js/store/niveles";
 import {storeUsuarios} from "../../../js/store/usuarios";
-
+    
 onMounted(() => {
+    console.log(store.state.auth.user.id);
     if (store.state.auth.user.id != null) {
         let usuario = store.state.auth.user;
         storeNiveles().getNivelSiguiente(usuario.niveles.id);
@@ -109,16 +144,28 @@ onMounted(() => {
 </script>
 
 <style scoped>
+section{
+    margin-bottom: 3em;
+}
+
 h2{
     color: white;
-    font-size: 50px;
+    font-size: 45px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: left;
 }
 
-section{
-    margin-bottom: 3em;
+p{
+    text-align: justify;
 }
+
+button{
+    color: white; 
+    border: none; 
+    font-family: Raleway;
+    font-weight: bold;
+}
+
 .txtInfo{
     height: 25rem;
     width: 40rem;
@@ -142,13 +189,11 @@ section{
 .caruselI1{
     height: 35.721rem;
     background-image: linear-gradient(to bottom right, #9B52E0, #0793E3);
-
 }
 
 .caruselI2{
     height: 35.721rem;
     background-image: linear-gradient(to bottom right, #108CD2, #51E0B9);
-
 }
 
 .caruselI3{
@@ -158,7 +203,6 @@ section{
 }
 
 .cuadradoInfo{
-    width: 33.33%;
     padding: 50px;
     transition: transform .5s;
     margin: 0 auto;
@@ -173,6 +217,14 @@ section{
 
 .cuadradoInfo p{
     color: white;
+}
+
+.seccionInfo1{
+    background-image: linear-gradient(to top right, #228213, #31BA1B);
+}
+
+.seccionInfo2{
+    background-image: linear-gradient(to top left, #AA361D, #E19325);
 }
 
 </style>

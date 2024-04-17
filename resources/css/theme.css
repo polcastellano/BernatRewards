@@ -255,6 +255,10 @@
     background-color: var(--principal) !important;
 }
 
+.text-principal{
+    color: var(--principal) !important;
+}
+
 .bg-coins{
     background-color: var(--coins) !important;
 }
