@@ -31,7 +31,7 @@ class User extends Authenticatable implements HasMedia
         'telephone',
         'puntos',
         'experience',
-        'id_nivel'
+        'nivel_id'
     ];
 
     /**

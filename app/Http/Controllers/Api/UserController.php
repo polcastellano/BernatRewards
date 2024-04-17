@@ -115,30 +115,33 @@ class UserController extends Controller
     //     }
     // }  
 
-    public function update(User $user, UpdateUserRequest $request)
+    public function update(UpdateUserRequest $request)
     {
+        $usuario = User::find($request->id);
+
         $roles = Role::find($request->roles);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
 
         if (!empty($request->password)) {
-            $user->password = Hash::make($request->password) ?? $user->password;
+            $usuario->password = Hash::make($request->password) ?? $usuario->password;
         }
 
 
         if ($request->hasFile('imagen')) {
-            $user->media()->delete();
-            $user->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
+            $usuario->media()->delete();
+            $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
         }
 
 
 
-        if ($user->save()) {
+        if ($usuario->save()) {
             if ($roles) {
-                $user->syncRoles($roles);
+                $usuario->syncRoles($roles);
             }
-            return UserResource::collection($user);
+            return $usuario;
+            // return UserResource::collection($usuario);
         }
     }
 
@@ -175,7 +178,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if ($user) {
-            $userNivele = User::with('niveles')->find($user->id);
+            $userNivele = User::with('niveles')->with('roles')->find($user->id);
             return $this->successResponse($userNivele, 'User found');
 
         } else {
