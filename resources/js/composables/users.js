@@ -122,7 +122,7 @@ export default function useUsers() {
         })
         .then(response => {
             console.log(response)
-            // router.push({ name: 'user.index' })
+            router.push({ name: 'users.index' })
             swal({
                 icon: 'success',
                 title: 'User editado correctamente'

@@ -164,7 +164,7 @@ class UserController extends Controller
         $user = $request->user();
     
         if ($user) {
-            $userNivele = User::with('niveles')->find($user->id);
+            $userNivele = User::with('niveles')->with('roles')->find($user->id);
             return $this->successResponse($userNivele, 'User found');
 
         } else {

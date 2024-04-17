@@ -36,7 +36,7 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="usuLogueado.roles[0].name == 'user'" v-model="user.experience" type="text" class="form-control" />
+                            <InputText :disabled="usuario.roles[0]?.name == 'user'" v-model="user.experience" type="text" class="form-control" />
                             <label class="font-bold block">Nivel<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -46,7 +46,7 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="usuLogueado.roles[0].name == 'user'" v-model="user.puntos" type="text" class="form-control" />
+                            <InputText :disabled="usuario.roles[0]?.name == 'user'" v-model="user.puntos" type="text" class="form-control" />
                             <label class="font-bold block">Puntos<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -83,9 +83,8 @@
                             Role
                             <span class="text-danger">*</span>
                         </h6>
-
                         <div class="mb-3">
-                            <MultiSelect :disabled="usuLogueado.roles[0].name == 'user'" v-model="user.roles" :options="roleList" filter dataKey="id"
+                            <MultiSelect :disabled="usuario.roles[0]?.name == 'user'" v-model="user.roles" :options="roleList" filter dataKey="id"
                                 optionLabel="name" placeholder="Seleciona un rol" display="chip" class="w-full">
                             </MultiSelect>
                         </div>
@@ -125,15 +124,13 @@
     import { setLocale } from 'yup';
     import DropZone from "@/components/DropZone.vue";
     import store from "@/store";
-    import {storeUsuarios} from "@/store/usuarios";
 
-    let usuario = store.state.auth.user;
+    const usuario = store.state.auth.user;
 
     setLocale(es);
 
     const { roleList, getRoleList } = useRoles();
     const { updateUser, getUser, user: postData, cargando } = useUsers();
-    const { getUsuLogueado, usuLogueado } = storeUsuarios();
 
     import { useForm, useField } from "vee-validate";
 
@@ -191,7 +188,6 @@
     onMounted(() => {
         getUser(route.params.id)
         getRoleList()
-        getUsuLogueado(usuario.id); 
     })
 
     // https://vuejs.org/api/reactivity-core.html#watcheffect

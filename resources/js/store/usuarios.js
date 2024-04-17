@@ -3,7 +3,7 @@ import { ref,watch } from 'vue'
 
 
 export const storeUsuarios = defineStore('allUsers', () => {
-        const usuLogueado = ref({})
+        const usuLogueado = ref({roles:[]})
         const usuMedia = ref({})
 
         function getUsuLogueado($id) {
