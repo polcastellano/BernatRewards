@@ -7,7 +7,6 @@
                 <p class="ms-2" style="font-weight: bold;">{{ storeUsuarios().usuMedia.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
-                {{ usuLogueado }}
                 <div class="d-flex justify-content-between">
                     <p>Nv.{{ storeUsuarios().usuLogueado.niveles?.numero }}</p>
                     <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado?.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>

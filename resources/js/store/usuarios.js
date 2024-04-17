@@ -3,8 +3,9 @@ import { ref,watch } from 'vue'
 
 
 export const storeUsuarios = defineStore('allUsers', () => {
-        const usuLogueado = ref({})
+        const usuLogueado = ref({roles:[]})
         const usuMedia = ref({})
+
         function getUsuLogueado($id) {
             axios.get('/api/getUserLogeado/' + $id).then(({ data }) => {
                 if (data.success) {
@@ -14,6 +15,7 @@ export const storeUsuarios = defineStore('allUsers', () => {
                 console.error("Error, " + res);
             })
         }
+
         function getUsuMedia($id) {
             axios.get('/api/getUsuMedia/' + $id).then(({ data }) => {
                 if (data.success) {
