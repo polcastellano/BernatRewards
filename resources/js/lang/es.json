@@ -39,7 +39,25 @@
     "polPriv": "Política de privacidad",
     "polCook": "Política de cookies",
     "rewards": "Recompensas",
-    "copyright": "Copyright © 2024 IES BERNAT EL FERRER"
+    "copyright": "Copyright © 2024 IES BERNAT EL FERRER",
+    "what_is_BernatRewards_title": "Que es Bernat Rewards?",
+    "what_is_BernatRewards": "Bernat Rewards representa una innovadora plataforma de aprendizaje competitivo diseñada por Bernat el Ferrer. Aquí, tendrás la oportunidad de acumular puntos como reconocimiento a tus destacadas contribuciones en el entorno académico.",
+    "start_wining_now_title": "Empieza a ganar ya!",
+    "start_wining_now": "Accede a tu cuenta para comenzar a acumular puntos por tu participación activa en las clases. ¡Cada aporte cuenta para aumentar tus puntos y desbloquear interesantes recompensas!",
+    "competitive_learning_title": "Aprendizaje competitivo",
+    "competitive_learning": "Sumérgete en una experiencia de aprendizaje llena de emoción y competencia a través del sistema de puntos de Bernat Rewards. Compite con tus compañeros para alcanzar la cima del ranking y demostrar quién acumula más puntos.",
+    "login_text": "Inicia sesion para poder empezar a acumular puntos!",
+    "buy": "Compra",
+    "buy_text": "Gasta tus puntos es ventajas o comodidades!",
+    "upgrade": "Mejora",
+    "upgrade_text": "Aprende mientras compites con tus amigos!",
+    "how_to_earn_points" : "Como ganar puntos?",
+    "how_to_earn_points_text": "Participa activamente durante las clases, plantea preguntas que te ayuden a comprender mejor los temas y esfuérzate en tus tareas y actividades. Tus profesores valorarán tu compromiso y dedicación y te recompensarán con Bernat points, una moneda especial que podrás utilizar para obtener recompensas exclusivas y especiales.",
+    "cauition_for_the_auctions": "Atento a las Subastas",
+    "cauition_for_the_auctions_text": "Mantente atento a las subastas temporales donde podrás usar tus puntos. Tus profesores te mantendrán informado sobre cuándo se llevarán a cabo estas subastas especiales, dándote la oportunidad de participar. Aprovecha esta oportunidad única para conseguir recompensas exclusivas con tus Bernat points.",
+    "auction" : "Subastas"
+
+
 
 
 }

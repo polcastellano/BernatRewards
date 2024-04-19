@@ -23,8 +23,7 @@
                                     </a>
                                     <ul class="menuDesp dropdown-menu dropdown-menu-end">
                                         <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                                        <li><router-link to="/admin/recompensas" class="dropdown-item">{{ $t('rewards')
-                                                }}</router-link></li>
+                                        <li><router-link to="/admin/recompensas" class="dropdown-item">{{ $t('rewards')}}</router-link></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -62,7 +61,7 @@
                             <router-link to="/" class="nav-link" aria-current="page">{{ $t('home') }}</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'recompensas.index' }" class="nav-link">{{ $t('rewards')
+                            <router-link to="/shop" class="nav-link">{{ $t('rewards')
                                 }}</router-link>
                         </li>
                     </ul>

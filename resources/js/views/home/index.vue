@@ -3,50 +3,41 @@
         <div id="caruselPrincipal" class="carousel slide carousel-fade p-0" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="caruselI1 d-flex justify-content-around align-items-center">
-                        <div class="txtInfo ms-4 d-flex flex-column align-items-left">
-                            <h2>Que es Bernat Rewards?</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit cras donec enim vulputate tempor
-                                nascetur, magna mus interdum netus blandit bibendum nunc curae porta auctor himenaeos
-                                mauris. Justo fusce habitasse massa nisi purus libero et, aenean suspe ndisse fringilla
-                                faucibus tempus fermentum.</p>
+                    <div class="caruselI1 p-5 d-flex justify-content-around align-items-center" style="height: 35rem;">
+                        <div class="txtInfo m-4 flex flex-column align-items-left">
+                            <h2>{{ $t('what_is_BernatRewards_title')}}</h2>
+                            <p>{{ $t('what_is_BernatRewards')}}</p>
                         </div>
                         <div class="imgInfo d-lg-block d-none"
                             style="background-image: url('/images/pictures/imagenJuego.png'); "></div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="caruselI2 d-flex justify-content-around align-items-center">
-                        <div class="txtInfo ms-4 d-flex flex-column align-items-left">
-                            <h2>Empieza a ganar ya!</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit cras donec enim vulputate tempor
-                                nascetur, magna mus interdum netus blandit bibendum nunc curae porta auctor himenaeos
-                                mauris. Justo fusce habitasse massa nisi purus libero et, aenean suspe ndisse fringilla
-                                faucibus tempus fermentum.</p>
+                    <div class="caruselI2 p-5 d-flex justify-content-around align-items-center" style="height: 35rem;">
+                        <div class="txtInfo m-4 flex flex-column align-items-left">
+                            <h2>{{ $t('start_wining_now_title')}}</h2>
+                            <p>{{ $t('start_wining_now')}}</p>
                         </div>
                         <div class="imgInfo d-lg-block d-none"
                             style="background-image: url('/images/pictures/imagenLogin.png'); "></div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="caruselI3 d-flex justify-content-around align-items-center">
-                        <div class="txtInfo ms-4 d-flex flex-column align-items-left">
-                            <h2>Aprendizaje competitivo</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit cras donec enim vulputate tempor
-                                nascetur, magna mus interdum netus blandit bibendum nunc curae porta auctor himenaeos
-                                mauris. Justo fusce habitasse massa nisi purus libero et, aenean suspe ndisse fringilla
-                                faucibus tempus fermentum.</p>
+                    <div class="caruselI3 p-5 d-flex justify-content-around align-items-center" style="height: 35rem;">
+                        <div class="txtInfo m-4 flex flex-column align-items-left">
+                            <h2>{{ $t('competitive_learning_title')}}</h2>
+                            <p>{{ $t('competitive_learning')}}</p>
                         </div>
                         <div class="imgInfo d-lg-block d-none"
                             style="background-image: url('/images/pictures/imagenCompeticion.png'); "></div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#caruselPrincipal" data-bs-slide="prev">
+            <button class="carousel-control-prev lg:w-10rem" type="button" data-bs-target="#caruselPrincipal" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#caruselPrincipal" data-bs-slide="next">
+            <button class="carousel-control-next lg:w-10rem" type="button" data-bs-target="#caruselPrincipal" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -54,28 +45,41 @@
     </section>
 
     <section>
-        <div class="flex lg:flex-row flex-column flex-column">
-            <router-link to="/login" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
-                <div class="bg-principal h-full d-flex flex-column justify-content-center align-items-center p-4">
-                    <img src="/images/iconos/login.svg" style="height: 13rem;" alt="">
-                    <h2 class="lg:h-5">Iniciar Sesion</h2>
-                    <p>Inicia sesion para poder empezar a acumular puntos!</p>
+        <div class="flex lg:flex-row flex-column seccionCuadradoInfo">
+            <router-link to="/login" class="lg:w-4 w-full cuadradoInfo cuadradoInfoInicio m-0 p-0">
+                <div class="bg-principal h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
+                    <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
+                        <img src="/images/iconos/login.svg" style="height: 100%;" alt="">
+                    </div>
+                    <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
+                        <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('login')}}</h2>
+                        <p class="lg:block hidden">{{ $t('login_text')}}</p>
+                    </div>
                 </div>
             </router-link>
 
             <router-link to="/shop" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
-                <div class="bg-coins h-full d-flex flex-column justify-content-center align-items-center p-4">
-                    <img src="/images/iconos/bernatPoints_white.svg" style="height: 13rem;" alt="">
-                    <h2 class="lg:h-5">Compra</h2>
-                    <p>Gasta tus puntos es ventajas o comodidades!</p>
+                <div class="bg-coins h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
+                    <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
+                        <img src="/images/iconos/bernatPoints_white.svg" style="height: 100%;" alt="">
+                    </div>
+                    <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
+                        <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('buy')}}</h2>
+                        <p class="lg:block hidden">{{ $t('buy_text')}}</p>
+                    </div>
+                    
                 </div>
             </router-link>
 
-            <router-link to="/moodle" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
-                <div class="bg-mejora h-full d-flex flex-column justify-content-center align-items-center p-4">
-                    <img src="/images/iconos/mejora.svg" style="height: 13rem;" alt="">
-                    <h2 class="lg:h-5">Mejora</h2>
-                    <p>Aprende mientras compites con tus amigos!</p>
+            <router-link to="/moodle" class="lg:w-4 w-full cuadradoInfo cuadradoInfoFinal m-0 p-0">
+                <div class="bg-mejora h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
+                    <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
+                        <img src="/images/iconos/mejora.svg" style="height: 100%;" alt="">
+                    </div>
+                    <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
+                        <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('upgrade')}}</h2>
+                        <p class="lg:block hidden">{{ $t('upgrade_text')}}</p>
+                    </div>
                 </div>
             </router-link>
         </div>
@@ -88,14 +92,11 @@
                 <img src="/images/iconos/points.svg" class="my-5" style="height: 17rem" alt="">
             </div>
             <div class="lg:w-6 w-full lg:p-5 p-4">
-                <h2 class="text-principal">Como ganar puntos?</h2>
-                <p>Participa activamente durante las clases, plantea preguntas que te ayuden a comprender mejor los
-                    temas y esfuérzate en tus tareas y actividades. Tus profesores valorarán tu compromiso y dedicación
-                    y te recompensarán con Bernat points, una moneda especial que podrás utilizar para obtener
-                    recompensas exclusivas y especiales.</p>
-                    <router-link to="/register">
-                        <button class="bg-principal p-2 px-5 border-round-3xl">Registrate</button>
-                    </router-link>
+                <h2 class="text-principal">{{ $t('how_to_earn_points')}}</h2>
+                <p>{{ $t('how_to_earn_points_text')}}</p>
+                <router-link to="/register">
+                    <button class="standardButton bg-principal p-2 px-5 border-round-3xl">{{ $t('register')}}</button>
+                </router-link>
             </div>
         </div>
     </section>
@@ -103,24 +104,20 @@
     <section>
         <div class="w-full flex h-auto" style="height: 300px">
             <div class="lg:w-6 w-full lg:p-5 p-4">
-                <h2 class="text-principal">Atento a las Subastas</h2>
-                <p>
-                    Mantente atento a las subastas temporales donde podrás usar tus puntos. Tus profesores te mantendrán
-                    informado sobre cuándo se llevarán a cabo estas subastas especiales, dándote la oportunidad de
-                    participar. Aprovecha esta oportunidad única para conseguir recompensas exclusivas con tus Bernat
-                    points.
-                </p>
+                <h2 class="text-principal">{{ $t('cauition_for_the_auctions')}}</h2>
+                <p>{{  $t('cauition_for_the_auctions_text') }}</p>
                 <router-link to="/shop">
-                    <button class="bg-principal p-2 px-5 border-round-3xl">Subastas</button>
+                    <button class="standardButton bg-principal p-2 px-5 border-round-3xl">{{ $t('auction')}}</button>
                 </router-link>
             </div>
-            <div class="lg:flex hidden seccionInfo2 w-6 h-6 border-round-xl border-noround-right d-flex align-items-center justify-content-center">
-                <img src="/images/iconos/auction.svg" class="my-5 pt-5 " style="height: 15rem" alt="">
+            <div
+                class="lg:flex hidden seccionInfo2 w-6 h-6 border-round-xl border-noround-right d-flex align-items-center justify-content-center">
+                <img src="/images/iconos/auction.svg" class="my-5 py-3 " style="height: 15rem" alt="">
             </div>
 
         </div>
     </section>
-    
+
     <app-footer></app-footer>
 </template>
 
@@ -150,7 +147,7 @@ section{
 
 h2{
     color: white;
-    font-size: 45px;
+    font-size: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: left;
 }
@@ -159,15 +156,25 @@ p{
     text-align: justify;
 }
 
-button{
+.standardButton{
     color: white; 
-    border: none; 
+    border: solid;
+    border-color: transparent; 
     font-family: Raleway;
     font-weight: bold;
+    transition: 0.5s;
+
+}
+
+.standardButton:hover{
+    background-color: white !important;
+    border: solid;
+    color: #145A79 !important; 
+    transition: 0.5s;
+    
 }
 
 .txtInfo{
-    height: 25rem;
     width: 40rem;
 }
 
@@ -187,17 +194,14 @@ button{
 }
 
 .caruselI1{
-    height: 35.721rem;
     background-image: linear-gradient(to bottom right, #9B52E0, #0793E3);
 }
 
 .caruselI2{
-    height: 35.721rem;
     background-image: linear-gradient(to bottom right, #108CD2, #51E0B9);
 }
 
 .caruselI3{
-    height: 35.721rem;
     background-image: linear-gradient(to bottom right, #10d24d, #b3e051);
 
 }
@@ -209,10 +213,24 @@ button{
 }
 
 .cuadradoInfo:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
   cursor: pointer;
   z-index: 2;
   box-shadow: 0px 0px 10px black !important;
+} 
+
+.cuadradoInfoInicio:hover {
+    transform: scale(1.1) translateX(23px);
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0px 0px 10px black !important;
+} 
+
+.cuadradoInfoFinal:hover {
+    transform: scale(1.1) translateX(-23px) ;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0px 0px 10px black !important;
 } 
 
 .cuadradoInfo p{
@@ -227,4 +245,30 @@ button{
     background-image: linear-gradient(to top left, #AA361D, #E19325);
 }
 
+@media (max-width: 991px) {
+    .seccionCuadradoInfo{
+        overflow: hidden;
+    }
+
+    .cuadradoInfo:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+        z-index: 2;
+        box-shadow: 0px 0px 10px black !important;
+    }
+
+    .cuadradoInfoInicio:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+        z-index: 2;
+        box-shadow: 0px 0px 10px black !important;
+    }
+
+    .cuadradoInfoFinal:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+        z-index: 2;
+        box-shadow: 0px 0px 10px black !important;
+    }
+}
 </style>

@@ -1,8 +1,17 @@
 <template>
+    <section>
+        <div class="bg-principal flex flex-wrap justify-content-around ">
+            <div v-for="item in recompensas.data" class="bg-red-500 lg:m-3 lg:w-3">
+                <div style="height: 100px; width: 100px; background-position: center; background-size: 100% auto; background-repeat: no-repeat;" :style="{ 'background-image': `url('${item.original_image}')` }"></div>
+                <p>{{ item.nombre }}</p>
+            </div>
+
+        </div>
+
+    </section>
     <div class="min-h-screen bg-white dark:bg-gray-900">
         <div class="col-12 bg-principal">
             <h1>Shop</h1>
-            {{ recompensas.data }}
         </div>
     </div>
     <app-footer></app-footer>
@@ -14,20 +23,19 @@ import { onMounted,} from 'vue';
 import store from "../../../js/store/";
 import {storeNiveles} from "../../../js/store/niveles";
 import {storeUsuarios} from "../../../js/store/usuarios";
+import usarRecompensas from "../../../js/composables/recompensas";
 
-import usarRecompensas from "@/composables/recompensas";
-
-const {recompensas, getRecompensas, deleteRecompensa} = usarRecompensas()
+const {recompensas, getRecompensas} = usarRecompensas()
 
 onMounted(() => {
-    getRecompensas()
+    getRecompensas();
 
     if (store.state.auth.user.id != null) {
         let usuario = store.state.auth.user;
         storeNiveles().getNivelSiguiente(usuario.niveles.id);
         storeUsuarios().getUsuMedia(usuario.id);
         storeUsuarios().getUsuLogueado(usuario.id);
-    }    
+    }
 });
 
 </script>
