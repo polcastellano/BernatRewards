@@ -2,6 +2,8 @@
     --principal: #145A79;
     --coins: #E19325;
     --mejora: #A31666;
+    --grisFondo: #EFEFEF;
+    --grisFondoOscuro: #D9D9D9;
     --surface-a: #ffffff;
     --surface-b: #f8f9fa;
     --surface-c: #e9ecef;
@@ -265,6 +267,14 @@
 
 .bg-mejora{
     background-color: var(--mejora) !important;
+}
+
+.bg-fondo{
+    background-color: var(--grisFondo) !important;
+}
+
+.bg-fondoOscuro{
+    background-color: var(--grisFondoOscuro) !important;
 }
 
 .p-autocomplete .p-autocomplete-loader {

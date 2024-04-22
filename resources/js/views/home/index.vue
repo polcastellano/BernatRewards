@@ -49,7 +49,7 @@
             <router-link to="/login" class="lg:w-4 w-full cuadradoInfo cuadradoInfoInicio m-0 p-0">
                 <div class="bg-principal h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
                     <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
-                        <img src="/images/iconos/login.svg" style="height: 100%;" alt="">
+                        <img src="/images/iconos/login.svg" class="h-full" alt="">
                     </div>
                     <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
                         <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('login')}}</h2>
@@ -61,7 +61,7 @@
             <router-link to="/shop" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
                 <div class="bg-coins h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
                     <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
-                        <img src="/images/iconos/bernatPoints_white.svg" style="height: 100%;" alt="">
+                        <img src="/images/iconos/bernatPoints_white.svg" class="h-full" alt="">
                     </div>
                     <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
                         <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('buy')}}</h2>
@@ -74,7 +74,7 @@
             <router-link to="/moodle" class="lg:w-4 w-full cuadradoInfo cuadradoInfoFinal m-0 p-0">
                 <div class="bg-mejora h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
                     <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
-                        <img src="/images/iconos/mejora.svg" style="height: 100%;" alt="">
+                        <img src="/images/iconos/mejora.svg" class="h-full" alt="">
                     </div>
                     <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
                         <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('upgrade')}}</h2>
