@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import store from "../store";
+import { userStore } from '@/store/authPinia';
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
 const GuestLayout = ()  => import('../layouts/Guest.vue');
@@ -19,8 +20,9 @@ const RecompensasEdit  = ()  => import('../views/admin/recompensas/Edit.vue');
 
 
 function requireLogin(to, from, next) {
+    const storeUser = userStore()
     let isLogin = false;
-    isLogin = !!store.state.auth.authenticated;
+    isLogin = !!storeUser.authenticated
 
     if (isLogin) {
         next()
@@ -30,8 +32,10 @@ function requireLogin(to, from, next) {
 }
 
 function guest(to, from, next) {
+    const storeUser = userStore()
+
     let isLogin;
-    isLogin = !!store.state.auth.authenticated;
+    isLogin = !!storeUser.authenticated;
 
     if (isLogin) {
         next('/')

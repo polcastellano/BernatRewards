@@ -126,21 +126,6 @@
 
 <script setup>
 import AppFooter from '../../layouts/AppFooter.vue';
-import { onMounted,} from 'vue';
-import store from "../../../js/store/";
-import {storeNiveles} from "../../../js/store/niveles";
-import {storeUsuarios} from "../../../js/store/usuarios";
-    
-onMounted(() => {
-    console.log(store.state.auth.user.id);
-    if (store.state.auth.user.id != null) {
-        let usuario = store.state.auth.user;
-        storeNiveles().getNivelSiguiente(usuario.niveles.id);
-        storeUsuarios().getUsuMedia(usuario.id);
-        storeUsuarios().getUsuLogueado(usuario.id);
-    }
-});
-
 </script>
 
 <style scoped>

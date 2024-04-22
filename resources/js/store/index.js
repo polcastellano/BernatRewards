@@ -8,7 +8,7 @@ const store = createStore({
         createPersistedState()
     ],
     modules:{
-        auth,
+        // auth,
         lang
     }
 })

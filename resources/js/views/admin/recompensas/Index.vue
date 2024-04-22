@@ -11,7 +11,7 @@
                     </div>
                     <!-- :rowsPerPageOptions="[5, 10, 20, 50]" -->
                     <DataTable :value="recompensas.data" paginator :rows="5" tableStyle="min-width: 50rem">
-                        
+
                         <template #empty> No se ha encontrado ninguna recompensa. </template>
 
                         <Column field="id" header="ID" sortable>
@@ -43,7 +43,7 @@
                         <Column style="width:100px;" class="pe-0 me-0">
                             <template #body="slotProps">
 
-                                <router-link v-if="can('recompensa-edit') && usuario.id == slotProps.data.usuario_id"
+                                <router-link v-if="can('recompensa-edit') && user.id == slotProps.data.usuario_id"
                                     :to="{ name: 'recompensas.edit', params: { id: slotProps.data.id } }" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                                         <path fill="#ffffff"
@@ -51,7 +51,7 @@
                                     </svg>
                                 </router-link>
 
-                                <span v-if="can('recompensa-delete') && usuario.id == slotProps.data.usuario_id" @click.prevent="deleteRecompensa(slotProps.data.id, slotProps.index)"
+                                <span v-if="can('recompensa-delete') && user.id == slotProps.data.usuario_id" @click.prevent="deleteRecompensa(slotProps.data.id, slotProps.index)"
                                     class="ms-2 me-0 btn btn-danger">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                                         <path fill="#ffffff"
@@ -76,13 +76,14 @@
     import DataTable from 'primevue/datatable';
     import Column from 'primevue/column';
     import {onMounted} from "vue";
-    import store from "@/store";
+    import { userStore } from '@/store/authPinia';
+
+    const { user } = userStore()
 
 
     const {recompensas, getRecompensas, deleteRecompensa} = usarRecompensas()
     const { can } = useAbility()
-    const usuario = store.state.auth.user;
-
+    
     onMounted(() =>{
         getRecompensas()
     });

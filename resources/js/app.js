@@ -126,6 +126,11 @@ import "primevue/resources/themes/viva-light/theme.css";
 import "primeicons/primeicons.css";
 
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 
 const app = createApp({
@@ -133,9 +138,6 @@ const app = createApp({
         useAuth().getUser()
     }
 });
-
-const pinia = createPinia()
-
 
 app.use(pinia)
 app.use(router)

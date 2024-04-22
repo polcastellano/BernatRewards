@@ -7,6 +7,9 @@ use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use App\Http\Resources\UserResource;
+
 
 class ProfileController extends Controller
 {
@@ -28,6 +31,8 @@ class ProfileController extends Controller
     public function user(Request $request)
     {
         $user = $request->user();
+
+        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
 
         return $this->successResponse($user, 'User found');
     }
