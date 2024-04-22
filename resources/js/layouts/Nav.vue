@@ -7,7 +7,6 @@
                     <img src="/images/logo/bernatRewards.svg" class="logo d-lg-none" alt="logo" />
 
                 </router-link>
-
                 <div class="d-flex align-items-center d-lg-none">
                     <div v-if="user?.name" class="w-100 infoUsuario m-2 me-3 d-flex flex-column">
                         <div class="d-flex align-items-center justify-content-between">
@@ -17,7 +16,7 @@
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
                                             <div class="imgUsuario"
-                                                :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }">
+                                                :style="{ 'background-image': `url('${user.original_image}')` }">
                                             </div>
                                         </div>
                                     </a>
@@ -88,7 +87,6 @@
                     </ul>
                 </div>
 
-
                 <div v-if="user?.name" class="infoUsuario p-0 m-0 d-flex flex-column d-lg-block d-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <ul class="navbar-nav">
@@ -97,15 +95,19 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <div class="imgUsuario"
-                                            :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }">
+                                            :style="{ 'background-image': `url('${user.original_image}')` }">
                                         </div>
                                         <p class="ms-2 nombreUsu" style="font-weight: bold;">{{
-                        storeUsuarios().usuMedia.name }}</p>
+                                            user.name }}</p>
                                     </div>
                                 </a>
                                 <ul class="menuDesp dropdown-menu dropdown-menu-end">
-                                    <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                                    <li><router-link to="/admin/recompensas" class="dropdown-item">{{ $t('rewards')}}</router-link></li>
+                                    <li><router-link v-if="user.roles[0]?.name != 'admin'" class="dropdown-item"
+                                            :to="{ name: 'users.index' }">Perfil</router-link>
+                                        <router-link v-else class="dropdown-item" to="/admin">Admin</router-link>
+                                    </li>
+                                    <li><router-link to="/admin/recompensas" class="dropdown-item">{{
+                                            $t('rewards')}}</router-link></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -116,8 +118,8 @@
                         </ul>
                         <div class="puntosUsuario d-flex px-1 justify-content-between align-items-center">
                             <p></p>
-                            <p v-if="storeUsuarios().usuLogueado.puntos <= 9999" class="pe-1 puntos">
-                                {{ storeUsuarios().usuLogueado.puntos }}</p>
+                            <p v-if="user.puntos <= 9999" class="pe-1 puntos">
+                                {{ user.puntos }}</p>
                             <p v-else class="pe-1 puntos"><img src="/images/iconos/plus.svg" style="height: 15px;"
                                     alt="logo" />9999</p>
                             <img src="/images/iconos/bernatPoints.svg" class="bernatCoin" alt="logo" />
@@ -125,20 +127,22 @@
                     </div>
                     <div class="nivelInfo d-flex flex-column">
                         <div class="d-flex justify-content-between">
-                            <p>Nv.{{ storeUsuarios().usuLogueado.niveles?.numero }}</p>
-                            <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado.experience }}</span>/{{
-                        storeNiveles().nivelUsu.experiencia }}xp</p>
-                            <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p>
+                            <p>Nv.{{ user.niveles?.numero }}</p>
+                            <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
+                                user.experiencia }}xp</p>
+                            <p>Nv.{{ user.niveles?.numero }}</p> 
+                            <!-- TODO recoger nivel siguiente -->
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal"
-                                :style="{ width: ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                                :style="{ width: ((user.experience - user.experiencia + 1000) / 10) + '%' }"
                                 :class="{
-                        'bg-warning': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
-                        'bg-info': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
-                        'bg-success': ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                        'bg-warning': ((user.experience - user.experiencia + 1000) / 10) <= 33,
+                        'bg-info': ((user.experience - user.experiencia + 1000) / 10) > 33 && ((user.experience - user.experiencia + 1000) / 10) <= 66,
+                        'bg-success': ((user.experience - user.experiencia + 1000) / 10) > 66 && ((user.experience - user.experiencia + 1000) / 10) <= 100,
                                 }"></div>
+                        <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
                         </div>
                     </div>
                 </div>
@@ -148,20 +152,13 @@
 
 </template>
 <script setup>
-import { useStore} from "vuex";
 import useAuth from "@/composables/auth";
-import {computed} from "vue";
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
-import { onMounted, ref } from 'vue';
-import storePinia from "../store";
-import {storeNiveles} from "../store/niveles";
-import {storeUsuarios} from "../store/usuarios";
+import {userStore} from "@/store/authPinia";
 
-    const store = useStore();
-    const user = computed(() => store.getters["auth/user"])
     const { processing, logout } = useAuth();
-    const { nivelUsu } = storeNiveles();
-    const { usuLogueado, usuMedia } = storeUsuarios();
+
+    const { user } = userStore()
 
 
 </script>

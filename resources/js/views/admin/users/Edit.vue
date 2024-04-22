@@ -36,7 +36,7 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="usuario.roles[0]?.name == 'user'" v-model="user.experience" type="text" class="form-control" />
+                            <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.experience" type="text" class="form-control" />
                             <label class="font-bold block">Nivel<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -46,7 +46,7 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="usuario.roles[0]?.name == 'user'" v-model="user.puntos" type="text" class="form-control" />
+                            <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.puntos" type="text" class="form-control" />
                             <label class="font-bold block">Puntos<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -84,7 +84,7 @@
                             <span class="text-danger">*</span>
                         </h6>
                         <div class="mb-3">
-                            <MultiSelect :disabled="usuario.roles[0]?.name == 'user'" v-model="user.roles" :options="roleList" filter dataKey="id"
+                            <MultiSelect :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles" :options="roleList" filter dataKey="id"
                                 optionLabel="name" placeholder="Seleciona un rol" display="chip" class="w-full">
                             </MultiSelect>
                         </div>
@@ -123,9 +123,9 @@
     import { es } from 'yup-locales';
     import { setLocale } from 'yup';
     import DropZone from "@/components/DropZone.vue";
-    import store from "@/store";
+    import { userStore } from '@/store/authPinia';
 
-    const usuario = store.state.auth.user;
+    const { user: authuser } = userStore()
 
     setLocale(es);
 

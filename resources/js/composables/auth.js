@@ -3,6 +3,8 @@ import { useRouter } from "vue-router";
 import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 import { ABILITY_TOKEN } from '@casl/vue';
 import store from '../store'
+import { userStore } from '@/store/authPinia';
+
 
 let user = reactive({
     name: '',
@@ -15,6 +17,9 @@ export default function useAuth() {
     const router = useRouter()
     const swal = inject('$swal')
     const ability = inject(ABILITY_TOKEN)
+
+    const store2 = userStore()
+
 
     const loginForm = reactive({
         email: '',
@@ -46,9 +51,10 @@ export default function useAuth() {
         processing.value = true
         validationErrors.value = {}
 
+
         await axios.post('/login', loginForm)
             .then(async response => {
-                await store.dispatch('auth/getUser')
+                await store2.login()
                 await loginUser()
                 swal({
                     icon: 'success',
@@ -56,7 +62,7 @@ export default function useAuth() {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                await router.push({ name: 'admin.index' })
+                router.push({ name: 'home' })
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -141,14 +147,14 @@ export default function useAuth() {
     }
 
     const loginUser = () => {
-        user = store.state.auth.user
+        user = store2.user
         // Cookies.set('loggedIn', true)
         getAbilities()
     }
 
     const getUser = async () => {
-        if (store.getters['auth/authenticated']) {
-            await store.dispatch('auth/getUser')
+        if (store2.getUser()) {
+            await store2.getUser()
             await loginUser()
         }
     }
@@ -162,7 +168,7 @@ export default function useAuth() {
             .then(response => {
                 user.name = ''
                 user.email = ''
-                store.dispatch('auth/logout')
+                store2.logout()
                 router.push({ name: 'auth.login' })
             })
             .catch(error => {

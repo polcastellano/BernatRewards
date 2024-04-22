@@ -127,7 +127,7 @@
                                     {{ post.created_at }}
                                 </td>
                                 <td class="px-6 py-4 text-sm d-flex">
-                                    <router-link v-if="can('user-edit') && post.id == usuario.id || can('user-all')" :to="{ name: 'users.edit', params: { id: post.id } }" 
+                                    <router-link v-if="can('user-edit') && post.id == user.id || can('user-all')" :to="{ name: 'users.edit', params: { id: post.id } }" 
                                     class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                                         <path fill="#ffffff"
@@ -164,11 +164,11 @@ import {useAbility} from '@casl/vue'
 import * as yup from 'yup';
 import { es } from 'yup-locales';
 import { setLocale } from 'yup';
-import store from "@/store";
+import { userStore } from '@/store/authPinia';
+
+const { user } = userStore()
 
     setLocale(es);
-
-    const usuario = store.state.auth.user;
 
 const search_id = ref('')
 const search_title = ref('')

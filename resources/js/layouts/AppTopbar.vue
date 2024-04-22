@@ -50,14 +50,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed } from 'vue';
 import { useLayout } from '../composables/layout';
-import { useStore } from 'vuex';
 import useAuth from "@/composables/auth";
+import { userStore } from '@/store/authPinia';
+
+const { user } = userStore()
+
 
 const { onMenuToggle } = useLayout();
-const store = useStore();
-const user = computed(() => store.state.auth.user)
 const { processing, logout } = useAuth();
 
 const topbarMenuActive = ref(false);

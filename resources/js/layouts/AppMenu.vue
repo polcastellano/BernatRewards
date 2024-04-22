@@ -3,23 +3,23 @@
     <ul class="layout-menu">
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
-                <div class="imgUsuario" :style="{ 'background-image': `url('${storeUsuarios().usuMedia.original_image}')` }"></div>
-                <p class="ms-2" style="font-weight: bold;">{{ storeUsuarios().usuMedia.name }}</p>
+                <div class="imgUsuario" :style="{ 'background-image': `url('${user.original_image}')` }"></div>
+                <p class="ms-2" style="font-weight: bold;">{{ user.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
                 <div class="d-flex justify-content-between">
-                    <p>Nv.{{ storeUsuarios().usuLogueado.niveles?.numero }}</p>
-                    <p><span style="font-weight: bold;">{{ storeUsuarios().usuLogueado?.experience }}</span>/{{ storeNiveles().nivelUsu.experiencia }}xp</p>
-                    <p>Nv.{{ storeNiveles().nivelUsu.numero }}</p> 
+                    <p>Nv.{{ user.niveles?.numero }}</p>
+                    <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{ user.experiencia }}xp</p>
+                    <p>Nv.{{ user.numero }}</p> 
                 </div>
 
                 <div class="barraNivel d-flex align-items-center">
                     <div class="barraNivelReal"
-                        :style="{ width: ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) + '%' }"
+                        :style="{ width: ((user.experience - user.experiencia + 1000) / 10) + '%' }"
                         :class="{
-                            'bg-warning': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 33,
-                            'bg-info': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 33 && ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 66,
-                            'bg-success': ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) > 66 && ((storeUsuarios().usuLogueado?.experience - storeNiveles().nivelUsu.experiencia + 1000) / 10) <= 100,
+                            'bg-warning': ((user.experience - user.experiencia + 1000) / 10) <= 33,
+                            'bg-info': ((user.experience - user.experiencia + 1000) / 10) > 33 && ((user.experience - user.experiencia + 1000) / 10) <= 66,
+                            'bg-success': ((user.experience - user.experiencia + 1000) / 10) > 66 && ((user.experience - user.experiencia + 1000) / 10) <= 100,
                         }"
                     ></div>
                 </div>
@@ -36,36 +36,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
-import {useAbility} from '@casl/vue'
-import store from "../store";
-import {storeNiveles} from "../store/niveles";
-import {storeUsuarios} from "../store/usuarios";
+import {userStore} from "@/store/authPinia";
+
+const { user } = userStore()
 
 const vela = "pepe";
-
-let usuario = store.state.auth.user;
-
-const porcentajeRestante = ref(0);
-// let porcentajeRestante = 50;
-
-// console.table(usuario);
-
-
-
-onMounted(() =>{
-    storeNiveles().getNivelSiguiente(usuario.niveles.id); 
-    storeUsuarios().getUsuMedia(usuario.id); 
-    storeUsuarios().getUsuLogueado(usuario.id); 
-});
-
 
 const model = ref([
     {
         label: 'Panel Usuario',
         items: [
-            { label: 'BernatPoints: ' + usuario.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
+            { label: 'BernatPoints: ' + user.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
             { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/', permision: 'all' },  
             { label: 'Positivos', icon: 'pi pi-fw pi-plus-circle', permision: 'all' },
             { label: 'Historial', icon: 'pi pi-fw pi-history', permision: 'all' },

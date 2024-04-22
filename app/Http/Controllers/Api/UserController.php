@@ -96,25 +96,6 @@ class UserController extends Controller
      * @param User $user
      * @return UserResource
      */
-
-    // public function update(UpdateUserRequest $request, User $user)
-    // {
-    //     $role = Role::find($request->role_id);
-
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     if(!empty($request->password)) {
-    //         $user->password = Hash::make($request->password) ?? $user->password;
-    //     }
-
-    //     if ($user->save()) {
-    //         if ($role) {
-    //             $user->syncRoles($role);
-    //         }
-    //         return new UserResource($user);
-    //     }
-    // }  
-
     public function update(UpdateUserRequest $request)
     {
         $usuario = User::find($request->id);
