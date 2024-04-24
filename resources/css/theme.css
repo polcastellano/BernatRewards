@@ -277,6 +277,30 @@
     background-color: var(--grisFondoOscuro) !important;
 }
 
+.bg-subastas{
+    background-color: var(--mejora) !important;
+}
+
+.bg-subastasSubTone{
+    background-color: #D52087 !important;
+}
+
+.bg-ventajas{
+    background-color: #12833f;
+}
+
+.bg-ventajasSubTone{
+    background-color: #1bbe5d !important;
+}
+
+.bg-comodidades{
+    background-color: #7616a3 !important;
+}
+
+.bg-comodidadesSubTone{
+    background-color: #9e1fd8 !important;
+}
+
 .p-autocomplete .p-autocomplete-loader {
     right: .75rem
 }

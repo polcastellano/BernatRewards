@@ -112,7 +112,7 @@
             </div>
             <div
                 class="lg:flex hidden seccionInfo2 w-6 h-6 border-round-xl border-noround-right d-flex align-items-center justify-content-center">
-                <img src="/images/iconos/auction.svg" class="my-5 py-3 " style="height: 15rem" alt="">
+                <img src="/images/iconos/subastas.svg" class="my-5 py-3 " style="height: 15rem" alt="">
             </div>
 
         </div>

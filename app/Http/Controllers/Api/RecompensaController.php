@@ -13,7 +13,7 @@ class RecompensaController extends Controller
 {
     public function index(){
         
-        $this->authorize('recompensa-list');
+        // $this->authorize('recompensa-list');
         
         $recompensas = Recompensa::with('categorias')->with('media')->get();
 
@@ -84,5 +84,12 @@ class RecompensaController extends Controller
             return new RecompensaResource($recompensa);
     
         }
+    }
+
+    public function getRecompensaByCategory($id)
+    {
+        $recompensas = Recompensa::whereRelation('categorias', 'id', '=', $id)->paginate();
+
+         return RecompensaResource::collection($recompensas);
     }
 }

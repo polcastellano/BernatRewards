@@ -1,20 +1,19 @@
 <template>
     <section>
-        <div class="flex justify-content-center align-items-center">
-            <div class="bg-mejora flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-2 md:justify-content-start justify-content-start border-round-3xl">
-                <div class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4"
-                    style="background-color: #D52087;">
-                    <img src="/images/iconos/auction.svg" class="h-3rem w-3rem pr-2" alt="">
-                    <h2 class="tituloSeccion p-1 m-0 text-white text-5xl">Subastas</h2>
+        <div v-for="categoria in productosCategorias" class="flex justify-content-center align-items-center">
+            <div :class="'bg-' + categoria.nombre.toLowerCase()" class="flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-3 md:justify-content-start justify-content-start border-round-3xl">
+                <div :class="'bg-' + categoria.nombre.toLowerCase() + 'SubTone'" class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4">
+                    <img :src="'/images/iconos/' + categoria.nombre.toLowerCase() + '.svg'" class="h-3rem w-3rem pr-0 md:pr-2" alt="">
+                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">{{categoria.nombre}}</h2>
                 </div>
                 <div class="flex flex-wrap w-full md:justify-content-start justify-content-center border-round-3xl">
-                    <div v-for="item in recompensas.data" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
+                    <div v-for="item in categoria.productos" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
                         <div class="bg-white block flex flex-column p-3 border-round-3xl flex-end">
                      
                             <div class="bg-fondo h-20rem mb-3 border-round-3xl">
                                 <div class="h-full w-full bg-center bg-no-repeat flex justify-content-between bg-contain" :style="{ 'background-image': `url('${item.original_image}')` }">
-                                    <div>
-                                        <div class="bg-fondoOscuro mt-2 ms-2 p-1 w-6rem h-2 flex border-round-3xl justify-content-between align-items-center">
+                                    <div v-for="categoria in item.categorias">
+                                        <div v-if="categoria.id == 1" class="bg-fondoOscuro mt-2 ms-2 p-1 w-6rem h-2 flex border-round-3xl justify-content-between align-items-center">
                                             <p class="text-black numerosProducto m-0 ps-2 font-normal">00:00</p>
                                             <img src="/images/iconos/watch.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                         </div>
@@ -32,7 +31,7 @@
                                 </div>
                                 <div class="flex flex-column ">
                                     <div class="w-8rem h-3rem flex bg-fondo border-round-3xl justify-content-around align-items-center mb-2">
-                                        <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(4, '0') }}</p>
+                                        <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
                                     <button class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
@@ -50,11 +49,11 @@
 
 
         <div class="flex justify-content-center align-items-center">
-            <div class="bg-principal flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-2 md:justify-content-start justify-content-start border-round-3xl">
+            <div class="bg-principal flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-3 md:justify-content-start justify-content-start border-round-3xl">
                 <div class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4"
                     style="background-color: #2E99C9;">
-                    <img src="/images/iconos/reward.svg" class="h-3rem w-3rem pr-2" alt="">
-                    <h2 class="tituloSeccion p-1 m-0 text-white text-5xl">Todo</h2>
+                    <img src="/images/iconos/reward.svg" class="h-3rem w-3rem pr-0 md:pr-2 lg:pr-2" alt="">
+                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">Todo</h2>
                 </div>
                 <div class="flex flex-wrap w-full md:justify-content-start justify-content-center border-round-3xl">
                     <div v-for="item in recompensas.data" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
@@ -81,7 +80,7 @@
                                 </div>
                                 <div class="flex flex-column ">
                                     <div class="w-8rem h-3rem flex bg-fondo border-round-3xl justify-content-around align-items-center mb-2">
-                                        <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(4, '0') }}</p>
+                                        <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
                                     <button class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
@@ -102,24 +101,23 @@
 
 <script setup>
 import AppFooter from '../../layouts/AppFooter.vue';
-import { onMounted,} from 'vue';
+import { onMounted, computed} from 'vue';
 import store from "../../../js/store/";
 import {storeNiveles} from "../../../js/store/niveles";
 import {storeUsuarios} from "../../../js/store/usuarios";
-import usarRecompensas from "../../../js/composables/recompensas";
+import usarRecompensas from "@/composables/recompensas";
+import usarCategorias from "@/composables/categorias";
 
-const {recompensas, subastas, getRecompensas} = usarRecompensas()
+const {recompensas, getRecompensas} = usarRecompensas()
+const { productosCategorias, getRecompensasCategorias } = usarCategorias()
+
 
 onMounted(() => {
     getRecompensas();
+    getRecompensasCategorias();
+}); 
 
-    if (store.state.auth.user.id != null) {
-        let usuario = store.state.auth.user;
-        storeNiveles().getNivelSiguiente(usuario.niveles.id);
-        storeUsuarios().getUsuMedia(usuario.id);
-        storeUsuarios().getUsuLogueado(usuario.id);
-    }
-});
+// const subastas = computed(() => recompensas.data);
 
 // function isSubasta(){
 //     recompensas.data.forEach(producto => {
