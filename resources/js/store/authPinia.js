@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 export const userStore = defineStore ('userStore', () => {
     
@@ -18,6 +18,10 @@ export const userStore = defineStore ('userStore', () => {
         })
     }
 
+
+    function vistaUser() {
+       return user;
+    }
     async function getUser() {
         await axios.get('/api/user').then(response => {
             user.value = response.data.data
@@ -39,6 +43,7 @@ export const userStore = defineStore ('userStore', () => {
 
     return {
         user,
+        vistaUser,
         authenticated,
         login,
         getUser,

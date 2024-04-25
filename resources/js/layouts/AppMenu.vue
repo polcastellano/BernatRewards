@@ -1,4 +1,3 @@
-
 <template>
     <ul class="layout-menu">
         <div class="infoUsuario">
@@ -21,7 +20,9 @@
                             'bg-info': ((user.experience - user.experiencia + 1000) / 10) > 33 && ((user.experience - user.experiencia + 1000) / 10) <= 66,
                             'bg-success': ((user.experience - user.experiencia + 1000) / 10) > 66 && ((user.experience - user.experiencia + 1000) / 10) <= 100,
                         }"
-                    ></div>
+                    >
+                    </div>
+<!-- TODO recoger la experiencia del siguiente nivel y el nivel siguiente -->
                 </div>
 
             </div> 
@@ -40,7 +41,7 @@ import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 import {userStore} from "@/store/authPinia";
 
-const { user } = userStore()
+const  user = userStore().vistaUser()
 
 const vela = "pepe";
 

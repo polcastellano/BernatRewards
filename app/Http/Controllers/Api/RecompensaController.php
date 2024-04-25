@@ -13,7 +13,7 @@ class RecompensaController extends Controller
 {
     public function index(){
         
-        $this->authorize('recompensa-list');
+        // $this->authorize('recompensa-list');
         
         $recompensas = Recompensa::with('categorias')->with('media')->get();
 

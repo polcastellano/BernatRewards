@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie'
-import store from "../store";
 import { userStore } from '@/store/authPinia';
 
 const AuthenticatedLayout = () => import('../layouts/Authenticated.vue')
 const GuestLayout = ()  => import('../layouts/Guest.vue');
+const PerfilLayout  = ()  => import('../views/auth/Perfil.vue');
+
 
 const PostsIndex  = ()  => import('../views/admin/posts/Index.vue');
 const PostsCreate  = ()  => import('../views/admin/posts/Create.vue');
@@ -106,6 +106,19 @@ export default [
                 name: 'auth.reset-password',
                 component: () => import('../views/auth/passwords/Reset.vue'),
                 beforeEnter: guest,
+            },
+        ]
+    },
+    {
+        path: '/perfil',
+        beforeEnter: requireLogin,
+        meta: { breadCrumb: 'Dashboard' },
+        children: [
+            {
+                name: 'perfil.edit',
+                path: ':id',
+                component: PerfilLayout,
+                meta: { breadCrumb: 'Perfil' }
             },
         ]
     },

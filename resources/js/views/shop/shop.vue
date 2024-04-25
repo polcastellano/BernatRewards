@@ -101,24 +101,14 @@
 </template>
 
 <script setup>
-import AppFooter from '../../layouts/AppFooter.vue';
+import AppFooter from '@/layouts/AppFooter.vue';
 import { onMounted,} from 'vue';
-import store from "../../../js/store/";
-import {storeNiveles} from "../../../js/store/niveles";
-import {storeUsuarios} from "../../../js/store/usuarios";
-import usarRecompensas from "../../../js/composables/recompensas";
+import usarRecompensas from "@/composables/recompensas";
 
 const {recompensas, subastas, getRecompensas} = usarRecompensas()
 
 onMounted(() => {
     getRecompensas();
-
-    if (store.state.auth.user.id != null) {
-        let usuario = store.state.auth.user;
-        storeNiveles().getNivelSiguiente(usuario.niveles.id);
-        storeUsuarios().getUsuMedia(usuario.id);
-        storeUsuarios().getUsuLogueado(usuario.id);
-    }
 });
 
 // function isSubasta(){

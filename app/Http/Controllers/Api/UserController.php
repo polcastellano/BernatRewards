@@ -139,41 +139,4 @@ class UserController extends Controller
 
         return response()->noContent();
     }
-
-    public function usuarioNivel(Request $request)
-    {
-        $user = $request->user();
-    
-        if ($user) {
-            $userNivele = User::with('niveles')->with('roles')->find($user->id);
-            return $this->successResponse($userNivele, 'User found');
-
-        } else {
-
-            return response()->json(['message' => 'Usuario no autenticado'], 401);
-        }
-    }
-
-    public function getUserLogeado($id)
-    {
-        $user = User::find($id);
-
-        if ($user) {
-            $userNivele = User::with('niveles')->with('roles')->find($user->id);
-            return $this->successResponse($userNivele, 'User found');
-
-        } else {
-
-            return response()->json(['message' => 'Usuario no autenticado'], 401);
-        }
-    }
-
-    public function getUsuMedia($id) {
-        $user = User::find($id);
-        if (!$user) {
-            return $this->errorResponse('User not found', 404);
-        }
-
-        return $this->successResponse(new UserResource($user), 'User found');
-    }
 }

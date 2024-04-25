@@ -36,4 +36,17 @@ class ProfileController extends Controller
 
         return $this->successResponse($user, 'User found');
     }
+
+    /**
+     * Display the specified User.
+     *
+     * @param  int  $id
+     * @return UserResource
+     */
+    public function show(User $user)
+    {
+        $user->load('roles');
+        return new UserResource($user);
+    }
+
 }

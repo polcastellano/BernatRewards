@@ -21,13 +21,22 @@
                                         </div>
                                     </a>
                                     <ul class="menuDesp dropdown-menu dropdown-menu-end">
-                                        <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                                        <li><router-link to="/admin/recompensas" class="dropdown-item">{{ $t('rewards')}}</router-link></li>
+                                        <li><router-link v-if="user.roles[0]?.name == 'admin'" class="dropdown-item"
+                                                to="/admin">
+                                                Admin</router-link>
+                                        </li>
+                                        <li>
+                                            <router-link class="dropdown-item"
+                                                :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
+                                        </li>
+                                        <li><router-link to="/admin/recompensas" class="dropdown-item">{{
+                                                $t('rewards') }}</router-link></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="javascript:void(0)"
-                                                @click="logout">Logout</a></li>
+                                                @click="logout">Logout</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -102,12 +111,16 @@
                                     </div>
                                 </a>
                                 <ul class="menuDesp dropdown-menu dropdown-menu-end">
-                                    <li><router-link v-if="user.roles[0]?.name != 'admin'" class="dropdown-item"
-                                            :to="{ name: 'users.index' }">Perfil</router-link>
-                                        <router-link v-else class="dropdown-item" to="/admin">Admin</router-link>
+                                    <li><router-link v-if="user.roles[0]?.name == 'admin'" class="dropdown-item"
+                                            to="/admin">
+                                            Admin</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link class="dropdown-item"
+                                            :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
                                     </li>
                                     <li><router-link to="/admin/recompensas" class="dropdown-item">{{
-                                            $t('rewards')}}</router-link></li>
+                                            $t('rewards') }}</router-link></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -130,19 +143,18 @@
                             <p>Nv.{{ user.niveles?.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
                                 user.experiencia }}xp</p>
-                            <p>Nv.{{ user.niveles?.numero }}</p> 
+                            <p>Nv.{{ user.niveles?.numero }}</p>
                             <!-- TODO recoger nivel siguiente -->
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal"
-                                :style="{ width: ((user.experience - user.experiencia + 1000) / 10) + '%' }"
-                                :class="{
+                                :style="{ width: ((user.experience - user.experiencia + 1000) / 10) + '%' }" :class="{
                         'bg-warning': ((user.experience - user.experiencia + 1000) / 10) <= 33,
                         'bg-info': ((user.experience - user.experiencia + 1000) / 10) > 33 && ((user.experience - user.experiencia + 1000) / 10) <= 66,
                         'bg-success': ((user.experience - user.experiencia + 1000) / 10) > 66 && ((user.experience - user.experiencia + 1000) / 10) <= 100,
                                 }"></div>
-                        <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
+                            <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
                         </div>
                     </div>
                 </div>
@@ -158,8 +170,7 @@ import {userStore} from "@/store/authPinia";
 
     const { processing, logout } = useAuth();
 
-    const { user } = userStore()
-
+    const  user = userStore().vistaUser()
 
 </script>
 
