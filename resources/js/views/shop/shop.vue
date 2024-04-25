@@ -101,10 +101,7 @@
 
 <script setup>
 import AppFooter from '../../layouts/AppFooter.vue';
-import { onMounted, computed} from 'vue';
-import store from "../../../js/store/";
-import {storeNiveles} from "../../../js/store/niveles";
-import {storeUsuarios} from "../../../js/store/usuarios";
+import { onMounted} from 'vue';
 import usarRecompensas from "@/composables/recompensas";
 import usarCategorias from "@/composables/categorias";
 
@@ -116,20 +113,6 @@ onMounted(() => {
     getRecompensas();
     getRecompensasCategorias();
 }); 
-
-// const subastas = computed(() => recompensas.data);
-
-// function isSubasta(){
-//     recompensas.data.forEach(producto => {
-//         producto.categorias.forEach(categoria => {
-//             if(categoria.id == 1){
-//                 return true;
-//             }
-
-//             return false;
-//         });
-//     });
-// }
 
 </script>
 

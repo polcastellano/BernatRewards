@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::put('/role-permissions', [PermissionController::class, 'updateRolePermissions']);
     Route::apiResource('permissions', PermissionController::class);
     Route::get('category-list', [CategoryController::class, 'getList']);
+    Route::apiResource('perfil', ProfileController::class);
     Route::get('/user', [ProfileController::class, 'user']);
     Route::put('/user', [ProfileController::class, 'update']);
     Route::get('/usuarioNivel', [UserController::class, 'usuarioNivel']);
