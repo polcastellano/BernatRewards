@@ -44,8 +44,10 @@ class ProfileController extends Controller
      * @return UserResource
      */
     public function show(User $user)
-    {
+    {   
+
         $user->load('roles');
+                
         return new UserResource($user);
     }
 

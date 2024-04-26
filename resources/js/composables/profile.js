@@ -1,24 +1,21 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import store from "../store";
+import { userStore } from '@/store/authPinia';
 
 export default function useProfile() {
-    const profile = ref({
-        name: '',
-        email: '',
-    })
+    const profile = ref({})
 
     const router = useRouter()
     const validationErrors = ref({})
     const isLoading = ref(false)
     const swal = inject('$swal')
 
-    const getProfile = async () => {
-        profile.value = store.getters["auth/user"]
-        // axios.get('/api/user')
-        //     .then(({data}) => {
-        //         profile.value = data.data;
-        //     })
+    const getProfile = async (id) => {
+        axios.get('/api/perfil/' + id)
+        .then(response => {
+            console.log(response.data)
+            profile.value = response.data.data;
+        })
     }
 
     const updateProfile = async (profile) => {
