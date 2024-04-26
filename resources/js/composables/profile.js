@@ -7,7 +7,7 @@ export default function useProfile() {
 
     const router = useRouter()
     const validationErrors = ref({})
-    const cargando = ref(false)
+    const isLoading = ref(false)
     const swal = inject('$swal')
 
     const getProfile = async (id) => {

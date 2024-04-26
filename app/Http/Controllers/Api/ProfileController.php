@@ -16,26 +16,26 @@ class ProfileController extends Controller
     /**
      * @throws ValidationException
      */
-    // public function update(UpdateProfileRequest $request)
-    // {
-    //     $profile = Auth::user();
-    //     $profile->name = $request->name;
-    //     $profile->email = $request->email;
+    public function update(UpdateProfileRequest $request)
+    {
+        $profile = Auth::user();
+        $profile->name = $request->name;
+        $profile->email = $request->email;
 
-    //     if ($profile->save()) {
-    //         return $this->successResponse($profile, 'User updated');;
-    //     }
-    //     return response()->json(['status' => 403, 'success' => false]);
-    // }
+        if ($profile->save()) {
+            return $this->successResponse($profile, 'User updated');;
+        }
+        return response()->json(['status' => 403, 'success' => false]);
+    }
 
-    // public function user(Request $request)
-    // {
-    //     $user = $request->user();
+    public function user(Request $request)
+    {
+        $user = $request->user();
 
-    //     $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
+        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
 
-    //     return $this->successResponse($user, 'User found');
-    // }
+        return $this->successResponse($user, 'User found');
+    }
 
     /**
      * Update the specified resource in storage.
@@ -44,35 +44,35 @@ class ProfileController extends Controller
      * @param User $user
      * @return UserResource
      */
-    public function update(UpdateUserRequest $request)
-    {
-        $usuario = User::find($request->id);
+    // public function update(UpdateUserRequest $request)
+    // {
+    //     $usuario = User::find($request->id);
 
-        $roles = Role::find($request->roles);
+    //     $roles = Role::find($request->roles);
 
-        $usuario->name = $request->name;
-        $usuario->email = $request->email;
+    //     $usuario->name = $request->name;
+    //     $usuario->email = $request->email;
 
-        if (!empty($request->password)) {
-            $usuario->password = Hash::make($request->password) ?? $usuario->password;
-        }
-
-
-        if ($request->hasFile('imagen')) {
-            $usuario->media()->delete();
-            $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
-        }
+    //     if (!empty($request->password)) {
+    //         $usuario->password = Hash::make($request->password) ?? $usuario->password;
+    //     }
 
 
+    //     if ($request->hasFile('imagen')) {
+    //         $usuario->media()->delete();
+    //         $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
+    //     }
 
-        if ($usuario->save()) {
-            if ($roles) {
-                $usuario->syncRoles($roles);
-            }
-            return $usuario;
-            // return UserResource::collection($usuario);
-        }
-    }
+
+
+    //     if ($usuario->save()) {
+    //         if ($roles) {
+    //             $usuario->syncRoles($roles);
+    //         }
+    //         return $usuario;
+    //         // return UserResource::collection($usuario);
+    //     }
+    // }
 
     /**
      * Display the specified User.
