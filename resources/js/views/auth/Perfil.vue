@@ -5,20 +5,20 @@
         <div class="layout-sidebar">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="layout-main-container ">
-                <h1>asddddddddddddddddddddd
-
-                    sass
-                </h1>
+        <div class="layout-main-container p-0">
+            <section>
+                <h1>asdddddddddddddddddddddsass</h1>
                 <h1>sssssssssssssssssssss</h1>
-                <Suspense>
+            </section>
+
+            <Suspense>
                 <router-view></router-view>
-                </Suspense>
-                <!-- que hace esto ^^^^^^^ -->
+            </Suspense>
+            <!-- que hace esto ^^^^^^^ -->
 
             <app-footer></app-footer>
-      </div>
-      
+        </div>
+
     </div>
 </template>
 

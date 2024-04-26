@@ -59,11 +59,10 @@ class NivelController extends Controller
         return $this->successResponse($nivel, 'Levels found');
     }
 
-    public function nivel($id){
+    public function nxtNivel($id){
         
-        $nivel = Nivel::find($id)->toArray();
         $nivelSuperior = Nivel::find($id + 1)->toArray();
-
+        
         return $this->successResponse($nivelSuperior);
     }
 }

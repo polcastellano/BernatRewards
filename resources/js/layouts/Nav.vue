@@ -103,8 +103,8 @@
                                 <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="d-flex align-items-center">
-                                        <div class="imgUsuario"
-                                            :style="{ 'background-image': `url('${user.original_image}')` }">
+                                        <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat"
+                                            :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
                                         </div>
                                         <p class="ms-2 nombreUsu" style="font-weight: bold;">{{
                                             user.name }}</p>
@@ -142,22 +142,22 @@
                         <div class="d-flex justify-content-between">
                             <p>Nv.{{ user.niveles?.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
-                                user.experiencia }}xp</p>
-                            <p>Nv.{{ user.niveles?.numero }}</p>
+                                nxtLvl.experiencia }}xp</p>
+                            <p>Nv.{{ nxtLvl.numero }}</p>
                             <!-- TODO recoger nivel siguiente -->
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal"
-                                :style="{ width: ((user.experience - user.experiencia + 1000) / 10) + '%' }" :class="{
-                        'bg-warning': ((user.experience - user.experiencia + 1000) / 10) <= 33,
-                        'bg-info': ((user.experience - user.experiencia + 1000) / 10) > 33 && ((user.experience - user.experiencia + 1000) / 10) <= 66,
-                        'bg-success': ((user.experience - user.experiencia + 1000) / 10) > 66 && ((user.experience - user.experiencia + 1000) / 10) <= 100,
+                                :style="{ width: ((user.experience - nxtLvl.experiencia + 1000) / 10) + '%' }" :class="{
+                        'bg-warning': ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 33,
+                        'bg-info': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 33 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 66,
+                        'bg-success': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 66 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 100,
                                 }"></div>
                             <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
         </nav>
     </section>
@@ -170,7 +170,10 @@ import {userStore} from "@/store/authPinia";
 
     const { processing, logout } = useAuth();
 
-    const  user = userStore().vistaUser()
+    const user = userStore().vistaUser();
+
+    const nxtLvl = userStore().vistaNxtLvl();
+
 
 </script>
 
@@ -221,9 +224,6 @@ import {userStore} from "@/store/authPinia";
     height: 2.5rem; 
     width: 2.5rem; 
     border: 3px solid #D0D0D0; 
-    border-radius: 100%; 
-    background-position: center; 
-    background-size: 100% auto;
 }
 
 .puntosUsuario{

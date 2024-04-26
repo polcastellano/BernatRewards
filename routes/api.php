@@ -56,7 +56,7 @@ Route::post('niveles/', [NivelController::class, 'store']);
 Route::put('niveles/update/{id}', [NivelController::class, 'update']);
 Route::delete('niveles/{id}', [NivelController::class, 'destroy']);
 Route::get('allniveles', [NivelController::class, 'allniveles']);
-Route::get('siguintenivel/{id}', [NivelController::class, 'nivel']);
+Route::get('siguintenivel/{id}', [NivelController::class, 'nxtNivel']);
 
 //Api User
 Route::get('getUserLogeado/{id}', [UserController::class, 'getUserLogeado']);
