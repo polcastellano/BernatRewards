@@ -86,29 +86,6 @@ export default function useUsers() {
 
     }
 
-
-    // const updateUser = async (user) => {
-    //     if (isLoading.value) return;
-
-    //     isLoading.value = true
-    //     validationErrors.value = {}
-
-    //     axios.put('/api/users/' + user.id, user)
-    //         .then(response => {
-    //             router.push({name: 'users.index'})
-    //             swal({
-    //                 icon: 'success',
-    //                 title: 'User updated successfully'
-    //             })
-    //         })
-    //         .catch(error => {
-    //             if (error.response?.data) {
-    //                 validationErrors.value = error.response.data.errors
-    //             }
-    //         })
-    //         .finally(() => isLoading.value = false)
-    // }
-
     const updateUser = async (user) => {
         if (cargando.value) return;
 
