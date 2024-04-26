@@ -16,25 +16,62 @@ class ProfileController extends Controller
     /**
      * @throws ValidationException
      */
-    public function update(UpdateProfileRequest $request)
-    {
-        $profile = Auth::user();
-        $profile->name = $request->name;
-        $profile->email = $request->email;
+    // public function update(UpdateProfileRequest $request)
+    // {
+    //     $profile = Auth::user();
+    //     $profile->name = $request->name;
+    //     $profile->email = $request->email;
 
-        if ($profile->save()) {
-            return $this->successResponse($profile, 'User updated');;
+    //     if ($profile->save()) {
+    //         return $this->successResponse($profile, 'User updated');;
+    //     }
+    //     return response()->json(['status' => 403, 'success' => false]);
+    // }
+
+    // public function user(Request $request)
+    // {
+    //     $user = $request->user();
+
+    //     $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
+
+    //     return $this->successResponse($user, 'User found');
+    // }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return UserResource
+     */
+    public function update(UpdateUserRequest $request)
+    {
+        $usuario = User::find($request->id);
+
+        $roles = Role::find($request->roles);
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+
+        if (!empty($request->password)) {
+            $usuario->password = Hash::make($request->password) ?? $usuario->password;
         }
-        return response()->json(['status' => 403, 'success' => false]);
-    }
 
-    public function user(Request $request)
-    {
-        $user = $request->user();
 
-        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
+        if ($request->hasFile('imagen')) {
+            $usuario->media()->delete();
+            $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
+        }
 
-        return $this->successResponse($user, 'User found');
+
+
+        if ($usuario->save()) {
+            if ($roles) {
+                $usuario->syncRoles($roles);
+            }
+            return $usuario;
+            // return UserResource::collection($usuario);
+        }
     }
 
     /**
@@ -47,7 +84,7 @@ class ProfileController extends Controller
     {   
 
         $user->load('roles');
-                
+
         return new UserResource($user);
     }
 

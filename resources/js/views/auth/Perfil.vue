@@ -214,11 +214,11 @@ const { onMenuToggle, layoutConfig, layoutState, isSidebarActive } = useLayout()
 
 const { getProfile, profile: postData } = useProfile()
 
-// function submitForm() {
-//     validate().then(form => {
-//         if (form.valid) updateProfile(user)
-//     })
-// }
+function submitForm() {
+    validate().then(form => {
+        if (form.valid) updateProfile(user)
+    })
+}
 
 onMounted(() => {
     getProfile(route.params.id)

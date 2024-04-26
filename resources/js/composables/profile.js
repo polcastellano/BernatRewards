@@ -7,7 +7,7 @@ export default function useProfile() {
 
     const router = useRouter()
     const validationErrors = ref({})
-    const isLoading = ref(false)
+    const cargando = ref(false)
     const swal = inject('$swal')
 
     const getProfile = async (id) => {
@@ -18,29 +18,58 @@ export default function useProfile() {
         })
     }
 
-    const updateProfile = async (profile) => {
-        if (isLoading.value) return;
+    // const updateProfile = async (profile) => {
+    //     if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+    //     isLoading.value = true
+    //     validationErrors.value = {}
 
-        axios.put('/api/user', profile)
-            .then(({data}) => {
-                if (data.success) {
-                    store.commit('auth/SET_USER', data.data)
-                    // router.push({name: 'profile.index'})
-                    swal({
-                        icon: 'success',
-                        title: 'Profile updated successfully'
-                    })
-                }
+    //     axios.put('/api/user', profile)
+    //         .then(({data}) => {
+    //             if (data.success) {
+    //                 store.commit('auth/SET_USER', data.data)
+    //                 // router.push({name: 'profile.index'})
+    //                 swal({
+    //                     icon: 'success',
+    //                     title: 'Profile updated successfully'
+    //                 })
+    //             }
+    //         })
+    //         .catch(error => {
+    //             if (error.response?.data) {
+    //                 validationErrors.value = error.response.data.errors
+    //             }
+    //         })
+    //         .finally(() => isLoading.value = false)
+    // }
+
+    const updateProfile = async (user) => {
+        if (cargando.value) return;
+
+        cargando.value = true
+
+
+        axios.post('/api/profile/update/' + user, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        })
+        .then(response => {
+            console.log(response)
+            router.push({ name: 'perfil.edit' })
+            swal({
+                icon: 'success',
+                title: 'Perfil editado correctamente'
             })
-            .catch(error => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
-                }
+        })
+        .catch(error => {
+            console.log(error)
+            swal({
+                icon: 'error',
+                title: 'Perfil editado incorrectamente'
             })
-            .finally(() => isLoading.value = false)
+        })
+        .finally(() => cargando.value = false)
     }
 
     return {
