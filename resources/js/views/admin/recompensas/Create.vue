@@ -75,7 +75,7 @@
                         </h6>
 
                         <div class="mb-3">
-                            <MultiSelect v-model="recompensa.categorias" optionValue="id" :options="listaCategorias" filter  dataKey="id" 
+                            <MultiSelect appendTo="self" v-model="recompensa.categorias" optionValue="id" :options="listaCategorias" filter  dataKey="id" 
                                 optionLabel="nombre" placeholder="Seleciona una categoría" display="chip"
                                 class="w-full">
                             </MultiSelect>

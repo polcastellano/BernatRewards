@@ -144,7 +144,6 @@
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
                                 nxtLvl.experiencia }}xp</p>
                             <p>Nv.{{ nxtLvl.numero }}</p>
-                            <!-- TODO recoger nivel siguiente -->
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
@@ -154,7 +153,6 @@
                         'bg-info': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 33 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 66,
                         'bg-success': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 66 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 100,
                                 }"></div>
-                            <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
                         </div>
                     </div>
                 </div>                

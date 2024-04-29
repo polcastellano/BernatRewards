@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('category-list', [CategoryController::class, 'getList']);
    // Route::apiResource('perfil', ProfileController::class);
    Route::get('perfil/{user}', [ProfileController::class, 'show']);
-   Route::get('perfil/update/{user}', [ProfileController::class, 'update']);
+   Route::post('perfil/update/{user}', [ProfileController::class, 'update']);
 
 
     Route::get('/user', [ProfileController::class, 'user']);

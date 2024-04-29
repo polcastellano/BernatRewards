@@ -9,8 +9,7 @@
                             <router-link :to="{name: 'recompensas.create'}" class="btn btn-success">Nueva recompensa</router-link>
                         </div>
                     </div>
-                    <!-- :rowsPerPageOptions="[5, 10, 20, 50]" -->
-                    <DataTable :value="recompensas.data" paginator :rows="5" tableStyle="min-width: 50rem">
+                    <DataTable appendTo="self" :value="recompensas.data" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
 
                         <template #empty> No se ha encontrado ninguna recompensa. </template>
 
