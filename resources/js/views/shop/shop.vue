@@ -34,7 +34,7 @@
                                         <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
-                                    <button class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
+                                    <button @click="storePedido(item.id)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
                                         <div>
                                             <p>{{ $t('buy')}}</p>
                                         </div>
@@ -83,7 +83,7 @@
                                         <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
-                                    <button class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
+                                    <button @click="storePedido(item.id)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
                                         <div>
                                             <p>{{ $t('buy')}}</p>
                                         </div>
@@ -104,9 +104,13 @@ import AppFooter from '../../layouts/AppFooter.vue';
 import { onMounted} from 'vue';
 import usarRecompensas from "@/composables/recompensas";
 import usarCategorias from "@/composables/categorias";
+import usarPedidos from "@/composables/pedidos";
+
 
 const {recompensas, getRecompensas} = usarRecompensas()
 const { productosCategorias, getRecompensasCategorias } = usarCategorias()
+const { storePedido } = usarPedidos()
+
 
 
 onMounted(() => {

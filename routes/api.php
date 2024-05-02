@@ -35,6 +35,8 @@ Route::post('recompensas/update/{id}', [RecompensaController::class, 'update']);
 Route::delete('recompensas/{recompensa}', [RecompensaController::class, 'destroy']);
 Route::get('recompensas/{recompensa}', [RecompensaController::class, 'show']);
 Route::get('get-recompensa-category/{id}', [RecompensaController::class, 'getRecompensaByCategory']);
+Route::get('recompensas/getRecompensa/{recompensa}', [RecompensaController::class, 'getRecompensa']);
+
 
 
 //Api Categorias
@@ -81,11 +83,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::put('/role-permissions', [PermissionController::class, 'updateRolePermissions']);
     Route::apiResource('permissions', PermissionController::class);
     Route::get('category-list', [CategoryController::class, 'getList']);
-   // Route::apiResource('perfil', ProfileController::class);
-   Route::get('perfil/{user}', [ProfileController::class, 'show']);
-   Route::get('perfil/update/{user}', [ProfileController::class, 'update']);
-
-
+    Route::apiResource('perfil', ProfileController::class);
     Route::get('/user', [ProfileController::class, 'user']);
     Route::put('/user', [ProfileController::class, 'update']);
     Route::get('/usuarioNivel', [UserController::class, 'usuarioNivel']);

@@ -82,8 +82,8 @@ class RecompensaController extends Controller
             return response()->json(['status' => 405, 'success' => false, 'message' => 'Solo puedes editar tus propias recompensas']);
         } else {
             return new RecompensaResource($recompensa);
-    
         }
+        
     }
 
     public function getRecompensaByCategory($id)
@@ -91,5 +91,12 @@ class RecompensaController extends Controller
         $recompensas = Recompensa::whereRelation('categorias', 'id', '=', $id)->paginate();
 
          return RecompensaResource::collection($recompensas);
+    }
+
+
+    public function getRecompensa(Recompensa $recompensa){
+
+            return new RecompensaResource($recompensa);
+        
     }
 }

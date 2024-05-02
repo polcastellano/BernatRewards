@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePedidoRequest;
 use App\Models\Pedido;
-use App\Models\Recompensa;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -17,19 +17,13 @@ class PedidoController extends Controller
         return $pedidos;
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'cantidad' => 'required',
-            'precio_total' => 'required',
-            'usuario_id' => 'required',
-            'fecha' => 'required',
-        ]);
+    public function store(StorePedidoRequest $request){
+            
+        $validatedData = $request->validated();       
+        $validatedData['usuario_id'] = auth()->id();
+        $pedido = Pedido::create($validatedData);
 
-        $pedido = $request->all();
-
-        $data = Pedido::create($pedido);
-
-        return response()->json(['success' => true, 'data' => $data]);
+        return response()->json(['success' => true, 'data' => $pedido]);
 
     }
 
@@ -37,10 +31,8 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
 
         $request->validate([
-            'cantidad' => 'required',
-            'precio_total' => 'required',
             'usuario_id' => 'required',
-            'fecha' => 'required',
+            'recompensa_id' => 'required',
         ]);
 
         $dataToUpdate = $request->all();

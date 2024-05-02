@@ -35,7 +35,8 @@ class Recompensa extends Model implements HasMedia
 
     public function pedidos(){
 
-        return $this->belongsToMany(Pedido::class, 'pedidos_recompensas');
+        return $this->hasMany(Pedido::class, 'pedido_id');
+
     }
 
     public function registerMediaCollections(): void{

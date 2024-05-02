@@ -10,14 +10,12 @@ class Pedido extends Model
     use HasFactory;
     
     protected $fillable = [
-        'cantidad',
-        'precio_total',
         'usuario_id',
-        'fecha',
+        'recompensa_id',
     ];
 
     public function recompensas(){
 
-        return $this->belongsToMany(Recompensa::class, 'pedidos_recompensas');
+        return $this->belongsTo(Recompensa::class, 'recompensas_id');
     }
 }
