@@ -51,6 +51,9 @@ Route::get('pedidos', [PedidoController::class, 'index']);
 Route::post('pedidos/', [PedidoController::class, 'store']);
 Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
 Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
+Route::get('getPedidosUser/{id}', [PedidoController::class, 'getPedidosUser']);
+
+
 
 //Api Niveles
 Route::get('niveles', [NivelController::class, 'index']);

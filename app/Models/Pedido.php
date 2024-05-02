@@ -14,8 +14,8 @@ class Pedido extends Model
         'recompensa_id',
     ];
 
-    public function recompensas(){
+    public function recompensa(){
 
-        return $this->belongsTo(Recompensa::class, 'recompensas_id');
+        return $this->belongsTo(Recompensa::class, 'recompensa_id');
     }
 }

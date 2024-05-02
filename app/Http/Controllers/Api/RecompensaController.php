@@ -99,4 +99,5 @@ class RecompensaController extends Controller
             return new RecompensaResource($recompensa);
         
     }
+    
 }

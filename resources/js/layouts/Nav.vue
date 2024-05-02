@@ -120,11 +120,15 @@
                                             :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
                                     </li>
                                     <li><router-link to="/admin/recompensas" class="dropdown-item">{{
-                                            $t('rewards') }}</router-link></li>
+                                            $t('rewards') }}</router-link>
+                                    </li>
+                                    <li><router-link to="/admin/pedidos" class="dropdown-item">{{
+                                            $t('history') }}</router-link>
+                                    </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a>
+                                    <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">{{ $t('logout')}}</a>
                                     </li>
                                 </ul>
                             </li>
