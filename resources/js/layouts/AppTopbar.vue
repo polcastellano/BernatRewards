@@ -48,6 +48,7 @@
                             <li>
                                 <router-link class="dropdown-item" :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
                             </li>
+                        <!-- TODO onlick js -->
                             <li><router-link to="/admin/recompensas" class="dropdown-item">{{
                                     $t('rewards') }}</router-link></li>
                             <li>

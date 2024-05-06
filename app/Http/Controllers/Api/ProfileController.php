@@ -15,21 +15,6 @@ use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
-    /**
-     * @throws ValidationException
-     */
-    // public function update(UpdateProfileRequest $request)
-    // {
-    //     $profile = Auth::user();
-    //     $profile->name = $request->name;
-    //     $profile->email = $request->email;
-
-    //     if ($profile->save()) {
-    //         return $this->successResponse($profile, 'User updated');;
-    //     }
-    //     return response()->json(['status' => 403, 'success' => false]);
-    // }
-
     public function user(Request $request)
     {
         $user = $request->user();
@@ -44,6 +29,7 @@ class ProfileController extends Controller
      *
      * @param UpdateUserRequest $request
      * @param User $user
+     * @throws ValidationException
      * @return UserResource
      */
     public function update(UpdateUserRequest $request)
@@ -86,6 +72,8 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {   
+
+        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
 
         $user->load('roles');
 

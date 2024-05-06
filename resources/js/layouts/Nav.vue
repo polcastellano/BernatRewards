@@ -142,16 +142,16 @@
                         <div class="d-flex justify-content-between">
                             <p>Nv.{{ user.niveles?.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
-                                nxtLvl.experiencia }}xp</p>
-                            <p>Nv.{{ nxtLvl.numero }}</p>
+                                nextLevel.experiencia }}xp</p>
+                            <p>Nv.{{ nextLevel.numero }}</p>
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal"
-                                :style="{ width: ((user.experience - nxtLvl.experiencia + 1000) / 10) + '%' }" :class="{
-                        'bg-warning': ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 33,
-                        'bg-info': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 33 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 66,
-                        'bg-success': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 66 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 100,
+                                :style="{ width: ((user.experience - nextLevel.experiencia + 1000) / 10) + '%' }" :class="{
+                        'bg-warning': ((user.experience - nextLevel.experiencia + 1000) / 10) <= 33,
+                        'bg-info': ((user.experience - nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 66,
+                        'bg-success': ((user.experience - nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 100,
                                 }"></div>
                         </div>
                     </div>
@@ -165,12 +165,15 @@
 import useAuth from "@/composables/auth";
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 import {userStore} from "@/store/authPinia";
+import useNiveles from "@/composables/niveles";
 
     const { processing, logout } = useAuth();
 
     const user = userStore().vistaUser();
 
-    const nxtLvl = userStore().vistaNxtLvl();
+    const { hasNextLevel } = useNiveles()
+    
+    const nextLevel = hasNextLevel()
 
 
 </script>

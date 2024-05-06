@@ -18,31 +18,6 @@ export default function useProfile() {
         })
     }
 
-    // const updateProfile = async (profile) => {
-    //     if (cargando.value) return;
-
-    //     cargando.value = true
-    //     validationErrors.value = {}
-
-    //     axios.put('/api/user', profile)
-    //         .then(({data}) => {
-    //             if (data.success) {
-    //                 store.commit('auth/SET_USER', data.data)
-    //                 // router.push({name: 'profile.index'})
-    //                 swal({
-    //                     icon: 'success',
-    //                     title: 'Profile updated successfully'
-    //                 })
-    //             }
-    //         })
-    //         .catch(error => {
-    //             if (error.response?.data) {
-    //                 validationErrors.value = error.response.data.errors
-    //             }
-    //         })
-    //         .finally(() => cargando.value = false)
-    // }
-
     const updateProfile = async (user) => {
         if (cargando.value) return;
 
@@ -54,6 +29,8 @@ export default function useProfile() {
             }
         })
         .then(response => {
+            
+            userStore().user = response.data
             swal({
                 icon: 'success',
                 title: 'Perfil editado correctamente'

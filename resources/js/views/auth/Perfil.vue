@@ -10,7 +10,6 @@
                 <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
             </div>
             <section>
-                {{ user }}
                 <form @submit.prevent="submitForm">
                     <div class="row my-5 mx-0">
                         <div class="col-md-8">
@@ -160,7 +159,7 @@ import { userStore } from '@/store/authPinia';
 import DropZone from "@/components/DropZone.vue";
 
 
-const { user: authuser } = userStore()
+const authuser = userStore().vistaUser()
 
 setLocale(es);
 const { roleList, getRoleList } = useRoles();
@@ -223,7 +222,6 @@ function submitForm() {
 onMounted(() => {
     getProfile(route.params.id)
     getRoleList()
-
 })
 
 const outsideClickListener = ref(null);

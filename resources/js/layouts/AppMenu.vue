@@ -3,6 +3,7 @@
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
                 <div class="imgUsuario" :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"></div>
+                <!-- TODO no actualiza bien la imagen en el perfil por lo tanto no la muestra al hacer update -->
                 <p class="ms-2" style="font-weight: bold;">{{ user.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
@@ -13,6 +14,7 @@
                 </div>
 
                 <div class="barraNivel d-flex align-items-center">
+                    
                     <div class="barraNivelReal"
                         :style="{ width: ((user.experience - nxtLvl.experiencia + 1000) / 10) + '%' }"
                         :class="{
@@ -38,11 +40,11 @@
 <script setup>
 import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
-import {userStore} from "@/store/authPinia";
+import { userStore } from '@/store/authPinia';
 
-const  user = userStore().vistaUser()
+const user = userStore().vistaUser()
 
-const nxtLvl = userStore().vistaNxtLvl();
+const nxtLvl = userStore()
 
 
 const vela = "pepe";
