@@ -66,12 +66,14 @@ Route::get('siguintenivel/{id}', [NivelController::class, 'nxtNivel']);
 //Api User
 Route::get('getUserLogeado/{id}', [UserController::class, 'getUserLogeado']);
 Route::get('getUsuMedia/{id}', [UserController::class, 'getUsuMedia']);
-
+Route::get('getStudents', [UserController::class, 'getStudents']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
     Route::post('users/update/{user}', [UserController::class, 'update']);
+    Route::post('users/updateExp/{id}', [UserController::class, 'updateExp']);
+
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('roles', RoleController::class);

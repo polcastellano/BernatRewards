@@ -8,6 +8,7 @@ export default function usarPedidos(){
     const user = userStore().vistaUser().value;
     const pedidos = ref([])
     const pedidosUser = ref([])
+    const recompensasUser = ref([])
     const pedido = ref({
         id: '',
         usuario_id: '',
@@ -18,11 +19,11 @@ export default function usarPedidos(){
     const swal = inject('$swal')
 
     const getPedidosUser = (id) => {
-            axios.get('/api/getPedidosUser/' + id)
-            .then(response => {
-                pedidosUser.value = response.data;
+        axios.get('/api/getPedidosUser/' + id)
+            .then(pedidos => {
+                pedidosUser.value = pedidos.data;
             })
-        }
+    }
 
     const storePedido = async (id) => {
 
@@ -125,6 +126,7 @@ export default function usarPedidos(){
         pedidos,
         pedido,
         pedidosUser,
+        recompensasUser,
         storePedido,
         getPedidosUser,
     }

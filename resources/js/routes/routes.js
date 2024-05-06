@@ -365,6 +365,12 @@ export default [
                 component: () => import('../views/admin/users/Edit.vue'),
                 meta: { breadCrumb: 'User Edit' }
             },
+            {
+                name: 'users.students',
+                path: 'users/students',
+                component: () => import('../views/admin/users/Students.vue'),
+                meta: { breadCrumb: 'Students' }
+            },
         ]
     },
     {

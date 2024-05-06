@@ -139,4 +139,27 @@ class UserController extends Controller
 
         return response()->noContent();
     }
+
+    public function getStudents(){
+        $users = User::whereHas('roles', function($query){
+            $query->where('id', 2);
+        })->get()->toArray();
+
+        return $users;
+
+    }
+
+
+    
+    public function updateExp($id, Request $request)
+    {
+        $usuario = User::find($id);
+
+        $usuario->experience += $request->experience;
+
+        $usuario->save();
+
+        return ($usuario);
+
+    }
 }

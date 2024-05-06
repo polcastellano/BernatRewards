@@ -6,34 +6,33 @@
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Historial de pedidos </h5>
                     </div>
-                    {{ pedidosUser }}
+                    
                     <!-- :rowsPerPageOptions="[5, 10, 20, 50]" -->
                     <DataTable :value="pedidosUser" paginator :rows="5" tableStyle="min-width: 50rem">
 
                         <template #empty> No tienes ninguna recompensa. </template>
 
-                        <Column field="id" header="ID" sortable>
+                        <Column field="created_at" header="Fecha" sortable>
                             <template #body="{ data }">
-                                {{ data.id }}
+                                {{ new Date(data.created_at).toLocaleString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit'    }) }}
                             </template>
                         </Column>
 
-                        <!-- <Column field="imagen" header="Imagen">
+                        <Column field="imagen" header="Imagen">
                             <template #body="slotProps">
-                                <img :src="`${slotProps.data.original_image}`" :alt="slotProps.data.original_image"
-                                    class="shadow-4 image-table" />
-                            </template>
-                        </Column> -->
-
-                        <Column field="recompensa" header="Recompensa" sortable>
-                            <template #body="{ data }">
-                                {{ data.recompensa.nombre }} <!-- Suponiendo que 'nombre' es un campo de la recompensa -->
+                                <img :src="slotProps.data.recompensa.media[0].original_url" class="shadow-4 image-table" />
                             </template>
                         </Column>
 
-                        <Column field="recompensa" header="Puntos" sortable>
+                        <Column field="recompensa.nombre" header="Recompensa" sortable>
                             <template #body="{ data }">
-                                {{ data.recompensa.precio }} <!-- Suponiendo que 'nombre' es un campo de la recompensa -->
+                                {{ data.recompensa.nombre }}
+                            </template>
+                        </Column>
+
+                        <Column field="recompensa.precio" header="Puntos" sortable>
+                            <template #body="{ data }">
+                                {{ data.recompensa.precio }}
                             </template>
                         </Column>
                     </DataTable>
@@ -56,12 +55,15 @@
     const { user } = userStore()
 
 
-    const { getPedidosUser, pedidosUser } = usarPedidos()
+    const { getPedidosUser, pedidosUser, recompensasUser } = usarPedidos()
     const { can } = useAbility()
     
     onMounted(() =>{
-        getPedidosUser(user.id)
+        getPedidosUser(user.id);
     });
+
+
+
 </script>
 
 

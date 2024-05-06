@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 
 export default function useUsers() {
     const users = ref([])
+    const students = ref([])
     const user = ref({
         name: '',
         email: '',
@@ -41,6 +42,13 @@ export default function useUsers() {
         axios.get('/api/users/' + id)
             .then(response => {
                 user.value = response.data.data;
+            })
+    }
+
+    const getStudents = async () => {
+        axios.get('/api/getStudents')
+            .then(response => {
+                students.value = response.data;
             })
     }
 
@@ -148,14 +156,85 @@ export default function useUsers() {
             })
     }
 
+    const addExp = async (id, nombre, exp) => {
+        swal({
+            title: 'Confirmar accion',
+            text: 'Seguro que quieres sumarle ' + exp + 'xp al usuario: ' + nombre + '?',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Confirmar',
+            confirmButtonColor: '#428BCA',
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true
+        })
+            .then(result => {
+                if (result.isConfirmed) {
+
+                    axios.post('/api/users/updateExp/' + id, {
+                        experience: exp,
+                      })
+                        .then(response => {
+                            console.log("Response:")
+                            console.log(response)
+                            swal({
+                                icon: 'success',
+                                title: 'User editado correctamente'
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            swal({
+                                icon: 'error',
+                                title: 'User editado incorrectamente'
+                            })
+                        })
+
+
+
+                    // axios.get('/api/users/' + id)
+                    //     .then(response => {
+
+                    //         response.data.data.experience = response.data.data.experience + exp;
+
+                    //         console.log(response.data.data);
+
+                    //         // axios.post('/api/users/update/' + user.id, user, {
+                    //         axios.post('/api/users/updateExp/'+ id, exp, {
+
+                    //         })
+                    //         .then(response => {
+                    //             console.log(response)
+                    //             router.push({ name: 'users.index' })
+                    //             swal({
+                    //                 icon: 'success',
+                    //                 title: 'User editado correctamente'
+                    //             })
+                    //         })
+                    //         .catch(error => {
+                    //             console.log(error)
+                    //             swal({
+                    //                 icon: 'error',
+                    //                 title: 'User editado incorrectamente'
+                    //             })
+                    //         })
+                    //     })
+                }
+            })
+    }
+
     return {
         users,
         user,
+        students,
         getUsers,
         getUser,
+        getStudents,
         storeUser,
         updateUser,
         deleteUser,
+        addExp,
         validationErrors,
         cargando
     }
