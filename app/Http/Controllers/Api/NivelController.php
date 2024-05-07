@@ -52,17 +52,4 @@ class NivelController extends Controller
         return response()->json(['success' => true, 'data' => 'Nivel eliminado correctamente']);
 
     }
-
-    public function allniveles(){
-        
-        $nivel = Nivel::all()->toArray();
-        return $this->successResponse($nivel, 'Levels found');
-    }
-
-    public function nxtNivel($id){
-        
-        $nivelSuperior = Nivel::find($id + 1)->toArray();
-        
-        return $this->successResponse($nivelSuperior);
-    }
 }

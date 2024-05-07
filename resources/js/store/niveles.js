@@ -1,40 +1,33 @@
 import { defineStore } from 'pinia'
-import { ref,watch } from 'vue'
+import axios from 'axios'
+import { ref, watch } from 'vue'
 
 
-export const storeNiveles = defineStore('allniveles', () => {
-        const niveles = ref({})
-        const nivelUsu = ref({})
-        function getNiveles() {
-            axios.get('/api/allniveles').then(({ data }) => {
-                if (data.success) {
-                    niveles.value = data.data;
-                } else {
-                    console.log("VACIO");
-                }
+export const storeNiveles = defineStore('storeNiveles', () => {
+    const niveles = ref([])
+    
+    async function getNiveles() {
+        await axios.get('/api/niveles').then(response => {
+            niveles.value = response.data
+        }).catch(error => {
+            console.error("Error, " + error);
+        })
+    }
 
-            }).catch(({ res }) => {
-                console.error("Error, " + res);
-            })
-        }
-        function getNivelSiguiente($id) {
-            axios.get('/api/siguintenivel/' + $id).then(({ data }) => {
-                if (data.success) {
-                    nivelUsu.value = data.data;
-                } else {
-                    console.log("VACIO");
-                }
+    function vistaNiveles() {
+        return niveles;
+    }
 
-            }).catch(({ res }) => {
-                console.error("Error, " + res);
-            })
-        }
-        return {
-            niveles,
-            nivelUsu,
-            getNiveles,
-            getNivelSiguiente
-        }
-    })
+    function logout(){
+        niveles.value = []
+    }
+
+    return {
+        niveles,
+        getNiveles,
+        vistaNiveles,
+        logout,
+    }
+}, {persist: true})
 
 

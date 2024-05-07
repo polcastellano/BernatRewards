@@ -95,7 +95,6 @@
                         </template>
                     </ul>
                 </div>
-
                 <div v-if="user?.name" class="infoUsuario p-0 m-0 d-flex flex-column d-lg-block d-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <ul class="navbar-nav">
@@ -146,19 +145,17 @@
                         <div class="d-flex justify-content-between">
                             <p>Nv.{{ user.niveles?.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
-                                nxtLvl.experiencia }}xp</p>
-                            <p>Nv.{{ nxtLvl.numero }}</p>
-                            <!-- TODO recoger nivel siguiente -->
+                                nextLevel.experiencia }}xp</p>
+                            <p>Nv.{{ nextLevel.numero }}</p>
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal"
-                                :style="{ width: ((user.experience - nxtLvl.experiencia + 1000) / 10) + '%' }" :class="{
-                        'bg-warning': ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 33,
-                        'bg-info': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 33 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 66,
-                        'bg-success': ((user.experience - nxtLvl.experiencia + 1000) / 10) > 66 && ((user.experience - nxtLvl.experiencia + 1000) / 10) <= 100,
+                                :style="{ width: ((user.experience - nextLevel.experiencia + 1000) / 10) + '%' }" :class="{
+                        'bg-warning': ((user.experience - nextLevel.experiencia + 1000) / 10) <= 33,
+                        'bg-info': ((user.experience - nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 66,
+                        'bg-success': ((user.experience - nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 100,
                                 }"></div>
-                            <!-- TODO get experiencia siguiente ----- right user.experiencia  -->
                         </div>
                     </div>
                 </div>                
@@ -171,12 +168,15 @@
 import useAuth from "@/composables/auth";
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
 import {userStore} from "@/store/authPinia";
+import useNiveles from "@/composables/niveles";
 
     const { processing, logout } = useAuth();
 
     const user = userStore().vistaUser();
 
-    const nxtLvl = userStore().vistaNxtLvl();
+    const { hasNextLevel } = useNiveles()
+    
+    const nextLevel = hasNextLevel()
 
 
 </script>

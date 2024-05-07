@@ -42,6 +42,7 @@ class User extends Authenticatable implements HasMedia
     protected $hidden = [
         'password',
         'remember_token',
+        'pivot',
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable implements HasMedia
      *
      * @var array<string, string>
      */
+    
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

@@ -10,9 +10,8 @@
                 <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
             </div>
             <section>
-
                 <form @submit.prevent="submitForm">
-                    <div class="row my-5">
+                    <div class="row my-5 mx-0">
                         <div class="col-md-8">
                             <div class="card  border-0 shadow-sm">
 
@@ -100,7 +99,7 @@
                                         <span class="text-danger">*</span>
                                     </h6>
                                     <div class="mb-3">
-                                        <MultiSelect :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
+                                        <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
                                             :options="roleList" filter dataKey="id" optionLabel="name"
                                             placeholder="Seleciona un rol" display="chip" class="w-full">
                                         </MultiSelect>
@@ -160,10 +159,14 @@ import { userStore } from '@/store/authPinia';
 import DropZone from "@/components/DropZone.vue";
 
 
-const { user: authuser } = userStore()
+const authuser = userStore().vistaUser()
 
 setLocale(es);
 const { roleList, getRoleList } = useRoles();
+
+const { onMenuToggle, layoutConfig, layoutState, isSidebarActive } = useLayout();
+
+const { getProfile, profile: postData, updateProfile, cargando } = useProfile()
 
 const schema = yup.object({
     name: yup.string().required().label('Nombre'),
@@ -210,10 +213,6 @@ const user = reactive({
 
 const route = useRoute();
 
-const { onMenuToggle, layoutConfig, layoutState, isSidebarActive } = useLayout();
-
-const { getProfile, profile: postData } = useProfile()
-
 function submitForm() {
     validate().then(form => {
         if (form.valid) updateProfile(user)
@@ -223,7 +222,6 @@ function submitForm() {
 onMounted(() => {
     getProfile(route.params.id)
     getRoleList()
-
 })
 
 const outsideClickListener = ref(null);
