@@ -20,19 +20,19 @@
 
                         <Column field="imagen" header="Imagen">
                             <template #body="slotProps">
-                                <img :src="slotProps.data.recompensa.media[0].original_url" class="shadow-4 image-table" />
+                                <img :src="slotProps.data.recompensas.media[0].original_url" class="shadow-4 image-table" />
                             </template>
                         </Column>
 
                         <Column field="recompensa.nombre" header="Recompensa" sortable>
                             <template #body="{ data }">
-                                {{ data.recompensa.nombre }}
+                                {{ data.recompensas.nombre }}
                             </template>
                         </Column>
 
                         <Column field="recompensa.precio" header="Puntos" sortable>
                             <template #body="{ data }">
-                                {{ data.recompensa.precio }}
+                                {{ data.recompensas.precio }}
                             </template>
                         </Column>
                     </DataTable>

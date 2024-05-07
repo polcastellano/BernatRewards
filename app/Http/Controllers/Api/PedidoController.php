@@ -51,7 +51,7 @@ class PedidoController extends Controller
     }
     public function getPedidosUser($id){
                 
-        $pedidos = Pedido::with('recompensa.media')->where('usuario_id', $id)->get();
+        $pedidos = Pedido::with('recompensas.media')->where('usuario_id', $id)->get();
         
         return $pedidos;
     }
