@@ -7,6 +7,7 @@ export default function useNiveles() {
     const niveles = storeNiveles().niveles
 
     const hasNextLevel = () => {
+        console.log("funcion hasnextlevel: " + niveles)
         // Obtenemos la experiencia del usuario
         const experienciaUsuario = user.experience;
 
@@ -18,7 +19,7 @@ export default function useNiveles() {
             // para el cual la experiencia del usuario sea mayor o igual a la experiencia necesaria
             const nextLevel = niveles.find(nivel => experienciaUsuario < nivel.experiencia);
 
-            // Si se encuentra un nivel más alto, devolvemos su experiencia
+            // Si se encuentra un nivel más alto, lo devolvemos
             return nextLevel ? nextLevel : "Level max";
         }
 

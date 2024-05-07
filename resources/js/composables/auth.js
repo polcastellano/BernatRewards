@@ -3,6 +3,8 @@ import { useRouter } from "vue-router";
 import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 import { ABILITY_TOKEN } from '@casl/vue';
 import { userStore } from '@/store/authPinia';
+import { storeNiveles } from '@/store/niveles'
+
 
 
 let user = reactive({
@@ -53,6 +55,9 @@ export default function useAuth() {
 
         await axios.post('/login', loginForm)
             .then(async response => {
+                
+                storeNiveles().getNiveles()
+
                 await store2.login()
                 await loginUser()
                 swal({
