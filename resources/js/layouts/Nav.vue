@@ -95,7 +95,6 @@
                         </template>
                     </ul>
                 </div>
-
                 <div v-if="user?.name" class="infoUsuario p-0 m-0 d-flex flex-column d-lg-block d-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <ul class="navbar-nav">

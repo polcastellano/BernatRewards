@@ -6,7 +6,7 @@ import { ref, watch } from 'vue'
 export const storeNiveles = defineStore('storeNiveles', () => {
     const niveles = ref([])
     
-    const getNiveles = async () => {
+    async function getNiveles() {
         await axios.get('/api/niveles').then(response => {
             niveles.value = response.data
         }).catch(error => {

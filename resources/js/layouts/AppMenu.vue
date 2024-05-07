@@ -133,7 +133,6 @@ const model = ref([
 .barraNivelReal{
     height: 0.5rem;
     border-radius: 25px;
-    // background-color: #34a6d6;
 }
 
 .separador{
