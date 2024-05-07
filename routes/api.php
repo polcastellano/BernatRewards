@@ -72,7 +72,8 @@ Route::get('getStudents', [UserController::class, 'getStudents']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
     Route::post('users/update/{user}', [UserController::class, 'update']);
-    Route::post('users/updateExp/{id}', [UserController::class, 'updateExp']);
+    Route::post('users/updatePts/{id}', [UserController::class, 'updatePts']);
+    Route::post('users/removePts/{id}', [UserController::class, 'removePts']);
 
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);

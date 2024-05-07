@@ -151,11 +151,24 @@ class UserController extends Controller
 
 
     
-    public function updateExp($id, Request $request)
+    public function updatePts($id, Request $request)
     {
         $usuario = User::find($id);
 
-        $usuario->experience += $request->experience;
+        $usuario->puntos += $request->puntos;
+        $usuario->experience += ($request->puntos * 1.25);
+
+        $usuario->save();
+
+        return ($usuario);
+
+    }
+
+    public function removePts($id, Request $request)
+    {
+        $usuario = User::find($id);
+
+        $usuario->puntos += $request->puntos;
 
         $usuario->save();
 

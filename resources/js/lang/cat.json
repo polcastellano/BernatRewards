@@ -56,7 +56,17 @@
     "how_to_earn_points_text": "Participa activament durant les classes, pregunta preguntes que t'ajudin a entendre millor els temes i esforça't en les teves tasques i activitats. Els teus professors valoraran el teu compromís i dedicació i et recompensaran amb punts Bernat, una moneda especial que podràs utilitzar per obtenir recompenses exclusives i especials.",
     "cauition_for_the_auctions": "Atent a les Subhastes",
     "cauition_for_the_auctions_text": "Mantingues atent a les subhastes temporals on podràs utilitzar els teus punts. Els teus professors et mantindran informat sobre quan es duran a terme aquestes subhastes especials, donant-te l'oportunitat de participar. Aprofita aquesta oportunitat única per aconseguir recompenses exclusives amb els teus punts Bernat.",
-    "auction" : "Subhastes"
+    "auction" : "Subhastes",
+    "experience" : "Experiència",
+    "points" : "Punts",
+    "actions" : "Accions",
+    "quick_actions" : "Accions ràpides",
+    "addPts" : "Afegir pts",
+    "remPts" : "Treure pts",
+    "add_new" : "Afegir nou",
+    "users" : "Usuaris",
+    "students" : "Alumnes"
+
 
     
 }

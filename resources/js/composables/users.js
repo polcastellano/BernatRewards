@@ -156,73 +156,143 @@ export default function useUsers() {
             })
     }
 
-    const addExp = async (id, nombre, exp) => {
-        swal({
-            title: 'Confirmar accion',
-            text: 'Seguro que quieres sumarle ' + exp + 'xp al usuario: ' + nombre + '?',
-            icon: 'question',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Confirmar',
-            confirmButtonColor: '#428BCA',
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true
-        })
-            .then(result => {
-                if (result.isConfirmed) {
 
-                    axios.post('/api/users/updateExp/' + id, {
-                        experience: exp,
-                      })
+    const addPts = async (id, nombre, pts) => {
+        if(pts == 0){
+            swal({
+                title: "Cuantos puntos quieres sumar a " + nombre + "?",
+                input: "number",
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar',
+                confirmButtonColor: '#428BCA',
+                timer: 20000,
+                timerProgressBar: true,
+                reverseButtons: true,
+                inputAttributes: {
+                    min: 0
+                },
+            }).then(result => {
+                if (result.isConfirmed) {
+                    
+                    pts = result.value;
+
+                    axios.post('/api/users/updatePts/' + id, {
+                        puntos: pts,
+                    })
                         .then(response => {
                             console.log("Response:")
-                            console.log(response)
+                            console.log(response.data.id)
+                            console.log(response.data.experience)
+                            console.log(response.data.puntos)
+
                             swal({
                                 icon: 'success',
-                                title: 'User editado correctamente'
+                                title: 'Puntos añadidos correctamente'
                             })
                         })
                         .catch(error => {
                             console.log(error)
                             swal({
                                 icon: 'error',
-                                title: 'User editado incorrectamente'
+                                title: 'Error al añadir puntos'
                             })
                         })
+                }
+            })
+        } else {
+            swal({
+                title: 'Confirmar accion',
+                text: 'Seguro que quieres sumarle ' + pts + 'pts al usuario: ' + nombre + '?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar',
+                confirmButtonColor: '#428BCA',
+                timer: 20000,
+                timerProgressBar: true,
+                reverseButtons: true
+            })
+                .then(result => {
+                    if (result.isConfirmed) {
+    
+                        axios.post('/api/users/updatePts/' + id, {
+                            puntos: pts,
+                          })
+                            .then(response => {
+                                console.log("Response:")
+                                console.log(response.data.id)                                
+                                console.log(response.data.experience)
+                                console.log(response.data.puntos)
+
+                                students.value.data = students.value.filter(student => {
+                                    if (student.id == response.data.id) {
+                                        student.experience = Math.round(response.data.experience);
+                                        student.puntos = response.data.puntos;
+                                    }
+                                    return student;
+                                });
+
+                                swal({
+                                    icon: 'success',
+                                    title: 'Puntos añadidos correctamente'
+                                })
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                swal({
+                                    icon: 'error',
+                                    title: 'Error al añadir puntos'
+                                })
+                            })
+                    }
+                })
+        }
 
 
+    }
 
-                    // axios.get('/api/users/' + id)
-                    //     .then(response => {
-
-                    //         response.data.data.experience = response.data.data.experience + exp;
-
-                    //         console.log(response.data.data);
-
-                    //         // axios.post('/api/users/update/' + user.id, user, {
-                    //         axios.post('/api/users/updateExp/'+ id, exp, {
-
-                    //         })
-                    //         .then(response => {
-                    //             console.log(response)
-                    //             router.push({ name: 'users.index' })
-                    //             swal({
-                    //                 icon: 'success',
-                    //                 title: 'User editado correctamente'
-                    //             })
-                    //         })
-                    //         .catch(error => {
-                    //             console.log(error)
-                    //             swal({
-                    //                 icon: 'error',
-                    //                 title: 'User editado incorrectamente'
-                    //             })
-                    //         })
-                    //     })
+    const substractPts = async (id, nombre) => {;
+        swal({
+            title: "Cuantos puntos quieres restarle a " + nombre + "?",
+            input: "number",
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Confirmar',
+            confirmButtonColor: '#428BCA',
+            timer: 20000,
+            timerProgressBar: true,
+            reverseButtons: true,
+            inputAttributes: {
+                min: 0
+              },
+          }).then(result => {
+                if (result.isConfirmed) {
+                    const pts = (result.value * -1); 
+                    
+                    axios.post('/api/users/removePts/' + id, {
+                        puntos: pts,
+                      })
+                        .then(response => {
+                            console.log("Response:")
+                            console.log(response)
+                            swal({
+                                icon: 'success',
+                                title: 'Puntos restados correctamente'
+                            })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            swal({
+                                icon: 'error',
+                                title: 'Error al restar puntos'
+                            })
+                        })
                 }
             })
     }
+
+    
 
     return {
         users,
@@ -234,7 +304,8 @@ export default function useUsers() {
         storeUser,
         updateUser,
         deleteUser,
-        addExp,
+        addPts,
+        substractPts,
         validationErrors,
         cargando
     }

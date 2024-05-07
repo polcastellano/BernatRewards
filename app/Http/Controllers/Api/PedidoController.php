@@ -11,8 +11,6 @@ class PedidoController extends Controller
 {
     public function index(){
         
-        // $recompensas = Recompensa::with('categorias')->get(); duda
-
         $pedidos = Pedido::with('recompensas.categorias')->get();
         return $pedidos;
     }

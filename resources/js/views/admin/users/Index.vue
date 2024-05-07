@@ -3,9 +3,9 @@
         <div class="col-md-12">
             <div class="card border-0">
                 <div class="card-header bg-transparent">
-                    <h5 class="float-start">Users</h5>
+                    <h5 class="float-start">{{$t('users')}}</h5>
                     <router-link v-if="can('user-create')" :to="{ name: 'users.create' }" class="btn btn-primary btn-sm float-end">
-                        Add New
+                        {{$t('add_new')}}
                     </router-link>
                 </div>
                 <div class="card-body shadow-sm">
@@ -55,7 +55,7 @@
                                          @click="updateOrdering('title')">
                                         <div class="font-medium text-uppercase"
                                              :class="{ 'font-bold text-blue-600': orderColumn === 'title' }">
-                                            Name
+                                             {{$t('name')}}
                                         </div>
                                         <div class="select-none">
                                 <span :class="{
@@ -108,7 +108,7 @@
                                     </div>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
-                                    Actions
+                                    {{$t('actions')}}
                                 </th>
                             </tr>
                             </thead>

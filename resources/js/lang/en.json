@@ -61,6 +61,15 @@
     "how_to_earn_points_text": "Participate actively during classes, ask questions that help you better understand the topics, and strive in your tasks and activities. Your teachers will value your commitment and dedication and reward you with Bernat points, a special currency that you can use to obtain exclusive and special rewards.",
     "cauition_for_the_auctions": "Cautious for the Auctions",
     "cauition_for_the_auctions_text": "Stay alert to temporary auctions where you can use your points. Your teachers will keep you informed about when these special auctions will take place, giving you the opportunity to participate. Seize this unique opportunity to get exclusive rewards with your Bernat points.",
-    "auction" : "Auctions"
+    "auction" : "Auctions",
+    "experience" : "Experience",
+    "points" : "Points",
+    "actions" : "Actions",
+    "quick_actions" : "Quick actions",
+    "addPts" : "Add pts",
+    "remPts" : "Remove pts",
+    "add_new" : "Add new",
+    "users" : "Users",
+    "students" : "Students"
 
 }

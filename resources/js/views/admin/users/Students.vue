@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card border-0">
                 <div class="card-header bg-transparent">
-                    <h5 class="float-start">ALUMNOS</h5>
+                    <h5 class="float-start">{{ $t('students') }}</h5>
                 </div>
                 <div class="card-body shadow-sm">
                     <div class="mb-4">
@@ -29,7 +29,7 @@
                             </tr>
                             <tr>
                                 <th class="px-6 py-3 text-start">
-                                    <div class="flex flex-row"
+                                    <div class="flex flex-row w-7rem"
                                          @click="updateOrdering('id')">
                                         <div class="font-medium text-uppercase"
                                              :class="{ 'font-bold text-blue-600': orderColumn === 'id' }">
@@ -48,11 +48,11 @@
                                     </div>
                                 </th>
                                 <th class="px-6 py-3 text-left">
-                                    <div class="flex flex-row"
+                                    <div class="flex flex-row w-10rem"
                                          @click="updateOrdering('title')">
                                         <div class="font-medium text-uppercase"
                                              :class="{ 'font-bold text-blue-600': orderColumn === 'title' }">
-                                            Name
+                                             {{$t('name')}}
                                         </div>
                                         <div class="select-none">
                                 <span :class="{
@@ -65,9 +65,20 @@
                                 }">&darr;</span>
                                         </div>
                                     </div>
-                                </th>                                
+                                </th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left">
-                                    Experience
+                                    {{$t('experience')}}
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left">
+                                    {{$t('points')}}
+                                </th>                               
+                                <th class="px-6 py-3 bg-gray-50 text-left">
+                                    {{$t('quick_actions')}}
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left">
+                                    {{$t('actions')}}
+                                </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left">
                                 </th>
                             </tr>
                             </thead>
@@ -79,20 +90,38 @@
                                 <td class="px-6 py-4 text-sm">
                                     {{ student.name }}
                                 </td>
-                                <td class="px-6 py-4 text-sm d-flex">
-                                    <a href="#"  @click.prevent="addExp(student.id, student.name, 25)"
-                                        class="ms-2 me-0 btn btn-primary">
-                                       <p>+25exp</p>
-                                    </a>
-                                    <a href="#"  @click.prevent="addExp(student.id,student.nombre, 50)"
-                                        class="ms-2 me-0 btn btn-primary">
-                                       <p>+50xp</p>
-                                    </a>
-                                    <a href="#"  @click.prevent="addExp(student.id, student.nombre, 100)"
-                                        class="ms-2 me-0 btn btn-primary">
-                                       <p>+100exp</p>
-                                    </a>
+                                <td class="px-6 py-4 text-sm">
+                                    {{ student.experience }}
                                 </td>
+                                <td class="px-6 py-4 text-sm">
+                                    {{ student.puntos }}
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="d-flex">     
+                                        <a href="#"  @click.prevent="addPts(student.id, student.name, 25)" class="ms-2 me-0 btn btn-primary">
+                                            <p>+25Pts</p>
+                                        </a>
+                                        <a href="#"  @click.prevent="addPts(student.id,student.name, 50)" class="ms-2 me-0 btn btn-primary">
+                                            <p>+50Pts</p>
+                                        </a>
+                                        <a href="#"  @click.prevent="addPts(student.id, student.name, 100)" class="ms-2 me-0 btn btn-primary">
+                                            <p>+100Pts</p>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm">
+                                    <div class="d-flex">
+                                        <a href="#"  @click.prevent="addPts(student.id, student.name, 0)" class="ms-2 me-0 btn btn-primary">
+                                            <p>{{$t('addPts')}}</p>
+                                        </a>
+                                        <a href="#"  @click.prevent="substractPts(student.id, student.name)"
+                                            class="ms-2 me-0 btn btn-danger">
+                                            <p>{{$t('remPts')}}</p>
+                                        </a>
+                                    </div>
+                                    
+                                </td>
+                                
                             </tr>
                             </tbody>
                         </table>
@@ -121,7 +150,7 @@ const search_title = ref('')
 const search_global = ref('')
 const orderColumn = ref('created_at')
 const orderDirection = ref('desc')
-const {students, getStudents, addExp} = useUsers()
+const {students, getStudents, addPts, substractPts} = useUsers()
 const {can} = useAbility()
 
 onMounted(() => {

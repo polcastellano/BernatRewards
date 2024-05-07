@@ -31,6 +31,7 @@ export default function usarPedidos(){
 
         axios.get('/api/pedidos')
             .then(response => {
+            
                 pedidos.value = response.data;
                 pedidos.value.forEach(pedido => {
                     if (pedido.usuario_id == user.id && pedido.recompensa_id == id) {
