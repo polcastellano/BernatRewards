@@ -3,24 +3,24 @@
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
                 <div class="imgUsuario" :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"></div>
-                <!-- TODO no actualiza bien la imagen en el perfil por lo tanto no la muestra al hacer update -->
+                <!-- TODO no peta pero no actualiza bien -->
                 <p class="ms-2" style="font-weight: bold;">{{ user.name }}</p>
             </div>
             <div class="nivelInfo d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <p>Nv.{{ user.niveles?.numero }}</p>
-                    <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{ nextLevel.experiencia }}xp</p>
-                    <p>Nv.{{ nextLevel.numero }}</p> 
+                    <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{ user.nextLevel.experiencia }}xp</p>
+                    <p>Nv.{{ user.nextLevel.numero }}</p> 
                 </div>
 
                 <div class="barraNivel d-flex align-items-center">
                     
                     <div class="barraNivelReal"
-                        :style="{ width: ((user.experience - nextLevel.experiencia + 1000) / 10) + '%' }"
+                        :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }"
                         :class="{
-                            'bg-warning': ((user.experience - nextLevel.experiencia + 1000) / 10) <= 33,
-                            'bg-info': ((user.experience - nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 66,
-                            'bg-success': ((user.experience - nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - nextLevel.experiencia + 1000) / 10) <= 100,
+                            'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
+                            'bg-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
+                            'bg-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
                         }"
                     >
                     </div>
@@ -41,14 +41,8 @@
 import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 import { userStore } from '@/store/authPinia';
-import useNiveles from "@/composables/niveles";
 
 const user = userStore().vistaUser()
-
-const { hasNextLevel } = useNiveles()
-
-const nextLevel = hasNextLevel()
-
 
 const vela = "pepe";
 
@@ -134,6 +128,7 @@ const model = ref([
 .barraNivelReal{
     height: 0.5rem;
     border-radius: 25px;
+    transition: width 0.5s ease;
 }
 
 .separador{

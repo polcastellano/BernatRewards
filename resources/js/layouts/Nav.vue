@@ -127,7 +127,8 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">{{ $t('logout')}}</a>
+                                    <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">{{
+                                            $t('logout')}}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -145,20 +146,23 @@
                         <div class="d-flex justify-content-between">
                             <p>Nv.{{ user.niveles?.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
-                                user.nextLevel.experiencia }}xp</p>
+                        user.nextLevel.experiencia }}xp</p>
                             <p>Nv.{{ user.nextLevel.numero }}</p>
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">
+
                             <div class="barraNivelReal"
-                                :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }" :class="{
+                                :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }"
+                                :class="{
                         'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
                         'bg-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
                         'bg-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
-                                }"></div>
+                        }">
+                            </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </nav>
     </section>
@@ -172,10 +176,6 @@ import {userStore} from "@/store/authPinia";
     const { processing, logout } = useAuth();
 
     const user = userStore().vistaUser();
-
-    
-
-
 </script>
 
 <style>
@@ -272,6 +272,9 @@ import {userStore} from "@/store/authPinia";
 .barraNivelReal{
     height: 0.5rem;
     border-radius: 25px;
+    transition: width 0.5s ease;
+    /* TODO porque sale asi el color del width */
+
 }
 
 .separador{

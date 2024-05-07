@@ -1,6 +1,8 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { userStore } from '@/store/authPinia';
+import useNiveles from "@/composables/niveles"
+
 
 export default function useProfile() {
     const profile = ref({})
@@ -29,8 +31,10 @@ export default function useProfile() {
             }
         })
         .then(response => {
-            
             userStore().user = response.data
+
+            userStore().user.nextLevel = useNiveles().hasNextLevel()
+
             swal({
                 icon: 'success',
                 title: 'Perfil editado correctamente'

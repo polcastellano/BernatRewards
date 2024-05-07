@@ -42,24 +42,24 @@
 
                         <i class="pi pi-user"></i>
                         <ul class="menuDesp dropdown-menu dropdown-menu-end">
-                            <li><router-link v-if="user.roles[0]?.name == 'admin'" class="dropdown-item" to="/admin">
-                                    Admin</router-link>
+                            <li><a v-if="user.roles[0]?.name == 'admin'" class="dropdown-item" href="javascript:void(0)" @click="admin()">
+                                    Admin</a>
                             </li>
                             <li>
-                                <router-link class="dropdown-item" :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
+                                <a class="dropdown-item" href="javascript:void(0)" @click="perfil(user.id)">Perfil</a>
                             </li>
-                        <!-- TODO onlick js -->
-                            <li><router-link to="/admin/recompensas" class="dropdown-item">{{
-                                    $t('rewards') }}</router-link>
+                            <li><a href="javascript:void(0)" @click="recompensas()" class="dropdown-item">{{
+                                    $t('rewards') }}</a>
                             </li>
-                            <li><router-link to="/admin/pedidos" class="dropdown-item">{{
-                                    $t('history') }}</router-link>
+                            <li><a href="javascript:void(0)" @click="pedidos()" class="dropdown-item">{{
+                                    $t('history') }}</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">{{ $t('logout')}}</a>
                             </li>
+                            <!-- TODO este logout no borra los niveles del store -->
                         </ul>
 
                         <span class="nav-link dropdown-toggle ms-3 me-2" href="#" role="button"
@@ -76,6 +76,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from "vue-router";
 import { useLayout } from '../composables/layout';
 import useAuth from "@/composables/auth";
 import { userStore } from '@/store/authPinia';
@@ -83,6 +84,7 @@ import LocaleSwitcher from "@/components/LocaleSwitcher.vue";
 
 
 const user = userStore().vistaUser()
+const router = useRouter()
 
 const { onMenuToggle } = useLayout();
 const { processing, logout } = useAuth();
@@ -105,6 +107,21 @@ const classFlecha = computed(() => {
     return display.value ? 'pi pi-angle-left' : 'pi pi-angle-right';
 });
 
+const admin = (() => {
+    router.push({ name: 'admin.index' })
+})
+
+const perfil = ((id) => {
+    router.push({ name: 'perfil.edit', params: { id: id } })
+})
+
+const recompensas = (() => {
+    router.push({ name: 'recompensas.index' })
+})
+
+const pedidos = (() => {
+    router.push({ name: 'pedidos.index' })
+})
 </script>
 
 <style lang="scss" scoped>

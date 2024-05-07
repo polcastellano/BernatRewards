@@ -7,7 +7,6 @@ export default function useNiveles() {
     const niveles = storeNiveles().niveles
 
     const hasNextLevel = () => {
-        console.log("funcion hasnextlevel: " + niveles)
         // Obtenemos la experiencia del usuario
         const experienciaUsuario = user.experience;
 

@@ -34,7 +34,7 @@ class ProfileController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $usuario = User::find($request->id);
+        $usuario = User::with('media')->with('niveles')->find($request->id);
         
         $roles = Role::find($request->roles);
 
