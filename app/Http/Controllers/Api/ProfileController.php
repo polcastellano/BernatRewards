@@ -51,14 +51,18 @@ class ProfileController extends Controller
         if ($request->hasFile('imagen')) {
             $usuario->media()->delete();
             $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
-        }
 
+        }
+        
 
 
         if ($usuario->save()) {
             if ($roles) {
                 $usuario->syncRoles($roles);
             }
+   
+            $usuario = User::with('media')->with('niveles')->with('roles')->find($request->id);
+
             return $usuario;
             // return UserResource::collection($usuario);
         }

@@ -6,9 +6,9 @@
                 <!-- TODO no peta pero no actualiza bien -->
                 <p class="ms-2" style="font-weight: bold;">{{ user.name }}</p>
             </div>
-            <div class="nivelInfo d-flex flex-column">
+            <div v-if="user.experience < 100000" class="nivelInfo d-flex flex-column">
                 <div class="d-flex justify-content-between">
-                    <p>Nv.{{ user.niveles?.numero }}</p>
+                    <p>Nv.{{ user.nivelActual.numero }}</p>
                     <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{ user.nextLevel.experiencia }}xp</p>
                     <p>Nv.{{ user.nextLevel.numero }}</p> 
                 </div>
@@ -23,6 +23,18 @@
                             'bg-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
                         }"
                     >
+                    </div>
+                </div>
+
+            </div> 
+            <div v-else class="nivelInfo d-flex flex-column">
+                <div class="d-flex justify-content-between">
+                    <p>Nv.{{ user.nivelActual.numero }}</p>
+                    <p>Nv.Max</p> 
+                </div>
+
+                <div class="barraNivel d-flex align-items-center">
+                    <div class="barraNivelReal bg-success" style="width: 100%;">
                     </div>
                 </div>
 

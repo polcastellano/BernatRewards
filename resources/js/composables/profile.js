@@ -25,6 +25,9 @@ export default function useProfile() {
 
         cargando.value = true
 
+        // console.log(user);
+
+
         axios.post('/api/perfil/update/' + user.id, user, {
             headers: {
                 "content-type": "multipart/form-data"
@@ -34,6 +37,7 @@ export default function useProfile() {
             userStore().user = response.data
 
             userStore().user.nextLevel = useNiveles().hasNextLevel()
+            userStore().user.nivelActual = useNiveles().nivelActual()
 
             swal({
                 icon: 'success',

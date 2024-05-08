@@ -6,6 +6,17 @@ export default function useNiveles() {
 
     const niveles = storeNiveles().niveles
 
+    const nivelActual = () => {
+        // Obtenemos la experiencia del usuario
+        const experienciaUsuario = user.experience;
+    
+        const nivelActualIndex = Math.floor(experienciaUsuario / 1000);
+        const nivelActual = niveles.find((nivel, index) => index === nivelActualIndex);
+    
+        // Devolvemos el primer nivel que cumpla con la condición
+        return nivelActual ? nivelActual : { "numero": 100, "experiencia": 100000};
+    }
+
     const hasNextLevel = () => {
         // Obtenemos la experiencia del usuario
         const experienciaUsuario = user.experience;
@@ -19,7 +30,7 @@ export default function useNiveles() {
             const nextLevel = niveles.find(nivel => experienciaUsuario < nivel.experiencia);
 
             // Si se encuentra un nivel más alto, lo devolvemos
-            return nextLevel ? nextLevel : "Level max";
+            return nextLevel ? nextLevel : nivelActual();
         }
 
 
@@ -27,6 +38,7 @@ export default function useNiveles() {
     }
 
     return {
+        nivelActual,
         hasNextLevel,
     }
 }

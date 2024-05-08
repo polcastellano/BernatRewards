@@ -17,6 +17,8 @@ export const userStore = defineStore ('userStore', () => {
             authenticated.value = true
 
             user.value.nextLevel = useNiveles().hasNextLevel()
+            user.value.nivelActual = useNiveles().nivelActual()
+
 
         }).catch((error) => {
             console.error("Error, " + error)
@@ -36,6 +38,7 @@ export const userStore = defineStore ('userStore', () => {
             authenticated.value = true
 
             user.value.nextLevel = useNiveles().hasNextLevel()
+            user.value.nivelActual = useNiveles().nivelActual()
 
 
         }).catch((error) => {
@@ -47,7 +50,7 @@ export const userStore = defineStore ('userStore', () => {
     }
 
     async function logout(){
-        user.value = {}
+        user.value = {roles:[], media:[], nextLevel:{}}
         authenticated.value = false
         storeNiveles().logout()
     }

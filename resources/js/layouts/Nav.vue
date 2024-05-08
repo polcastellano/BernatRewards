@@ -30,7 +30,7 @@
                                                 :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
                                         </li>
                                         <li><router-link to="/admin/recompensas" class="dropdown-item">{{
-                                                $t('rewards') }}</router-link></li>
+                        $t('rewards') }}</router-link></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -106,7 +106,7 @@
                                             :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
                                         </div>
                                         <p class="ms-2 nombreUsu" style="font-weight: bold;">{{
-                                            user.name }}</p>
+                        user.name }}</p>
                                     </div>
                                 </a>
                                 <ul class="menuDesp dropdown-menu dropdown-menu-end">
@@ -119,16 +119,16 @@
                                             :to="{ name: 'perfil.edit', params: { id: user.id } }">Perfil</router-link>
                                     </li>
                                     <li><router-link to="/admin/recompensas" class="dropdown-item">{{
-                                            $t('rewards') }}</router-link>
+                        $t('rewards') }}</router-link>
                                     </li>
                                     <li><router-link to="/admin/pedidos" class="dropdown-item">{{
-                                            $t('history') }}</router-link>
+                        $t('history') }}</router-link>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">{{
-                                            $t('logout')}}</a>
+                        $t('logout') }}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -142,9 +142,9 @@
                             <img src="/images/iconos/bernatPoints.svg" class="bernatCoin" alt="logo" />
                         </div>
                     </div>
-                    <div class="nivelInfo d-flex flex-column">
+                    <div v-if="user.experience < 100000" class="nivelInfo d-flex flex-column">
                         <div class="d-flex justify-content-between">
-                            <p>Nv.{{ user.niveles?.numero }}</p>
+                            <p>Nv.{{ user.nivelActual.numero }}</p>
                             <p><span style="font-weight: bold;">{{ user.experience }}</span>/{{
                         user.nextLevel.experiencia }}xp</p>
                             <p>Nv.{{ user.nextLevel.numero }}</p>
@@ -158,9 +158,22 @@
                         'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
                         'bg-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
                         'bg-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
-                        }">
+                    }">
                             </div>
                         </div>
+
+                    </div>
+                    <div v-else class="nivelInfo d-flex flex-column">
+                        <div class="d-flex justify-content-between">
+                            <p>Nv.{{ user.nivelActual.numero }}</p>
+                            <p>Nv.Max</p>
+                        </div>
+
+                        <div class="barraNivel d-flex align-items-center">
+                            <div class="barraNivelReal bg-success" style="width: 100%;">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -171,11 +184,11 @@
 <script setup>
 import useAuth from "@/composables/auth";
 import LocaleSwitcher from "../components/LocaleSwitcher.vue";
-import {userStore} from "@/store/authPinia";
+import { userStore } from "@/store/authPinia";
 
-    const { processing, logout } = useAuth();
+const { processing, logout } = useAuth();
 
-    const user = userStore().vistaUser();
+const user = userStore().vistaUser();
 </script>
 
 <style>
@@ -184,11 +197,11 @@ import {userStore} from "@/store/authPinia";
     box-shadow: 0px 0px 6px black !important;
 }
 
-.logo{
+.logo {
     height: 3.6rem;
 }
 
-.navbar-toggler{
+.navbar-toggler {
     height: fit-content;
 }
 
@@ -196,18 +209,18 @@ import {userStore} from "@/store/authPinia";
     width: fit-content;
 }
 
-.tarjetaUsu{
+.tarjetaUsu {
     width: fit-content !important;
 }
 
-.infoUsuario{
+.infoUsuario {
     width: 245px;
     margin: 0.5rem 0.5rem 0 0.5rem;
     border-radius: 12px;
     padding: 0.5rem;
 }
 
-.infoUsuario p{
+.infoUsuario p {
     color: black;
     font-size: 15px;
     font-family: Raleway;
@@ -216,45 +229,45 @@ import {userStore} from "@/store/authPinia";
 }
 
 .nombreUsu {
-    max-width: 6.563rem; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    max-width: 6.563rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.imgUsuario{
-    height: 2.5rem; 
-    width: 2.5rem; 
-    border: 3px solid #D0D0D0; 
+.imgUsuario {
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 3px solid #D0D0D0;
 }
 
-.puntosUsuario{
+.puntosUsuario {
     background-color: #D0D0D0;
     width: 6rem;
-    border-radius: 25px; 
+    border-radius: 25px;
 }
 
-.menuDesp{
+.menuDesp {
     position: absolute !important;
     z-index: 99;
 }
 
-.puntosUsuario p{
+.puntosUsuario p {
     font-size: 15px;
     font-family: Raleway;
     font-weight: bold;
     max-width: 230px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.bernatCoin{
+.bernatCoin {
     height: 1.4rem;
 }
 
-.nivelInfo{
+.nivelInfo {
     padding: 0 0.5rem 0 0.5rem;
 }
 
-.nivelInfo p{
+.nivelInfo p {
     color: black;
     font-size: 10px;
     font-family: Raleway;
@@ -262,14 +275,14 @@ import {userStore} from "@/store/authPinia";
     margin: 0px;
 }
 
-.barraNivel{
+.barraNivel {
     width: 100%;
     border-radius: 25px;
     padding: 0.15rem;
     background-color: #D0D0D0;
 }
 
-.barraNivelReal{
+.barraNivelReal {
     height: 0.5rem;
     border-radius: 25px;
     transition: width 0.5s ease;
@@ -277,9 +290,7 @@ import {userStore} from "@/store/authPinia";
 
 }
 
-.separador{
+.separador {
     color: Red !important;
 }
-
-
 </style>

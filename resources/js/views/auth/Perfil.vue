@@ -5,15 +5,16 @@
         <div class="layout-sidebar">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="layout-main-container p-0">
-            <div class="d-flex justify-content-between pb-2 mb-5">
-                <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
-            </div>
+       
+        <div class="layout-main-container p-0 mt-8">
             <section>
+                <div class="d-flex justify-content-between pb-2 mb-5">
+                    <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
+                </div>
                 <form @submit.prevent="submitForm">
                     <div class="row my-5 mx-0">
                         <div class="col-md-8">
-                            <div class="card  border-0 shadow-sm">
+                            <div class="card border-0">
 
                                 <div class="form-group mb-5">
                                     <FloatLabel class="align-items-center">
@@ -70,7 +71,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card border-0 shadow-sm">
+                            <div class="card border-0">
                                 <div class="card-body">
                                     <!-- Buttons -->
                                     <h6>
@@ -99,9 +100,10 @@
                                         <span class="text-danger">*</span>
                                     </h6>
                                     <div class="mb-3">
-                                        <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
-                                            :options="roleList" filter dataKey="id" optionLabel="name"
-                                            placeholder="Seleciona un rol" display="chip" class="w-full">
+                                        <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'"
+                                            v-model="user.roles" :options="roleList" filter dataKey="id"
+                                            optionLabel="name" placeholder="Seleciona un rol" display="chip"
+                                            class="w-full">
                                         </MultiSelect>
                                     </div>
                                     <div class="text-danger mt-1">
@@ -290,7 +292,4 @@ ol {
     flex-wrap: nowrap;
 }
 
-.layout-sidebar {
-    padding: 0;
-}
 </style>
