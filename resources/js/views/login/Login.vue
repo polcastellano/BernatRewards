@@ -4,8 +4,7 @@
             <div class="col-md-6"><!-- {{ $t('login') }} -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <TabView class="">
-                            
+                        <TabView class="" v-model:activeIndex="active">
                             <TabPanel header="login">
 
                                 <form @submit.prevent="submitLogin">
@@ -133,8 +132,19 @@
 <script setup>
 
 import useAuth from '@/composables/auth'
+import { ref, watch  } from 'vue';
+import { useRoute } from 'vue-router';
 
-const { loginForm, registerForm, validationErrors, processing, submitLogin } = useAuth();
+const { loginForm, registerForm, validationErrors, processing, submitLogin, submitRegister} = useAuth();
+
+const route = useRoute();
+
+const active = ref(parseInt(route.query.tab) || 0);
+
+watch(() => route.query.tab, (newTab) => {
+  // Actualizar el valor de active cuando cambie el parámetro 'tab' en la URL
+  active.value = parseInt(newTab) || 0;
+});
 
 </script>
 
@@ -145,7 +155,7 @@ const { loginForm, registerForm, validationErrors, processing, submitLogin } = u
     border-radius: 100px;
 }
 
-.inputLogin::placeholder, , .inputRegister::placeholder{
+.inputLogin::placeholder, .inputRegister::placeholder{
     font-weight: bold;
     font-size: small;
 }

@@ -43,10 +43,9 @@
             </button>
         </div>
     </section>
-
     <section>
         <div class="flex lg:flex-row flex-column seccionCuadradoInfo">
-            <router-link to="/login" class="lg:w-4 w-full cuadradoInfo cuadradoInfoInicio m-0 p-0">
+            <router-link v-if="user.name == undefined"  :to="{ path: '/login', query: { tab: 0 }}" class="lg:w-4 w-full cuadradoInfo cuadradoInfoInicio m-0 p-0">
                 <div class="bg-principal h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
                     <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
                         <img src="/images/iconos/login.svg" class="h-full" alt="">
@@ -57,6 +56,19 @@
                     </div>
                 </div>
             </router-link>
+
+            <router-link v-else :to="{ name: 'perfil.edit', params: { id: user.id } }" class="lg:w-4 w-full cuadradoInfo cuadradoInfoInicio m-0 p-0">
+                <div class="bg-principal h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
+                    <div class="lg:h-13rem h-5rem lg:w-full flex justify-content-center">
+                        <img src="/images/iconos/profile.svg" class="h-full" alt="">
+                    </div>
+                    <div class="lg:w-full lg:py-4 lg:ps-0 ps-4">
+                        <h2 class="lg:h-5 lg:mb-3 mb-0">{{ $t('profile')}}</h2>
+                        <p class="lg:block hidden">{{ $t('profile_text')}}</p>
+                    </div>
+                </div>
+            </router-link>
+            
 
             <router-link to="/shop" class="lg:w-4 w-full cuadradoInfo m-0 p-0">
                 <div class="bg-coins h-full d-flex flex lg:flex-column flex-row align-items-center justify-content-center p-4">
@@ -94,7 +106,7 @@
             <div class="lg:w-6 w-full lg:p-5 p-4">
                 <h2 class="text-principal">{{ $t('how_to_earn_points')}}</h2>
                 <p>{{ $t('how_to_earn_points_text')}}</p>
-                <router-link to="/register">
+                <router-link :to="{ path: '/login', query: { tab: 1 }}">
                     <button class="standardButton bg-principal p-2 px-5 border-round-3xl">{{ $t('register')}}</button>
                 </router-link>
             </div>
@@ -123,6 +135,10 @@
 
 <script setup>
 import AppFooter from '../../layouts/AppFooter.vue';
+import {userStore} from "@/store/authPinia";
+
+const user = userStore().vistaUser()
+
 </script>
 
 <style scoped>

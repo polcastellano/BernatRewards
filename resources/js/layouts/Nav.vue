@@ -15,9 +15,9 @@
                                     <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
-                                            <div class="imgUsuario"
-                                                :style="{ 'background-image': `url('${user.original_image}')` }">
-                                            </div>
+                                            <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat"
+                                            :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
+                                        </div>
                                         </div>
                                     </a>
                                     <ul class="menuDesp dropdown-menu dropdown-menu-end">
@@ -32,6 +32,9 @@
                                         <li><router-link to="/admin/recompensas" class="dropdown-item">{{
                                                 $t('rewards') }}</router-link></li>
                                         <li>
+                                        <li><router-link to="/admin/pedidos" class="dropdown-item">{{
+                                                $t('history') }}</router-link>
+                                        </li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="javascript:void(0)"
@@ -56,10 +59,10 @@
                     <ul class="navbar-nav m-0 ps-4 d-lg-none">
                         <template v-if="!user?.name">
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 }}">{{ $t('login') }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 }}">{{ $t('register') }}</router-link>
                             </li>
                         </template>
                     </ul>
@@ -87,10 +90,10 @@
                     <ul class="navbar-nav m-0 ps-4">
                         <template v-if="!user?.name">
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/login">{{ $t('login') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 }}">{{ $t('login') }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/register">{{ $t('register') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 }}">{{ $t('register') }}</router-link>
                             </li>
                         </template>
                     </ul>
