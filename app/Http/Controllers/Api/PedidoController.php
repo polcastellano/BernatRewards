@@ -49,6 +49,7 @@ class PedidoController extends Controller
         return response()->json(['success' => true, 'data' => 'Pedido eliminada correctamente']);
 
     }
+    
     public function getPedidosUser($id){
                 
         $pedidos = Pedido::with('recompensas.media')->where('usuario_id', $id)->get();

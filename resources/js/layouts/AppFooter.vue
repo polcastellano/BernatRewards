@@ -49,12 +49,17 @@ const logoUrl = computed(() => {
 
             <div class="col-md-6 col-lg-3 d-flex justify-content-center mb-3">
                 <div class="d-flex flex-column align-items-start">
-                    <h2 class="text-footer">{{ $t('tituloPolit') }}</h2>
+                    <h2 class="text-footer">{{ $t('tituloIns') }}</h2>
                     <ul class="list-group list-group-flush">
-                        <li class="text-footer bg-transparent border-0 list-group-item">{{ $t('avisLegal') }}</li>
-                        <li class="text-footer bg-transparent border-0 list-group-item">{{ $t('polPriv') }}</li>
-                        <li class="text-footer bg-transparent border-0 list-group-item">{{ $t('polCook') }}</li>
-                    </ul>
+                        <router-link to="/moodle">
+                            <li class="text-footer bg-transparent border-0 list-group-item">Campus</li>
+                        </router-link>
+                        <router-link to="/" class="nav-link">
+                            <li class="text-footer bg-transparent border-0 list-group-item">BernatRewards</li>
+                        </router-link>
+                        <router-link to="/shop" class="nav-link">
+                            <li class="text-footer bg-transparent border-0 list-group-item">{{ $t('rewards') }}</li>
+                        </router-link>                    </ul>
                 </div>
             </div>
         </div>

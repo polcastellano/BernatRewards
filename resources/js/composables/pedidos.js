@@ -25,6 +25,24 @@ export default function usarPedidos(){
             })
     }
 
+    const canBuy = async (id_recompensa, puntos_recompensa) => {
+        console.log("Recompensa:")
+        console.log(puntos_recompensa)
+        console.log("puntos:")
+        console.log(user.puntos)
+
+        if((user.puntos - puntos_recompensa) >= 0){
+            //TODO restar puntos al usuario con la funcion que ya existe
+            storePedido(id_recompensa);
+        }else{
+            swal({
+                icon: 'error',
+                title: 'No tienes puntos suficientes'
+            })
+        }
+
+    }
+
     const storePedido = async (id) => {
 
         var tieneRecompensa = false;
@@ -128,6 +146,7 @@ export default function usarPedidos(){
         pedido,
         pedidosUser,
         recompensasUser,
+        canBuy,
         storePedido,
         getPedidosUser,
     }

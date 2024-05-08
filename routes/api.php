@@ -38,7 +38,6 @@ Route::get('get-recompensa-category/{id}', [RecompensaController::class, 'getRec
 Route::get('recompensas/getRecompensa/{recompensa}', [RecompensaController::class, 'getRecompensa']);
 
 
-
 //Api Categorias
 Route::get('categorias', [CategoriaController::class, 'index']);
 Route::post('categorias/', [CategoriaController::class, 'store']);
@@ -52,7 +51,6 @@ Route::post('pedidos/', [PedidoController::class, 'store']);
 Route::put('pedidos/update/{id}', [PedidoController::class, 'update']);
 Route::delete('pedidos/{id}', [PedidoController::class, 'destroy']);
 Route::get('getPedidosUser/{id}', [PedidoController::class, 'getPedidosUser']);
-
 
 
 //Api Niveles

@@ -71,6 +71,9 @@
     "remPts" : "Remove pts",
     "add_new" : "Add new",
     "users" : "Users",
-    "students" : "Students"
-
+    "students" : "Students",
+    "all" : "All",
+    "Subastas": "Auctions",
+    "Ventajas": "Advantages",
+    "Comodidades": "Amenities"
 }

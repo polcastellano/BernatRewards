@@ -40,6 +40,7 @@
     "avisLegal": "Aviso legal",
     "polPriv": "Política de privacidad",
     "polCook": "Política de cookies",
+    "tituloIns" : "Aprende con nosotros",
     "rewards": "Recompensas",
     "copyright": "Copyright © 2024 IES BERNAT EL FERRER",
     "what_is_BernatRewards_title": "Que es Bernat Rewards?",
@@ -66,9 +67,9 @@
     "remPts" : "Quitar pts",
     "add_new" : "Agregar nuevo",
     "users" : "Usuarios",
-    "students" : "Alumnos"
-
-
-
-
+    "students" : "Alumnos",
+    "all" : "Todo",  
+    "Subastas" : "Subastas",
+    "Ventajas" : "Ventajas",
+    "Comodidades" : "Comodidades"
 }

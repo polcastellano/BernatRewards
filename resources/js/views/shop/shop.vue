@@ -4,7 +4,7 @@
             <div :class="'bg-' + categoria.nombre.toLowerCase()" class="flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-3 md:justify-content-start justify-content-start border-round-3xl">
                 <div :class="'bg-' + categoria.nombre.toLowerCase() + 'SubTone'" class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4">
                     <img :src="'/images/iconos/' + categoria.nombre.toLowerCase() + '.svg'" class="h-3rem w-3rem pr-0 md:pr-2" alt="">
-                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">{{categoria.nombre}}</h2>
+                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">{{ $t(categoria.nombre) }}</h2>
                 </div>
                 <div class="flex flex-wrap w-full md:justify-content-start justify-content-center border-round-3xl">
                     <div v-for="item in categoria.productos" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
@@ -34,7 +34,8 @@
                                         <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
-                                    <button @click="storePedido(item.id)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
+                                    
+                                    <button @click="canBuy(item?.id, item?.precio)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
                                         <div>
                                             <p>{{ $t('buy')}}</p>
                                         </div>
@@ -53,7 +54,7 @@
                 <div class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4"
                     style="background-color: #2E99C9;">
                     <img src="/images/iconos/reward.svg" class="h-3rem w-3rem pr-0 md:pr-2 lg:pr-2" alt="">
-                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">Todo</h2>
+                    <h2 class="tituloSeccion hidden md:block p-1 m-0 text-white text-5xl">{{ $t('all')}}</h2>
                 </div>
                 <div class="flex flex-wrap w-full md:justify-content-start justify-content-center border-round-3xl">
                     <div v-for="item in recompensas.data" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
@@ -83,7 +84,7 @@
                                         <p class="text-black numerosProducto m-0 font-normal ps-4">{{ item.precio.toString().padStart(5, '0') }}</p>
                                         <img src="/images/iconos/bernatPoints.svg" class="h-2rem w-2rem justify-self-end" alt="">
                                     </div>
-                                    <button @click="storePedido(item.id)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
+                                    <button @click="canBuy(item?.id, item?.precio)" class="buttonComprar w-8rem h-3rem flex bg-fondo border-round-3xl border-none justify-content-around align-items-center mb-2">
                                         <div>
                                             <p>{{ $t('buy')}}</p>
                                         </div>
@@ -109,7 +110,7 @@ import usarPedidos from "@/composables/pedidos";
 
 const {recompensas, getRecompensas} = usarRecompensas()
 const { productosCategorias, getRecompensasCategorias } = usarCategorias()
-const { storePedido } = usarPedidos()
+const { canBuy } = usarPedidos()
 
 
 
