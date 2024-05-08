@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { ref } from 'vue'
-import { storeNiveles } from '@/store/niveles';
+import useNiveles from "@/composables/niveles"
+import { storeNiveles } from '@/store/niveles'
+
 
 export const userStore = defineStore ('userStore', () => {
     const user = ref({})
@@ -10,10 +12,13 @@ export const userStore = defineStore ('userStore', () => {
     async function login() {
         user.value = {}
         await axios.get('/api/user').then(response => {
+            
             user.value = response.data.data
             authenticated.value = true
-            // TODO sacar los niveles
-            storeNiveles().getNiveles()
+
+            user.value.nextLevel = useNiveles().hasNextLevel()
+            user.value.nivelActual = useNiveles().nivelActual()
+
 
         }).catch((error) => {
             console.error("Error, " + error)
@@ -28,10 +33,13 @@ export const userStore = defineStore ('userStore', () => {
 
     async function getUser() {
         await axios.get('/api/user').then(response => {
+            
             user.value = response.data.data
             authenticated.value = true
-            // TODO sacar los niveles
-            storeNiveles().getNiveles()
+
+            user.value.nextLevel = useNiveles().hasNextLevel()
+            user.value.nivelActual = useNiveles().nivelActual()
+
 
         }).catch((error) => {
             console.error("Error, " + error)
@@ -42,7 +50,7 @@ export const userStore = defineStore ('userStore', () => {
     }
 
     async function logout(){
-        user.value = {}
+        user.value = {roles:[], media:[], nextLevel:{}}
         authenticated.value = false
         storeNiveles().logout()
     }

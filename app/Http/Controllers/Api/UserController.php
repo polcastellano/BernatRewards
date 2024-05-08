@@ -104,6 +104,8 @@ class UserController extends Controller
 
         $usuario->name = $request->name;
         $usuario->email = $request->email;
+        $usuario->puntos = $request->puntos;
+        $usuario->experience = $request->experience;
 
         if (!empty($request->password)) {
             $usuario->password = Hash::make($request->password) ?? $usuario->password;

@@ -51,6 +51,7 @@
         </div>
     </div>
 </template> -->
+<!-- TODO esto que es ^^^^ -->
 
 <script setup>
 import { computed, watch, ref } from 'vue';
@@ -60,7 +61,7 @@ import Breadcrumb from 'primevue/breadcrumb';
 import AppTopbar from './AppTopbar.vue';
 import AppFooter from './AppFooter.vue';
 import AppSidebar from './AppSidebar.vue';
-//import AppConfig from './AppConfig.vue';
+import AppConfig from './AppConfig.vue';
 import { useLayout } from '../composables/layout';
 
 const route = useRoute();
@@ -162,10 +163,6 @@ ol {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-}
-
-.layout-sidebar{
-    padding: 0;
 }
 
 </style>

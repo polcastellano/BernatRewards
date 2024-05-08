@@ -14,7 +14,7 @@ export const storeNiveles = defineStore('storeNiveles', () => {
         })
     }
 
-    function vistaNiveles() {
+    async function vistaNiveles() {
         return niveles;
     }
 

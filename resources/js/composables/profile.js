@@ -1,6 +1,8 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { userStore } from '@/store/authPinia';
+import useNiveles from "@/composables/niveles"
+
 
 export default function useProfile() {
     const profile = ref({})
@@ -23,14 +25,20 @@ export default function useProfile() {
 
         cargando.value = true
 
+        // console.log(user);
+
+
         axios.post('/api/perfil/update/' + user.id, user, {
             headers: {
                 "content-type": "multipart/form-data"
             }
         })
         .then(response => {
-            
             userStore().user = response.data
+
+            userStore().user.nextLevel = useNiveles().hasNextLevel()
+            userStore().user.nivelActual = useNiveles().nivelActual()
+
             swal({
                 icon: 'success',
                 title: 'Perfil editado correctamente'
