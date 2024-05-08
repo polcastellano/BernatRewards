@@ -56,11 +56,10 @@ const model = ref([
     {
         label: 'Panel Usuario',
         items: [
-            { label: 'BernatPoints: ' + user.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
-            { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/', permision: 'all' },  
-            { label: 'Positivos', icon: 'pi pi-fw pi-plus-circle', permision: 'all' },
-            { label: 'Historial', icon: 'pi pi-fw pi-history', permision: 'all' },
-            { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/campus', permision: 'all' }
+            { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
+            { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  
+            { label: 'Historial', icon: 'pi pi-fw pi-history', to: '/admin/pedidos', permision: 'all' },
+            { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/moodle', permision: 'all' }
         ]
     },
     {
