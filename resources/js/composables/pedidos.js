@@ -27,18 +27,9 @@ export default function usarPedidos() {
 
     const canBuy = async (id_recompensa, puntos_recompensa) => {
 
-        if((user.puntos - puntos_recompensa) >= 0){
-            storePedido(id_recompensa);
-        }else{
-            swal({
-                icon: 'error',
-                title: 'No tienes puntos suficientes'
-            })
-        }
+        if ((user.puntos - puntos_recompensa) >= 0) {
+            const pts = (puntos_recompensa * -1);
 
-    }
-
-    const storePedido = async (id) => {
 
             var tieneRecompensa = false;
 
@@ -84,7 +75,7 @@ export default function usarPedidos() {
                                                 userStore().user = responseUpdate.data;
                                                 userStore().user.nextLevel = useNiveles().hasNextLevel()
                                                 userStore().user.nivelActual = useNiveles().nivelActual()
-                                            
+
                                             })
 
                                         })
@@ -130,9 +121,9 @@ export default function usarPedidos() {
                                                 userStore().user = responseUpdate.data;
                                                 userStore().user.nextLevel = useNiveles().hasNextLevel()
                                                 userStore().user.nivelActual = useNiveles().nivelActual()
-                                            
+
                                             })
-                                            
+
 
                                         })
                                         .catch(error => {
