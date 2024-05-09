@@ -32,7 +32,6 @@ export default function usarPedidos(){
         console.log(user.puntos)
 
         if((user.puntos - puntos_recompensa) >= 0){
-            //TODO restar puntos al usuario con la funcion que ya existe
             storePedido(id_recompensa);
         }else{
             swal({

@@ -5,139 +5,145 @@
         <div class="layout-sidebar">
             <app-sidebar></app-sidebar>
         </div>
-       
+
         <div class="layout-main-container p-0 mt-8">
             <section>
-                <div class="d-flex justify-content-between pb-2 mb-5">
-                    <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
-                </div>
-                <form @submit.prevent="submitForm">
-                    <div class="row my-5 mx-0">
-                        <div class="col-md-8">
-                            <div class="card border-0">
+                <Toast />
+                <Button icon="pi pi-user-edit" @click="visible = true" ></Button>
 
-                                <div class="form-group mb-5">
-                                    <FloatLabel class="align-items-center">
-                                        <InputText v-model="user.name" type="text" class="form-control" />
-                                        <label class="font-bold block">Nombre<span class="text-danger"> *</span></label>
-                                    </FloatLabel>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.name }}
+                <Dialog appendTo="self" v-model:visible="visible" modal header="Editar perfil"
+                    :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+                    <form @submit.prevent="submitForm">
+                        <div class="row my-5 mx-0">
+                            <div class="col-md-8">
+                                <div class="card border-0">
+
+                                    <div class="form-group mb-5">
+                                        <FloatLabel class="align-items-center">
+                                            <InputText v-model="user.name" type="text" class="form-control" />
+                                            <label class="font-bold block">Nombre<span class="text-danger">
+                                                    *</span></label>
+                                        </FloatLabel>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.name }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group mb-5">
-                                    <FloatLabel class="align-items-center">
-                                        <InputText v-model="user.email" type="text" class="form-control" />
-                                        <label class="font-bold block">Email<span class="text-danger"> *</span></label>
-                                    </FloatLabel>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.nombre }}
+                                    <div class="form-group mb-5">
+                                        <FloatLabel class="align-items-center">
+                                            <InputText v-model="user.email" type="text" class="form-control" />
+                                            <label class="font-bold block">Email<span class="text-danger">
+                                                    *</span></label>
+                                        </FloatLabel>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.nombre }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group mb-5">
-                                    <FloatLabel class="align-items-center">
-                                        <InputText v-model="user.password" type="text" class="form-control" />
-                                        <label class="font-bold block">Password<span class="text-danger">
-                                                *</span></label>
-                                    </FloatLabel>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.password }}
+                                    <div class="form-group mb-5">
+                                        <FloatLabel class="align-items-center">
+                                            <InputText v-model="user.password" type="text" class="form-control" />
+                                            <label class="font-bold block">Password<span class="text-danger">
+                                                    *</span></label>
+                                        </FloatLabel>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.password }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group mb-5">
-                                    <FloatLabel class="align-items-center">
-                                        <InputText :disabled="authuser.roles[0]?.name == 'user'"
-                                            v-model="user.experience" type="text" class="form-control" />
-                                        <label class="font-bold block">Nivel<span class="text-danger"> *</span></label>
-                                    </FloatLabel>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.nivel }}
+                                    <div class="form-group mb-5">
+                                        <FloatLabel class="align-items-center">
+                                            <InputText :disabled="authuser.roles[0]?.name == 'user'"
+                                                v-model="user.experience" type="text" class="form-control" />
+                                            <label class="font-bold block">Nivel<span class="text-danger">
+                                                    *</span></label>
+                                        </FloatLabel>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.nivel }}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group mb-5">
-                                    <FloatLabel class="align-items-center">
-                                        <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.puntos"
-                                            type="text" class="form-control" />
-                                        <label class="font-bold block">Puntos<span class="text-danger"> *</span></label>
-                                    </FloatLabel>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.puntos }}
+                                    <div class="form-group mb-5">
+                                        <FloatLabel class="align-items-center">
+                                            <InputText :disabled="authuser.roles[0]?.name == 'user'"
+                                                v-model="user.puntos" type="text" class="form-control" />
+                                            <label class="font-bold block">Puntos<span class="text-danger">
+                                                    *</span></label>
+                                        </FloatLabel>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.puntos }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card border-0">
-                                <div class="card-body">
-                                    <!-- Buttons -->
-                                    <h6>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                                        </svg> Acción
-                                    </h6>
-                                    <div class="mt-3 text-center">
-                                        <button :disabled="Object.keys(errors).length != 0 || cargando"
-                                            :loading="cargando" class="btn btn-primary">
-                                            <span v-if="cargando">Guardando...</span>
-                                            <span v-else>Guardar cambios</span>
-                                        </button>
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <!-- Buttons -->
+                                        <h6>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                    d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                                            </svg> Acción
+                                        </h6>
+                                        <div class="mt-3 text-center">
+                                            <button :disabled="Object.keys(errors).length != 0 || cargando"
+                                                :loading="cargando" class="btn btn-primary" @click="visible = false">
+                                                <span v-if="cargando">Guardando...</span>
+                                                <span v-else>Guardar cambios</span>
+                                            </button>
+                                        </div>
 
-                                    <!-- Role -->
-                                    <h6 class="mt-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                                        </svg>
-                                        Role
-                                        <span class="text-danger">*</span>
-                                    </h6>
-                                    <div class="mb-3">
-                                        <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'"
-                                            v-model="user.roles" :options="roleList" filter dataKey="id"
-                                            optionLabel="name" placeholder="Seleciona un rol" display="chip"
-                                            class="w-full">
-                                        </MultiSelect>
-                                    </div>
-                                    <div class="text-danger mt-1">
-                                        {{ errors.roles }}
-                                    </div>
-
-                                    <!-- Imagen -->
-                                    <div class="mb-3">
+                                        <!-- Role -->
                                         <h6 class="mt-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
                                                     d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
                                             </svg>
-                                            Imagen
+                                            Role
                                             <span class="text-danger">*</span>
                                         </h6>
-                                        <DropZone v-model="user.imagen" />
+                                        <div class="mb-3">
+                                            <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'"
+                                                v-model="user.roles" :options="roleList" filter dataKey="id"
+                                                optionLabel="name" placeholder="Seleciona un rol" display="chip"
+                                                class="w-full">
+                                            </MultiSelect>
+                                        </div>
                                         <div class="text-danger mt-1">
-                                            {{ errors.imagen }}
+                                            {{ errors.roles }}
+                                        </div>
+
+                                        <!-- Imagen -->
+                                        <div class="mb-3">
+                                            <h6 class="mt-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-arrow-down-square"
+                                                    viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                                                </svg>
+                                                Imagen
+                                                <span class="text-danger">*</span>
+                                            </h6>
+                                            <DropZone v-model="user.imagen" />
+                                            <div class="text-danger mt-1">
+                                                {{ errors.imagen }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </Dialog>
+                <div class="d-flex justify-content-between pb-2 mb-5">
+                    <h5 class="card-title">Bienvenido {{ authuser.name }}</h5>
+                </div>
+                
             </section>
-
-            <Suspense>
-                <router-view></router-view>
-            </Suspense>
-            <!--TODO que hace esto ^^^^^^^ -->
-
             <app-footer></app-footer>
         </div>
 
@@ -159,10 +165,14 @@ import useProfile from '@/composables/profile';
 import useRoles from "@/composables/roles";
 import { userStore } from '@/store/authPinia';
 import DropZone from "@/components/DropZone.vue";
+import { useToast } from "primevue/usetoast";
 
+const toast = useToast();
 
 const authuser = userStore().vistaUser()
 
+
+const visible = ref(false);
 setLocale(es);
 const { roleList, getRoleList } = useRoles();
 
@@ -291,5 +301,4 @@ ol {
     align-items: center;
     flex-wrap: nowrap;
 }
-
 </style>

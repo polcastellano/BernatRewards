@@ -1,16 +1,16 @@
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import { userStore } from '@/store/authPinia';
 import useNiveles from "@/composables/niveles"
+import { useToast } from "primevue/usetoast";
 
 
 export default function useProfile() {
     const profile = ref({})
 
-    const router = useRouter()
+    const toast = useToast();
+
     const validationErrors = ref({})
     const cargando = ref(false)
-    const swal = inject('$swal')
 
     const getProfile = async (id) => {
         axios.get('/api/perfil/' + id)
@@ -25,9 +25,6 @@ export default function useProfile() {
 
         cargando.value = true
 
-        // console.log(user);
-
-
         axios.post('/api/perfil/update/' + user.id, user, {
             headers: {
                 "content-type": "multipart/form-data"
@@ -39,17 +36,12 @@ export default function useProfile() {
             userStore().user.nextLevel = useNiveles().hasNextLevel()
             userStore().user.nivelActual = useNiveles().nivelActual()
 
-            swal({
-                icon: 'success',
-                title: 'Perfil editado correctamente'
-            })
+            toast.add({ severity: 'info', summary: 'Perfil editado', detail: 'El perfil se ha editado correctamente', life: 3050, closable: false });
         })
         .catch(error => {
             console.log(error)
-            swal({
-                icon: 'error',
-                title: 'Perfil editado incorrectamente'
-            })
+            toast.add({ severity: 'error', summary: 'Error al editar', detail: 'El perfil no se ha editado', life: 3050, closable: false });
+
         })
         .finally(() => cargando.value = false)
     }

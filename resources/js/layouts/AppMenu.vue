@@ -3,8 +3,7 @@
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
                 <div class="imgUsuario" :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"></div>
-                <!-- TODO no peta pero no actualiza bien -->
-                <p class="ms-2" style="font-weight: bold;">{{ user.name }}</p>
+                <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ user.name }}</p>
             </div>
             <div v-if="user.experience < 100000" class="nivelInfo d-flex flex-column">
                 <div class="d-flex justify-content-between">
@@ -50,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
 import { userStore } from '@/store/authPinia';
 
@@ -97,6 +96,48 @@ const model = ref([
         ]
     }
 ]);
+
+watchEffect(() => {
+    model.value = [
+        {
+            label: 'Panel Usuario',
+            items: [
+                { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
+                { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  
+                { label: 'Historial', icon: 'pi pi-fw pi-history', to: '/admin/pedidos', permision: 'all' },
+                { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/moodle', permision: 'all' }
+            ]
+        },
+        {
+            label: 'Panel de Administrador',
+            items: [
+                { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'recompensa-list' }
+            ]
+        },
+        {
+            label: 'Usuarios',
+            items: [
+                { label: 'Users', icon: 'pi pi-fw pi-user', to: '/admin/users', permision: 'user-list' },
+                { label: 'Alumnos', icon: 'pi pi-fw pi-id-card', to: '/admin/users/students', permision: 'user-list' },
+                { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
+                { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
+            ]
+        },
+        {
+            label: 'Ejercicios',
+            items: [
+                { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
+                { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
+            ]
+        },
+        {
+            label: 'Posts',
+            items: [
+                { label: 'Posts', icon: 'pi pi-fw pi-id-card', to: '/admin/posts', permision: 'post-list' }
+            ]
+        }
+    ];
+})
 </script>
 
 
@@ -144,6 +185,13 @@ const model = ref([
 
 .separador{
     color: Red !important;
+}
+
+.nombreUsu {
+    max-width: 14rem;
+    max-height: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 </style>
