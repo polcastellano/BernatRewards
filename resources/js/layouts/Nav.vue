@@ -167,9 +167,12 @@
 
                     </div>
                     <div v-else class="nivelInfo d-flex flex-column">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <p>Nv.{{ user.nivelActual.numero }}</p>
-                            <p>Nv.Max</p>
+                            <div class="d-flex align-items-center">
+                                <p>Nv.Max</p>
+                                <img src="/images/iconos/lvlMax.svg" class="logo d-none d-lg-block" style="height: 1.2rem;" alt="logo" />
+                            </div>
                         </div>
 
                         <div class="barraNivel d-flex align-items-center">

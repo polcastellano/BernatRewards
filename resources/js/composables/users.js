@@ -220,11 +220,7 @@ export default function useUsers() {
                             puntos: pts,
                           })
                             .then(response => {
-                                console.log("Response:")
-                                console.log(response.data.id)                                
-                                console.log(response.data.experience)
-                                console.log(response.data.puntos)
-
+                                
                                 students.value.data = students.value.filter(student => {
                                     if (student.id == response.data.id) {
                                         student.experience = Math.round(response.data.experience);
@@ -274,8 +270,6 @@ export default function useUsers() {
                         puntos: pts,
                       })
                         .then(response => {
-                            console.log("Response:")
-                            console.log(response)
                             swal({
                                 icon: 'success',
                                 title: 'Puntos restados correctamente'

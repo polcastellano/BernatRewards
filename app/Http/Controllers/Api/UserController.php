@@ -151,7 +151,19 @@ class UserController extends Controller
 
     }
 
+    public function updateExp($id, Request $request)
+    {
+        $usuario = User::find($id);
 
+        $usuario->experience += $request->puntos * 0.15;
+
+        $usuario->save();
+
+        $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
+
+        return ($usuario);
+
+    }
     
     public function updatePts($id, Request $request)
     {
@@ -161,6 +173,8 @@ class UserController extends Controller
         $usuario->experience += ($request->puntos * 1.25);
 
         $usuario->save();
+
+        $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
         return ($usuario);
 
@@ -173,6 +187,8 @@ class UserController extends Controller
         $usuario->puntos += $request->puntos;
 
         $usuario->save();
+
+        $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
         return ($usuario);
 
