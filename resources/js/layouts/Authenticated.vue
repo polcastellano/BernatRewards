@@ -34,25 +34,6 @@
     </div>
 </template>
 
-<!-- <template>
-    <AdminNavbar />
-    <div class="d-flex align-items-stretch w-100">
-        <AdminSidebar />
-        <div class="container-fluid">
-            <Breadcrumb class="row justify-content-center mt-4" :crumbs="crumbs" @selected="selected" />
-             <h2 class="fw-semibold">
-                {{ crumbs }}
-            </h2>
-                 <div class="main mx-2">
-                <Suspense>
-                <router-view></router-view>
-                </Suspense>
-            </div>
-        </div>
-    </div>
-</template> -->
-<!-- TODO esto que es ^^^^ -->
-
 <script setup>
 import { computed, watch, ref } from 'vue';
 import { useRoute } from "vue-router";

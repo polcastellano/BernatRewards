@@ -27,9 +27,18 @@ export default function usarPedidos() {
 
     const canBuy = async (id_recompensa, puntos_recompensa) => {
 
-        if ((user.puntos - puntos_recompensa) >= 0) {
-            const pts = (puntos_recompensa * -1);
+        if((user.puntos - puntos_recompensa) >= 0){
+            storePedido(id_recompensa);
+        }else{
+            swal({
+                icon: 'error',
+                title: 'No tienes puntos suficientes'
+            })
+        }
 
+    }
+
+    const storePedido = async (id) => {
 
             var tieneRecompensa = false;
 

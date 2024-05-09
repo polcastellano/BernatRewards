@@ -155,7 +155,7 @@
 
                         <div class="barraNivel d-flex align-items-center">
 
-                            <div class="barraNivelReal"
+                            <div class="barraNivelReal" 
                                 :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }"
                                 :class="{
                         'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
@@ -291,6 +291,7 @@ const user = userStore().vistaUser();
 .barraNivelReal {
     height: 0.5rem;
     border-radius: 25px;
+    
     transition: width 0.5s ease;
     /* TODO porque sale asi el color del width */
 
