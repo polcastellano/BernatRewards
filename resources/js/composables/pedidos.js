@@ -2,10 +2,10 @@ import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { userStore } from "@/store/authPinia"
 import useNiveles from "@/composables/niveles"
+import { useToast } from "primevue/usetoast";
 
 export default function usarPedidos() {
 
-    const user = userStore().vistaUser().value;
     const pedidos = ref([])
     const pedidosUser = ref([])
     const recompensasUser = ref([])
@@ -14,6 +14,8 @@ export default function usarPedidos() {
         usuario_id: '',
         recompensa_id: '',
     })
+    const toast = useToast();
+
 
     const router = useRouter()
     const swal = inject('$swal')
@@ -27,7 +29,7 @@ export default function usarPedidos() {
 
     const canBuy = async (id_recompensa, puntos_recompensa) => {
 
-        if ((user.puntos - puntos_recompensa) >= 0) {
+        if ((userStore().user.puntos - puntos_recompensa) >= 0) {
             const pts = (puntos_recompensa * -1);
 
 
@@ -38,7 +40,7 @@ export default function usarPedidos() {
 
                     pedidos.value = response.data;
                     pedidos.value.forEach(pedido => {
-                        if (pedido.usuario_id == user.id && pedido.recompensa_id == id_recompensa) {
+                        if (pedido.usuario_id == userStore().user.id && pedido.recompensa_id == id_recompensa) {
                             tieneRecompensa = true;
                         }
                     });
@@ -58,7 +60,7 @@ export default function usarPedidos() {
                         })
                             .then(result => {
                                 if (result.isConfirmed) {
-                                    axios.post('/api/users/removePts/' + user.id, {
+                                    axios.post('/api/users/removePts/' + userStore().user.id, {
                                         puntos: pts,
                                     })
                                         .then(responseRemove => {
@@ -68,13 +70,15 @@ export default function usarPedidos() {
                                             userStore().user.nextLevel = useNiveles().hasNextLevel()
                                             userStore().user.nivelActual = useNiveles().nivelActual()
 
-                                            axios.post('/api/users/updateExp/' + user.id, {
+                                            axios.post('/api/users/updateExp/' + userStore().user.id, {
                                                 puntos: puntos_recompensa,
                                             }).then(responseUpdate => {
 
                                                 userStore().user = responseUpdate.data;
                                                 userStore().user.nextLevel = useNiveles().hasNextLevel()
                                                 userStore().user.nivelActual = useNiveles().nivelActual()
+
+
 
                                             })
 
@@ -104,7 +108,7 @@ export default function usarPedidos() {
                         })
                             .then(result => {
                                 if (result.isConfirmed) {
-                                    axios.post('/api/users/removePts/' + user.id, {
+                                    axios.post('/api/users/removePts/' + userStore().user.id, {
                                         puntos: pts,
                                     })
                                         .then(responseRemove => {
@@ -114,7 +118,7 @@ export default function usarPedidos() {
                                             userStore().user.nextLevel = useNiveles().hasNextLevel()
                                             userStore().user.nivelActual = useNiveles().nivelActual()
 
-                                            axios.post('/api/users/updateExp/' + user.id, {
+                                            axios.post('/api/users/updateExp/' + userStore().user.id, {
                                                 puntos: puntos_recompensa,
                                             }).then(responseUpdate => {
 

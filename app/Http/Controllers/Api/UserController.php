@@ -161,7 +161,7 @@ class UserController extends Controller
 
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
-        return ($usuario);
+        return $usuario;
 
     }
     
@@ -176,7 +176,7 @@ class UserController extends Controller
 
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
-        return ($usuario);
+        return $usuario;
 
     }
 
@@ -190,7 +190,7 @@ class UserController extends Controller
 
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
-        return ($usuario);
+        return $usuario;
 
     }
 }
