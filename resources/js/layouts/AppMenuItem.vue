@@ -73,7 +73,7 @@ const checkActiveRoute = (item) => {
 </script>
 
 <template>
-    <div  v-if="root || item.permision === 'all' || can(item.permision) ">
+    <div  v-if="item.permision === 'all' || can(item.permision) ">
         <li :class="{ 'layout-root-menuitem': root, 'active-menuitem': isActiveMenu }">
             <div v-if="root && item.visible !== false" class="layout-menuitem-root-text">{{ item.label }}</div>
             

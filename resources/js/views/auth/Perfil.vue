@@ -156,6 +156,7 @@
                                         <span class="text-danger">*</span>
                                     </h6>
                                     <DropZone v-model="user.imagen" />
+                                    <!-- TODO revisar este modelo, no va bien -->
                                     <div class="text-danger mt-1">
                                         {{ errors.imagen }}
                                     </div>
@@ -167,21 +168,35 @@
             </form>
         </Dialog>
 
-        <section>
+        <section class="background-profile">
             <div class="layout-main-container p-0">
                 <div class="container text-center mt-5">
                     <div class="row">
                         <div class="col">
                             <div class="mb-4">
-                                <h2 class="card-title">Bienvenido {{ authuser.name }}</h2>
+                                <div class="d-flex align-items-center justify-content-center position-relative">
+                                    <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat position-relative"
+                                        :style="{ 'background-image': `url('${authuser?.media[0]?.original_url}')` }"
+                                        :class="{
+                                                'border-white': ((authuser.experience - authuser.nextLevel.experiencia + 1000) / 10) <= 33,
+                                                'border-info': ((authuser.experience - authuser.nextLevel.experiencia + 1000) / 10) > 33 && ((authuser.experience - authuser.nextLevel.experiencia + 1000) / 10) <= 66,
+                                                'border-success': ((authuser.experience - authuser.nextLevel.experiencia + 1000) / 10) > 66 && ((authuser.experience - authuser.nextLevel.experiencia + 1000) / 10) <= 100,
+                                                'border-comodidadesSubTone': authuser.experience >= 100000,
+                                            }">
+                                        <Button
+                                            class="buttons standardButton bg-principal p-2 px-3 border-round-3xl position-absolute top-0 end-0"
+                                            icon="pi pi-user-edit" @click="visible = true"></Button>
+                                    </div>
+                                </div>
+
+                                <h2 class="card-title">{{ authuser.name }}</h2>
+
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-7">
                                 <p class="my-3">Correo electronico: {{ authuser.email }}</p>
                                 <p class="my-3">Fecha nacimiento: {{ authuser.birthday }}</p>
                                 <p class="my-3">Numero de telefono: {{ authuser.telephone }}</p>
                                 <p class="my-3">Direccion: {{ authuser.address }}</p>
-                                <h3 class="card-title my-3">Editar perfil</h3>
-                                <Button class="buttons standardButton bg-principal p-2 px-5 border-round-3xl" icon="pi pi-user-edit" @click="visible = true"></Button>
                             </div>
                         </div>
 
@@ -230,26 +245,26 @@ const schema = yup.object({
     birthday: yup.string().required().label('Fecha de nacimiento'),
     address: yup.string().required().label('Direccion'),
     imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
-            if (!value) {
-                // Si el valor está vacío, retornar un mensaje personalizado
-                throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
+        if (!value) {
+            // Si el valor está vacío, retornar un mensaje personalizado
+            throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
 
-            } else if (typeof value?.name === 'string') {
+        } else if (typeof value?.name === 'string') {
 
-                // Si es un string, es válido pero no debe estar vacío
-                // Verificar que no esté vacío
-                if(value?.name.trim() !== ''){
-                    return value?.type == 'image/jpeg' || value?.type == 'image/png';
-                } 
-
-            } else if(typeof value[0]?.file_name === 'string') {
-
-                // Si es un string, es válido pero no debe estar vacío
-                // Verificar que no esté vacío
-                if(value[0]?.file_name.trim() !== ''){
-                    return value[0]?.mime_type == 'image/jpeg' || value[0]?.mime_type == 'image/png';
-                } 
+            // Si es un string, es válido pero no debe estar vacío
+            // Verificar que no esté vacío
+            if (value?.name.trim() !== '') {
+                return value?.type == 'image/jpeg' || value?.type == 'image/png';
             }
+
+        } else if (typeof value[0]?.file_name === 'string') {
+
+            // Si es un string, es válido pero no debe estar vacío
+            // Verificar que no esté vacío
+            if (value[0]?.file_name.trim() !== '') {
+                return value[0]?.mime_type == 'image/jpeg' || value[0]?.mime_type == 'image/png';
+            }
+        }
     }).required().label('Imagen'),
     roles: yup.array().min(1).required().label('Roles'),
 
@@ -372,21 +387,27 @@ ol {
 
 }
 
-.standardButton{
-    color: white; 
+.standardButton {
+    color: white;
     border: solid;
-    border-color: transparent; 
+    border-color: transparent;
     font-family: Raleway;
     font-weight: bold;
     transition: 0.5s;
 
 }
 
-.standardButton:hover{
+.standardButton:hover {
     background-color: white !important;
     border: solid;
-    color: #145A79 !important; 
+    color: #145A79 !important;
     transition: 0.5s;
-    
+
+}
+
+.imgUsuario {
+    height: 15rem;
+    width: 15rem;
+    border: 5px solid #D0D0D0;
 }
 </style>

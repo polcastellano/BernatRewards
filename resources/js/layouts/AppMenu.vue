@@ -71,6 +71,7 @@ const vela = "pepe";
 const model = ref([
     {
         label: 'Panel Usuario',
+        permision: 'all',
         items: [
             { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
             { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  

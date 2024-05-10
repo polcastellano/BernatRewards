@@ -16,8 +16,14 @@
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
                                             <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat"
-                                            :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
-                                        </div>
+                                                :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"
+                                                :class="{
+                                                    'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
+                                                    'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
+                                                    'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
+                                                    'border-comodidadesSubTone': user.experience >= 100000,
+                                                }">
+                                            </div>
                                         </div>
                                     </a>
                                     <ul class="menuDesp dropdown-menu dropdown-menu-end">
