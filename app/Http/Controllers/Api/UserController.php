@@ -85,6 +85,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user = User::with('roles')->with('media')->find($user->id);
         $user->load('roles');
         return new UserResource($user);
     }

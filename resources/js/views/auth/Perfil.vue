@@ -248,22 +248,12 @@ const schema = yup.object({
         if (!value) {
             // Si el valor está vacío, retornar un mensaje personalizado
             throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
-
-        } else if (typeof value?.name === 'string') {
-
+        } else if (typeof value === 'string') {
             // Si es un string, es válido pero no debe estar vacío
-            // Verificar que no esté vacío
-            if (value?.name.trim() !== '') {
-                return value?.type == 'image/jpeg' || value?.type == 'image/png';
-            }
-
-        } else if (typeof value[0]?.file_name === 'string') {
-
-            // Si es un string, es válido pero no debe estar vacío
-            // Verificar que no esté vacío
-            if (value[0]?.file_name.trim() !== '') {
-                return value[0]?.mime_type == 'image/jpeg' || value[0]?.mime_type == 'image/png';
-            }
+            return value.trim() !== ''; // Verificar que no esté vacío
+        } else {
+            // Si es un objeto de archivo, validar su tipo
+            return ['image/jpeg', 'image/png'].includes(value.type);
         }
     }).required().label('Imagen'),
     roles: yup.array().min(1).required().label('Roles'),
@@ -318,7 +308,7 @@ watchEffect(() => {
     user.name = postData.value.name
     user.email = postData.value.email
     user.roles = postData.value.roles
-    user.imagen = postData.value.media
+    user.imagen = postData.value.original_image
     user.puntos = postData.value.puntos
     user.experience = postData.value.experience
     user.telephone = postData.value.telephone

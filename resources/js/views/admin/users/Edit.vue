@@ -3,7 +3,7 @@
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm">
-                    
+
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.name" type="text" class="form-control" />
@@ -16,18 +16,42 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText v-model="user.email" type="text" class="form-control" />
-                            <label class="font-bold block">Email<span class="text-danger"> *</span></label>
+                            <InputText v-model="user.telephone" type="text" class="form-control" />
+                            <label class="font-bold block">{{ $t('telephone') }}<span class="text-danger">
+                                    *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
-                            {{ errors.nombre }}
+                            {{ errors.telephone }}
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-5 border-0">
+                        <FloatLabel class="align-items-center">
+                            <Calendar v-model="user.birthday" class="form-control" />
+                            <label class="font-bold block">{{ $t('birthday') }}<span class="text-danger">
+                                    *</span></label>
+                        </FloatLabel>
+                        <div class="text-danger mt-1">
+                            {{ errors.birthday }}
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-5">
+                        <FloatLabel class="align-items-center">
+                            <InputText v-model="user.address" type="text" class="form-control" />
+                            <label class="font-bold block">{{ $t('address') }}<span class="text-danger">
+                                    *</span></label>
+                        </FloatLabel>
+                        <div class="text-danger mt-1">
+                            {{ errors.address }}
                         </div>
                     </div>
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.password" type="text" class="form-control" />
-                            <label class="font-bold block">Password<span class="text-danger"> *</span></label>
+                            <label class="font-bold block">Password<span class="text-danger">
+                                    *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
                             {{ errors.password }}
@@ -36,17 +60,20 @@
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.experience" type="text" class="form-control" />
-                            <label class="font-bold block">Nivel<span class="text-danger"> *</span></label>
+                            <InputText :disabled="authuser.roles[0]?.name != 'admin'" v-model="user.experience"
+                                type="text" class="form-control" />
+                            <label class="font-bold block">Experiencia<span class="text-danger">
+                                    *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
-                            {{ errors.nivel }}
+                            {{ errors.experience }}
                         </div>
                     </div>
 
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
-                            <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.puntos" type="text" class="form-control" />
+                            <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.puntos" type="text"
+                                class="form-control" />
                             <label class="font-bold block">Puntos<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -67,12 +94,13 @@
                             </svg> Acción
                         </h6>
                         <div class="mt-3 text-center">
-                            <button :disabled="Object.keys(errors).length != 0 || cargando" :loading="cargando" class="btn btn-primary">
+                            <button :disabled="Object.keys(errors).length != 0 || cargando" :loading="cargando"
+                                class="btn btn-primary">
                                 <span v-if="cargando">Guardando...</span>
                                 <span v-else>Guardar usuario</span>
                             </button>
                         </div>
-                        
+
                         <!-- Role -->
                         <h6 class="mt-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -84,8 +112,9 @@
                             <span class="text-danger">*</span>
                         </h6>
                         <div class="mb-3">
-                            <MultiSelect :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles" :options="roleList" filter dataKey="id"
-                                optionLabel="name" placeholder="Seleciona un rol" display="chip" class="w-full">
+                            <MultiSelect :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
+                                :options="roleList" filter dataKey="id" optionLabel="name"
+                                placeholder="Seleciona un rol" display="chip" class="w-full">
                             </MultiSelect>
                         </div>
                         <div class="text-danger mt-1">
@@ -115,92 +144,102 @@
     </form>
 </template>
 <script setup>
-    import { onMounted, reactive, watchEffect } from "vue";
-    import { useRoute } from "vue-router";
-    import useRoles from "@/composables/roles";
-    import useUsers from "@/composables/users";
-    import * as yup from 'yup';
-    import { es } from 'yup-locales';
-    import { setLocale } from 'yup';
-    import DropZone from "@/components/DropZone.vue";
-    import { userStore } from '@/store/authPinia';
+import { onMounted, reactive, watchEffect } from "vue";
+import { useRoute } from "vue-router";
+import useRoles from "@/composables/roles";
+import useUsers from "@/composables/users";
+import * as yup from 'yup';
+import { es } from 'yup-locales';
+import { setLocale } from 'yup';
+import DropZone from "@/components/DropZone.vue";
+import { userStore } from '@/store/authPinia';
 
-    const { user: authuser } = userStore()
+const { user: authuser } = userStore()
 
-    setLocale(es);
+setLocale(es);
 
-    const { roleList, getRoleList } = useRoles();
-    const { updateUser, getUser, user: postData, cargando } = useUsers();
+const { roleList, getRoleList } = useRoles();
+const { updateUser, getUser, user: postData, cargando } = useUsers();
 
-    import { useForm, useField } from "vee-validate";
+import { useForm, useField } from "vee-validate";
 
 
-    const schema = yup.object({
-        name: yup.string().required().label('Nombre'),
-        email: yup.string().required().label('Email'),
-        puntos: yup.number().integer().required().min(0).label('Puntos'),
-        experience: yup.number().integer().required().min(0).label('Nivel'),
-        imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
-            if (!value) {
-                // Si el valor está vacío, retornar un mensaje personalizado
-                throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
-            } else if (typeof value === 'string') {
-                // Si es un string, es válido pero no debe estar vacío
-                return value.trim() !== ''; // Verificar que no esté vacío
-            } else {
-                // Si es un objeto de archivo, validar su tipo
-                return ['image/jpeg', 'image/png'].includes(value.type);
-            }
-        }).required().label('Imagen'),
-        roles: yup.array().min(1).required().label('Roles'),
-        
+const schema = yup.object({
+    name: yup.string().required().label('Nombre'),
+    email: yup.string().required().label('Email'),
+    puntos: yup.number().integer().required().min(0).label('Puntos'),
+    experience: yup.number().integer().required().min(0).label('Experiencia'),
+    telephone: yup.string().matches(/^\d{9}$/, 'Número de teléfono debe tener exactamente 9 dígitos').required().label('Número de teléfono'),
+    birthday: yup.string().required().label('Fecha de nacimiento'),
+    address: yup.string().required().label('Direccion'),    
+    imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
+        if (!value) {
+            // Si el valor está vacío, retornar un mensaje personalizado
+            throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
+        } else if (typeof value === 'string') {
+            // Si es un string, es válido pero no debe estar vacío
+            return value.trim() !== ''; // Verificar que no esté vacío
+        } else {
+            // Si es un objeto de archivo, validar su tipo
+            return ['image/jpeg', 'image/png'].includes(value.type);
+        }
+    }).required().label('Imagen'),
+    roles: yup.array().min(1).required().label('Roles'),
+
+})
+
+// Create a form context with the validation schema
+const { validate, errors } = useForm({ validationSchema: schema })
+// Define actual fields for validation
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: email } = useField('email', null, { initialValue: '' });
+const { value: password } = useField('password', null, { initialValue: '' });
+const { value: roles } = useField('roles', null, { initialValue: '', label: 'role' });
+const { value: imagen } = useField('imagen', null);
+const { value: puntos } = useField('puntos', null, { initialValue: 0, label: 'puntos' });
+const { value: experience } = useField('experience', null, { initialValue: 0, label: 'experiencia' });
+const { value: telephone } = useField('telephone', null, { initialValue: 0, label: 'telephone' });
+const { value: birthday } = useField('birthday', null, { initialValue: 0, label: 'birthday' });
+const { value: address } = useField('address', null, { initialValue: 0, label: 'address' });
+
+const user = reactive({
+    name,
+    email,
+    password,
+    roles,
+    imagen,
+    puntos,
+    experience,
+    telephone,
+    birthday,
+    address,
+})
+
+const route = useRoute()
+
+function submitForm() {
+    validate().then(form => {
+        if (form.valid) updateUser(user)
     })
+}
 
-    // Create a form context with the validation schema
-    const { validate, errors } = useForm({ validationSchema: schema })
-    // Define actual fields for validation
-    const { value: name } = useField('name', null, { initialValue: '' });
-    const { value: email } = useField('email', null, { initialValue: '' });
-    const { value: password } = useField('password', null, { initialValue: '' });
-    const { value: roles } = useField('roles', null, { initialValue: '', label: 'role' });
-    const { value: imagen} = useField('imagen', null);
-    const { value: puntos } = useField('puntos', null, { initialValue: 0, label: 'puntos' });
-    const { value: experience } = useField('experience', null, { initialValue: 0, label: 'experience' });
+onMounted(() => {
+    getUser(route.params.id)
+    getRoleList()
+})
 
-    const user = reactive({
-        name,
-        email,
-        password,
-        roles,
-        imagen,
-        puntos,
-        experience,
-    })
+// https://vuejs.org/api/reactivity-core.html#watcheffect
+watchEffect(() => {
+    user.id = postData.value.id
+    user.name = postData.value.name
+    user.email = postData.value.email
+    user.roles = postData.value.roles
+    user.imagen = postData.value.original_image
+    user.puntos = postData.value.puntos
+    user.experience = postData.value.experience
+    user.telephone = postData.value.telephone
+    user.birthday = postData.value.birthday
+    user.address = postData.value.address
 
-    const route = useRoute()
-
-    function submitForm() {
-        validate().then(form => { 
-            if (form.valid) updateUser(user) 
-        })
-    }
-    
-    onMounted(() => {
-        getUser(route.params.id)
-        getRoleList()
-    })
-
-    // https://vuejs.org/api/reactivity-core.html#watcheffect
-    watchEffect(() => {
-        user.id = postData.value.id
-        user.name = postData.value.name
-        user.email = postData.value.email
-        user.roles = postData.value.roles
-        user.imagen = postData.value.original_image
-        user.puntos = postData.value.puntos
-        user.experience = postData.value.experience
-
-
-
-    })
+})
 </script>

@@ -85,7 +85,7 @@ class ProfileController extends Controller
 
         $user->load('roles');
 
-        return $user;
+        return new UserResource($user);
     }
 
 }
