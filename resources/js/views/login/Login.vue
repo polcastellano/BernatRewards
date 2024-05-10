@@ -23,7 +23,7 @@
                                             </div>
                                             <!-- Password -->
                                             <div class="mb-3">
-                                                <Password v-model="loginForm.password" id="password" type="password"
+                                                <Password class="p-component2" v-model="loginForm.password" id="password" type="password"
                                                     required  :feedback="false"
                                                     autocomplete="current-password" :placeholder="$t('password')" />
                                                 <!-- Validation Errors -->
@@ -111,7 +111,7 @@
                                             </div>
                                             <!-- Birthday -->
                                             <div class="mb-3">
-                                                <Calendar v-model="registerForm.birthday" id="birthday" showIcon
+                                                <Calendar class="p-component2" v-model="registerForm.birthday" id="birthday" showIcon
                                                     iconDisplay="input" :placeholder="$t('birthday')" />
                                                 <!-- Validation Errors -->
                                                 <div class="text-danger mt-1">
@@ -122,7 +122,7 @@
                                             </div>
                                             <!-- Password -->
                                             <div class="mb-3">
-                                                <Password v-model="registerForm.password" id="password" type="password"
+                                                <Password class="p-component2" v-model="registerForm.password" id="password" type="password"
                                                     autocomplete="current-password" 
                                                     :placeholder="$t('password')"  :feedback="false" />
                                                 <!-- Validation Errors -->
@@ -134,7 +134,7 @@
                                             </div>
                                             <!-- Confirm Password -->
                                             <div class="mb-3">
-                                                <Password v-model="registerForm.password_confirmation"
+                                                <Password class="p-component2" v-model="registerForm.password_confirmation"
                                                     id="password_confirmation" type="password"
                                                     autocomplete="current-password"  :feedback="false"
                                                     :placeholder="$t('confirm_password')" />
@@ -181,13 +181,6 @@ watch(() => route.query.tab, (newTab) => {
     // Actualizar el valor de active cuando cambie el parámetro 'tab' en la URL
     active.value = parseInt(newTab) || 0;
 });
-
-const backgroundColor = ref('red'); // Estado de referencia para el color de fondo
-
-const changeBackground = () => {
-    // Cambiar el color de fondo entre rojo y azul
-    backgroundColor.value = backgroundColor.value === 'red' ? 'blue' : 'red';
-}
 
 </script>
 

@@ -91,6 +91,8 @@ class AuthenticatedSessionController extends Controller
             'address' => $request['address'],
         ]);
 
+        $user->registerMediaCollections();
+        
         return $this->successResponse($user, 'Registration Successfully');
     }
 }

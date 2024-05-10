@@ -23,8 +23,10 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'admin@demo.com',
             'password' => bcrypt('12345678'),
             'puntos' => 99999,
-            'experience' => 3300
-
+            'experience' => 3300,
+            'telephone' => 618849375,
+            'birthday' => "2024/05/10",
+            'address' =>" Carrer Ntra. Sra. de Lourdes, 34",
         ]);
 
         $role = Role::create(['name' => 'admin']);

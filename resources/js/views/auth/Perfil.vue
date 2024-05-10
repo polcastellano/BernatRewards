@@ -6,9 +6,9 @@
             <app-sidebar></app-sidebar>
         </div>
         <Toast />
-        <Dialog appendTo="self" v-model:visible="visible" modal header="Editar perfil" :style="{ width: '50vw' }"
+        <Dialog appendTo="self" v-model:visible="visible" modal header="Editar perfil" :style="{ width: '70vw' }"
             :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-            :pt="{root: 'border-none',mask: {style: 'backdrop-filter: blur(2px)'}}">
+            :pt="{ root: 'border-none', mask: { style: 'backdrop-filter: blur(2px)' } }">
             <form @submit.prevent="submitForm">
                 <div class="row my-5 mx-0">
                     <div class="col-md-8">
@@ -17,7 +17,7 @@
                             <div class="form-group mb-5">
                                 <FloatLabel class="align-items-center">
                                     <InputText v-model="user.name" type="text" class="form-control" />
-                                    <label class="font-bold block">Nombre<span class="text-danger">
+                                    <label class="font-bold block">{{ $t('name') }}<span class="text-danger">
                                             *</span></label>
                                 </FloatLabel>
                                 <div class="text-danger mt-1">
@@ -28,11 +28,44 @@
                             <div class="form-group mb-5">
                                 <FloatLabel class="align-items-center">
                                     <InputText v-model="user.email" type="text" class="form-control" />
-                                    <label class="font-bold block">Email<span class="text-danger">
+                                    <label class="font-bold block">{{ $t('email') }}<span class="text-danger">
                                             *</span></label>
                                 </FloatLabel>
                                 <div class="text-danger mt-1">
-                                    {{ errors.nombre }}
+                                    {{ errors.email }}
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-5">
+                                <FloatLabel class="align-items-center">
+                                    <InputText v-model="user.telephone" type="text" class="form-control" />
+                                    <label class="font-bold block">{{ $t('telephone') }}<span class="text-danger">
+                                            *</span></label>
+                                </FloatLabel>
+                                <div class="text-danger mt-1">
+                                    {{ errors.telephone }}
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-5 border-0">
+                                <FloatLabel class="align-items-center">
+                                    <Calendar v-model="user.birthday" class="form-control" />
+                                    <label class="font-bold block">{{ $t('birthday') }}<span class="text-danger">
+                                            *</span></label>
+                                </FloatLabel>
+                                <div class="text-danger mt-1">
+                                    {{ errors.birthday }}
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-5">
+                                <FloatLabel class="align-items-center">
+                                    <InputText v-model="user.address" type="text" class="form-control" />
+                                    <label class="font-bold block">{{ $t('address') }}<span class="text-danger">
+                                            *</span></label>
+                                </FloatLabel>
+                                <div class="text-danger mt-1">
+                                    {{ errors.address }}
                                 </div>
                             </div>
 
@@ -148,7 +181,7 @@
                                 <p class="my-3">Numero de telefono: {{ authuser.telephone }}</p>
                                 <p class="my-3">Direccion: {{ authuser.address }}</p>
                                 <h3 class="card-title my-3">Editar perfil</h3>
-                                <Button class="buttons" icon="pi pi-user-edit" @click="visible = true"></Button>
+                                <Button class="buttons standardButton bg-principal p-2 px-5 border-round-3xl" icon="pi pi-user-edit" @click="visible = true"></Button>
                             </div>
                         </div>
 
@@ -193,17 +226,30 @@ const schema = yup.object({
     email: yup.string().required().label('Email'),
     puntos: yup.number().integer().required().min(0).label('Puntos'),
     experience: yup.number().integer().required().min(0).label('Experiencia'),
+    telephone: yup.string().matches(/^\d{9}$/, 'Número de teléfono debe tener exactamente 9 dígitos').required().label('Número de teléfono'),
+    birthday: yup.string().required().label('Fecha de nacimiento'),
+    address: yup.string().required().label('Direccion'),
     imagen: yup.mixed().test('fileFormat', 'Solo se permiten PNG y JPG', (value) => {
-        if (!value) {
-            // Si el valor está vacío, retornar un mensaje personalizado
-            throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
-        } else if (typeof value === 'string') {
-            // Si es un string, es válido pero no debe estar vacío
-            return value.trim() !== ''; // Verificar que no esté vacío
-        } else {
-            // Si es un objeto de archivo, validar su tipo
-            return ['image/jpeg', 'image/png'].includes(value.type);
-        }
+            if (!value) {
+                // Si el valor está vacío, retornar un mensaje personalizado
+                throw new yup.ValidationError('Imagen es un campo requerido', null, 'imagen');
+
+            } else if (typeof value?.name === 'string') {
+
+                // Si es un string, es válido pero no debe estar vacío
+                // Verificar que no esté vacío
+                if(value?.name.trim() !== ''){
+                    return value?.type == 'image/jpeg' || value?.type == 'image/png';
+                } 
+
+            } else if(typeof value[0]?.file_name === 'string') {
+
+                // Si es un string, es válido pero no debe estar vacío
+                // Verificar que no esté vacío
+                if(value[0]?.file_name.trim() !== ''){
+                    return value[0]?.mime_type == 'image/jpeg' || value[0]?.mime_type == 'image/png';
+                } 
+            }
     }).required().label('Imagen'),
     roles: yup.array().min(1).required().label('Roles'),
 
@@ -220,6 +266,9 @@ const { value: roles } = useField('roles', null, { initialValue: '', label: 'rol
 const { value: imagen } = useField('imagen', null);
 const { value: puntos } = useField('puntos', null, { initialValue: 0, label: 'puntos' });
 const { value: experience } = useField('experience', null, { initialValue: 0, label: 'experiencia' });
+const { value: telephone } = useField('telephone', null, { initialValue: 0, label: 'telephone' });
+const { value: birthday } = useField('birthday', null, { initialValue: 0, label: 'birthday' });
+const { value: address } = useField('address', null, { initialValue: 0, label: 'address' });
 
 const user = reactive({
     name,
@@ -229,6 +278,9 @@ const user = reactive({
     imagen,
     puntos,
     experience,
+    telephone,
+    birthday,
+    address,
 })
 
 const route = useRoute();
@@ -251,9 +303,12 @@ watchEffect(() => {
     user.name = postData.value.name
     user.email = postData.value.email
     user.roles = postData.value.roles
-    user.imagen = postData.value.original_image
+    user.imagen = postData.value.media
     user.puntos = postData.value.puntos
     user.experience = postData.value.experience
+    user.telephone = postData.value.telephone
+    user.birthday = postData.value.birthday
+    user.address = postData.value.address
 })
 
 watch(isSidebarActive, (newVal) => {
@@ -315,5 +370,23 @@ ol {
     border-radius: 100px !important;
     border: 0px;
 
+}
+
+.standardButton{
+    color: white; 
+    border: solid;
+    border-color: transparent; 
+    font-family: Raleway;
+    font-weight: bold;
+    transition: 0.5s;
+
+}
+
+.standardButton:hover{
+    background-color: white !important;
+    border: solid;
+    color: #145A79 !important; 
+    transition: 0.5s;
+    
 }
 </style>

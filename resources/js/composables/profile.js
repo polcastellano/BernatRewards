@@ -15,8 +15,7 @@ export default function useProfile() {
     const getProfile = async (id) => {
         axios.get('/api/perfil/' + id)
         .then(response => {
-            
-            profile.value = response.data.data;
+            profile.value = response.data;
         })
     }
 
