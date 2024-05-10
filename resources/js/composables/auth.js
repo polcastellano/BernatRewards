@@ -4,6 +4,7 @@ import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 import { ABILITY_TOKEN } from '@casl/vue';
 import { userStore } from '@/store/authPinia';
 import { storeNiveles } from '@/store/niveles'
+import { useToast } from "primevue/usetoast";
 
 
 
@@ -18,6 +19,7 @@ export default function useAuth() {
     const router = useRouter()
     const swal = inject('$swal')
     const ability = inject(ABILITY_TOKEN)
+    const toast = useToast();
 
     const store2 = userStore()
 
@@ -43,7 +45,10 @@ export default function useAuth() {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        birthday: '',
+        address: '',
+        telephone: '',
     })
 
     const submitLogin = async () => {
@@ -72,6 +77,7 @@ export default function useAuth() {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
                 }
+                toast.add({ severity: 'error', summary: 'Error al iniciar sesión', detail: 'Las credenciales no coinciden', life: 3050, closable: false });
             })
             .finally(() => processing.value = false)
     }
@@ -84,19 +90,29 @@ export default function useAuth() {
 
         await axios.post('/register', registerForm)
             .then(async response => {
-                // await store.dispatch('auth/getUser')
-                // await loginUser()
                 swal({
                     icon: 'success',
                     title: 'Registration successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
-                await router.push({ name: 'auth.login' })
+                router.push({ path: '/login', query: { tab: 1 }})
+                // TODO llevar a login
             })
             .catch(error => {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
+                    const errors = error.response.data.errors;
+                    let time = 3050
+                    if (errors) {
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                const errorMessage = errors[key];
+                                time += 200;
+                                toast.add({ severity: 'error', summary: 'Error al registrarte', detail: `${key}: ${errorMessage}`, life: time, closable: false });
+                            }
+                        }
+                    }
                 }
             })
             .finally(() => processing.value = false)

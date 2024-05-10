@@ -19,7 +19,7 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
+        $user = User::with('roles')->with('media')->find($user->id);
 
         return $this->successResponse($user, 'User found');
     }
@@ -34,7 +34,7 @@ class ProfileController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $usuario = User::with('media')->with('niveles')->find($request->id);
+        $usuario = User::with('media')->find($request->id);
         
         $roles = Role::find($request->roles);
 
@@ -42,6 +42,10 @@ class ProfileController extends Controller
         $usuario->email = $request->email;
         $usuario->puntos = $request->puntos;
         $usuario->experience = $request->experience;
+        $usuario->telephone = $request->telephone;
+        $usuario->address = $request->address;
+        $usuario->birthday = date("Y-m-d", strtotime($request->birthday));
+
 
         if (!empty($request->password)) {
             $usuario->password = Hash::make($request->password) ?? $usuario->password;
@@ -61,7 +65,7 @@ class ProfileController extends Controller
                 $usuario->syncRoles($roles);
             }
    
-            $usuario = User::with('media')->with('niveles')->with('roles')->find($request->id);
+            $usuario = User::with('media')->with('roles')->find($request->id);
 
             return $usuario;
             // return UserResource::collection($usuario);
@@ -77,11 +81,11 @@ class ProfileController extends Controller
     public function show(User $user)
     {   
 
-        $user = User::with('niveles')->with('roles')->with('media')->find($user->id);
+        $user = User::with('roles')->with('media')->find($user->id);
 
         $user->load('roles');
 
-        return new UserResource($user);
+        return $user;
     }
 
 }

@@ -2,7 +2,15 @@
     <ul class="layout-menu">
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
-                <div class="imgUsuario" :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"></div>
+                <div class="imgUsuario" 
+                :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"
+                :class="{
+                    'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
+                    'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
+                    'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
+                    'border-comodidadesSubTone': user.experience >= 100000,
+                }"
+                ></div>
                 <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ user.name }}</p>
             </div>
             <div v-if="user.experience < 100000" class="nivelInfo d-flex flex-column">
@@ -16,7 +24,8 @@
                 <div class="barraNivel d-flex align-items-center">
 
                     <div class="barraNivelReal"
-                        :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }" :class="{
+                        :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }" 
+                        :class="{
                             'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
                             'bg-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
                             'bg-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
@@ -35,7 +44,7 @@
                 </div>
 
                 <div class="barraNivel d-flex align-items-center mt-1">
-                    <div class="barraNivelReal bg-success" style="width: 100%;">
+                    <div class="barraNivelReal bg-comodidadesSubTone" style="width: 100%;">
                     </div>
                 </div>
 

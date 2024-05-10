@@ -27,11 +27,11 @@ class User extends Authenticatable implements HasMedia
         'name',
         'email',
         'password',
-        'age',
+        'birthday',
         'telephone',
+        'address',
         'puntos',
         'experience',
-        'nivel_id'
     ];
 
     /**

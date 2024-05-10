@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('age')->nullable();
+            $table->date('birthday')->nullable();
             $table->unsignedBigInteger('telephone')->nullable();
+            $table->string('address')->nullable();
             $table->unsignedBigInteger('puntos')->default(0);
             $table->unsignedBigInteger('experience')->default(0);
             $table->rememberToken();
