@@ -313,6 +313,29 @@
     right: .75rem
 }
 
+.border-warning {
+    border-color: #ffc107;
+    transition: border 0.5s ease-out;
+}
+
+.border-info {
+    border-color: #0dcaf0;
+    transition: border 0.5s ease-out;
+
+}
+
+.border-success {
+    border-color: #198754;
+    transition: border 0.5s ease-out;
+
+}
+
+.border-comodidadesSubTone{
+    border-color: #9e1fd8 !important;
+    transition: border 0.5s ease-out;
+
+}
+
 .p-autocomplete.p-autocomplete-dd .p-autocomplete-loader {
     right: 3.75rem
 }

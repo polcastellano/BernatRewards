@@ -103,11 +103,13 @@ export default function useAuth() {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
                     const errors = error.response.data.errors;
+                    let time = 3050
                     if (errors) {
                         for (const key in errors) {
                             if (errors.hasOwnProperty(key)) {
                                 const errorMessage = errors[key];
-                                toast.add({ severity: 'error', summary: 'Error al registrarte', detail: `${key}: ${errorMessage}`, life: 3050, closable: false });
+                                time += 200;
+                                toast.add({ severity: 'error', summary: 'Error al registrarte', detail: `${key}: ${errorMessage}`, life: time, closable: false });
                             }
                         }
                     }
