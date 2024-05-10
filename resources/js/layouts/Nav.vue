@@ -293,7 +293,6 @@ const user = userStore().vistaUser();
     border-radius: 25px;
     
     transition: width 0.5s ease;
-    /* TODO porque sale asi el color del width */
 
 }
 

@@ -133,7 +133,7 @@
                 return ['image/jpeg', 'image/png'].includes(value.type);
             }
         }).required().label('Imagen'),
-        nivel_desbloqueo: yup.number().integer().required().min(0).max(5).label('Nivel'),
+        nivel_desbloqueo: yup.number().integer().required().min(0).max(100).label('Nivel'),
         categorias: yup.array().min(1).required().label('Categorias'),
     })
     
