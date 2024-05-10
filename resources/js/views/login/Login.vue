@@ -6,6 +6,7 @@
                     <div class="card-body">
                         <TabView class="flex flex-column justify-content-around" v-model:activeIndex="active">
                             <TabPanel :header="$t('login')">
+                                <Toast />
 
                                     <form @submit.prevent="submitLogin">
                                         <div class="">
