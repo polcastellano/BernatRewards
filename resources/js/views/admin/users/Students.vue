@@ -1,5 +1,6 @@
 <template>
     <div class="row justify-content-center my-2">
+        <Toast />
         <div class="col-md-12">
             <div class="card border-0">
                 <div class="card-header bg-transparent">

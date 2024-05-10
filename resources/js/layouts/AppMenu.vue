@@ -2,7 +2,7 @@
     <ul class="layout-menu">
         <div class="infoUsuario">
             <div class="d-flex align-items-center">
-                <div class="imgUsuario" 
+                <div class="imgUsuario bg-white" 
                 :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"
                 :class="{
                     'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
@@ -71,6 +71,7 @@ const vela = "pepe";
 const model = ref([
     {
         label: 'Panel Usuario',
+        permision: 'all',
         items: [
             { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
             { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  
@@ -80,74 +81,56 @@ const model = ref([
     },
     {
         label: 'Panel de Administrador',
+        permision: 'recompensa-list',
         items: [
             { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'recompensa-list' }
-        ]
+        ],
+        
     },
     {
         label: 'Usuarios',
+        permision: 'student-list',
         items: [
             { label: 'Users', icon: 'pi pi-fw pi-user', to: '/admin/users', permision: 'user-list' },
-            { label: 'Alumnos', icon: 'pi pi-fw pi-id-card', to: '/admin/users/students', permision: 'user-list' },
+            { label: 'Alumnos', icon: 'pi pi-fw pi-id-card', to: '/admin/users/students', permision: 'student-list' },
             { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
             { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
         ]
     },
-    {
-        label: 'Ejercicios',
-        items: [
-            { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
-            { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
-        ]
-    },
-    {
-        label: 'Posts',
-        items: [
-            { label: 'Posts', icon: 'pi pi-fw pi-id-card', to: '/admin/posts', permision: 'post-list' }
-        ]
-    }
+   
 ]);
 
-watchEffect(() => {
-    model.value = [
-        {
-            label: 'Panel Usuario',
-            items: [
-                { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
-                { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  
-                { label: 'Historial', icon: 'pi pi-fw pi-history', to: '/admin/pedidos', permision: 'all' },
-                { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/moodle', permision: 'all' }
-            ]
-        },
-        {
-            label: 'Panel de Administrador',
-            items: [
-                { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'recompensa-list' }
-            ]
-        },
-        {
-            label: 'Usuarios',
-            items: [
-                { label: 'Users', icon: 'pi pi-fw pi-user', to: '/admin/users', permision: 'user-list' },
-                { label: 'Alumnos', icon: 'pi pi-fw pi-id-card', to: '/admin/users/students', permision: 'user-list' },
-                { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
-                { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
-            ]
-        },
-        {
-            label: 'Ejercicios',
-            items: [
-                { label: 'Ejercicios', icon: 'pi pi-fw pi-id-card', to: '/admin/exercises', permision: 'exercise-list' },
-                { label: 'Categorias', icon: 'pi pi-fw pi-id-card', to: '/admin/categories', permision: 'category-list' }
-            ]
-        },
-        {
-            label: 'Posts',
-            items: [
-                { label: 'Posts', icon: 'pi pi-fw pi-id-card', to: '/admin/posts', permision: 'post-list' }
-            ]
-        }
-    ];
+watchEffect(() => {0
+    model.value[0].items[0].label = 'BernatPoints: ' + user.value.puntos;
+
+    // model.value = [
+    //     {
+    //         label: 'Panel Usuario',
+    //         permision: 'all',
+    //         items: [
+    //             { label: 'BernatPoints: ' + user.value.puntos, icon: 'pi pi-fw puntosIcon', permision: 'all' },          
+    //             { label: 'Recompensas', icon: 'pi pi-fw pi-star-fill', to: '/shop', permision: 'all' },  
+    //             { label: 'Historial', icon: 'pi pi-fw pi-history', to: '/admin/pedidos', permision: 'all' },
+    //             { label: 'Campus', icon: 'pi pi-fw pi-book', to: '/moodle', permision: 'all' }
+    //         ]
+    //     },
+    //     {
+    //         label: 'Panel de Administrador',
+    //         items: [
+    //             { label: 'Recompensas', icon: 'pi pi-fw pi-star', to: '/admin/recompensas', permision: 'recompensa-list' }
+    //         ]
+    //     },
+    //     {
+            
+    //         label: 'Usuarios',
+    //         items: [
+    //             { label: 'Users', icon: 'pi pi-fw pi-user', to: '/admin/users', permision: 'user-list' },
+    //             { label: 'Alumnos', icon: 'pi pi-fw pi-id-card', to: '/admin/users/students', permision: 'student-list' },
+    //             { label: 'Roles', icon: 'pi pi-fw pi-check-square', to: '/admin/roles', permision:'role-list' },
+    //             { label: 'Permisos', icon: 'pi pi-fw pi-bookmark', to: '/admin/permissions', permision:'permission-list' }
+    //         ]
+    //     },
+    // ];
 })
 </script>
 

@@ -1,5 +1,6 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from "primevue/usetoast";
 
 export default function useUsers() {
     const users = ref([])
@@ -13,6 +14,8 @@ export default function useUsers() {
         puntos: '',
         experience: ''
     })
+    const toast = useToast();
+
 
     const router = useRouter()
     const validationErrors = ref({})
@@ -78,10 +81,8 @@ export default function useUsers() {
             })
             .then(response =>{
                 router.push({ name: 'users.index' })
-                    swal({
-                        icon: 'success',
-                        title: 'Usuario creado correctamente'
-                    })
+                toast.add({ severity: 'success', summary: 'Usuario creado', detail: 'Usuario creado correctamente', life: 3050, closable: false });
+
             })
             .catch(error => {
                 swal({
@@ -108,10 +109,8 @@ export default function useUsers() {
         .then(response => {
             console.log(response)
             router.push({ name: 'users.index' })
-            swal({
-                icon: 'success',
-                title: 'User editado correctamente'
-            })
+            toast.add({ severity: 'info', summary: 'User editado', detail: 'User editado correctamente', life: 3050, closable: false });
+
         })
         .catch(error => {
             console.log(error)
@@ -141,10 +140,7 @@ export default function useUsers() {
                         .then(response => {
                             getUsers()
                             router.push({name: 'users.index'})
-                            swal({
-                                icon: 'success',
-                                title: 'User deleted successfully'
-                            })
+                            toast.add({ severity: 'info', summary: 'User borrado', detail: 'User borrado correctamente', life: 3050, closable: false });
                         })
                         .catch(error => {
                             swal({
@@ -186,10 +182,8 @@ export default function useUsers() {
                             console.log(response.data.experience)
                             console.log(response.data.puntos)
 
-                            swal({
-                                icon: 'success',
-                                title: 'Puntos añadidos correctamente'
-                            })
+                            toast.add({ severity: 'success', summary: 'Puntos añadidos', detail: 'Puntos añadidos correctamente', life: 3050, closable: false });
+
                         })
                         .catch(error => {
                             console.log(error)
@@ -229,10 +223,8 @@ export default function useUsers() {
                                     return student;
                                 });
 
-                                swal({
-                                    icon: 'success',
-                                    title: 'Puntos añadidos correctamente'
-                                })
+                                toast.add({ severity: 'success', summary: 'Puntos añadidos', detail: 'Puntos añadidos correctamente', life: 3050, closable: false });
+
                             })
                             .catch(error => {
                                 console.log(error)
@@ -270,10 +262,8 @@ export default function useUsers() {
                         puntos: pts,
                       })
                         .then(response => {
-                            swal({
-                                icon: 'success',
-                                title: 'Puntos restados correctamente'
-                            })
+                            toast.add({ severity: 'info', summary: 'Puntos restados', detail: 'Puntos restados correctamente', life: 3050, closable: false });
+
                         })
                         .catch(error => {
                             console.log(error)

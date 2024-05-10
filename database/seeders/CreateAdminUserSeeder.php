@@ -31,25 +31,48 @@ class CreateAdminUserSeeder extends Seeder
 
         $role = Role::create(['name' => 'admin']);
         $role2 = Role::create(['name' => 'user']);
+        $role3 = Role::create(['name' => 'teacher']);
+
         $permissions = [
+            'recompensa-list',
+            'user-edit',
+        ];
+
+        $permissions_teacher = [
+            'role-list',
+            'user-list',
+            'student-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
+            'user-all',
             'post-list',
             'post-create',
             'post-edit',
+            'post-all',
             'post-delete',
-            'post-list',
+            'exercise-list',
             'exercise-create',
             'exercise-edit',
             'exercise-all',
             'exercise-delete',
+            'category-list',
+            'category-create',
+            'category-edit',
+            'category-delete',
             'recompensa-list',
+            'recompensa-create',
             'recompensa-edit',
-            'recompensa-delete',
-            'user-list',
-            'user-edit',
+            'recompensa-all',
+            'recompensa-delete'
         ];
+
         $role2->syncPermissions($permissions);
         Category::create(['name' => 'Vue.js']);
         Category::create(['name' => 'Cat 2']);
+
+        $role3->syncPermissions($permissions_teacher);
+
 
         $permissions = Permission::pluck('id','id')->all();
 

@@ -25,6 +25,7 @@ class PermissionTableSeeder extends Seeder
             'permission-edit',
             'permission-delete',
             'user-list',
+            'student-list',
             'user-create',
             'user-edit',
             'user-delete',

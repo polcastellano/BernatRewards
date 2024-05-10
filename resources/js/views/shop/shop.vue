@@ -1,5 +1,6 @@
 <template>
     <section>
+        <Toast />
         <div v-for="categoria in productosCategorias" class="flex justify-content-center align-items-center">
             <div :class="'bg-' + categoria.nombre.toLowerCase()" class="flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-3 md:justify-content-start justify-content-start border-round-3xl">
                 <div :class="'bg-' + categoria.nombre.toLowerCase() + 'SubTone'" class="tituloCategoria flex align-items-center p-2 px-4 border-round-3xl lg:mb-6 mb-4">

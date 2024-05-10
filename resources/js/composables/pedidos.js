@@ -161,18 +161,10 @@ export default function usarPedidos() {
 
                 axios.post('/api/pedidos', pedido)
                     .then(response => {
-                        swal({
-                            icon: 'success',
-                            title: 'La recompensa ha sido reclamada con exito',
-                            confirmButtonText: 'Continuar',
-                            confirmButtonColor: '#12833f',
-                        })
+                        toast.add({ severity: 'success', summary: 'Compra realizada', detail: 'La recompensa ha sido reclamada con exito', life: 3050, closable: false });
                     })
                     .catch(error => {
-                        swal({
-                            icon: 'error',
-                            title: 'Error al reclamar la recompensa'
-                        })
+                        toast.add({ severity: 'error', summary: 'Error con la compra', detail: 'Error al reclamar la recompensa', life: 3050, closable: false });
                     })
             })
     }

@@ -15,7 +15,7 @@
                                     <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="d-flex align-items-center">
-                                            <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat"
+                                            <div class="imgUsuario bg-gray-100  border-circle bg-cover bg-center bg-no-repeat"
                                             :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
                                         </div>
                                         </div>
@@ -105,7 +105,7 @@
                                 <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="d-flex align-items-center">
-                                        <div class="imgUsuario border-circle bg-cover bg-center bg-no-repeat"
+                                        <div class="imgUsuario bg-gray-100 border-circle bg-cover bg-center bg-no-repeat"
                                         :class="{
                                             'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
                                             'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
@@ -114,8 +114,7 @@
                                         }"
                                             :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
                                         </div>
-                                        <p class="ms-2 nombreUsu" style="font-weight: bold;">{{
-                        user.name }}</p>
+                                        <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ user.name }}</p>
                                     </div>
                                 </a>
                                 <ul class="menuDesp dropdown-menu dropdown-menu-end">
