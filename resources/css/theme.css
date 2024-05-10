@@ -336,6 +336,13 @@
 
 }
 
+.background-profile{
+    background-image: url('/images/backgrounds/triangles2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+}
+
 .p-autocomplete.p-autocomplete-dd .p-autocomplete-loader {
     right: 3.75rem
 }
