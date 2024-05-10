@@ -77,7 +77,7 @@ export default function useAuth() {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
                 }
-                toast.add({ severity: 'error', summary: 'Error al iniciar sesión', detail: error.response.data.errors.email[0], life: 3050, closable: false });
+                toast.add({ severity: 'error', summary: 'Error al iniciar sesión', detail: 'Las credenciales no coinciden', life: 3050, closable: false });
             })
             .finally(() => processing.value = false)
     }
@@ -102,8 +102,16 @@ export default function useAuth() {
             .catch(error => {
                 if (error.response?.data) {
                     validationErrors.value = error.response.data.errors
+                    const errors = error.response.data.errors;
+                    if (errors) {
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                const errorMessage = errors[key];
+                                toast.add({ severity: 'error', summary: 'Error al registrarte', detail: `${key}: ${errorMessage}`, life: 3050, closable: false });
+                            }
+                        }
+                    }
                 }
-                toast.add({ severity: 'error', summary: 'Error al registrarte', detail: error.response.data.errors.email[0], life: 3050, closable: false });
             })
             .finally(() => processing.value = false)
     }
