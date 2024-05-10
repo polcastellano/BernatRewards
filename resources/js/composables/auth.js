@@ -43,7 +43,10 @@ export default function useAuth() {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        birthday: '',
+        address: '',
+        telephone: '',
     })
 
     const submitLogin = async () => {
@@ -84,15 +87,14 @@ export default function useAuth() {
 
         await axios.post('/register', registerForm)
             .then(async response => {
-                // await store.dispatch('auth/getUser')
-                // await loginUser()
                 swal({
                     icon: 'success',
                     title: 'Registration successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
-                await router.push({ name: 'auth.login' })
+                router.push({ path: '/login', query: { tab: 1 }})
+                // TODO llevar a login
             })
             .catch(error => {
                 if (error.response?.data) {

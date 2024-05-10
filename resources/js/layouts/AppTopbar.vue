@@ -195,84 +195,8 @@ const pedidos = (() => {
     width: fit-content !important;
 }
 
-.infoUsuario{
-    width: 245px;
-    margin: 0.5rem 0.5rem 0 0.5rem;
-    border-radius: 12px;
-    padding: 0.5rem;
-}
-
-.infoUsuario p{
-    color: black;
-    font-size: 15px;
-    font-family: Raleway;
-    font-weight: bold;
-    margin: 0px;
-}
-
-.nombreUsu {
-    max-width: 6.563rem; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-}
-
-.imgUsuario{
-    height: 2.5rem; 
-    width: 2.5rem; 
-    border: 3px solid #D0D0D0; 
-    border-radius: 100%; 
-    background-position: center; 
-    background-size: 100% auto;
-}
-
-.puntosUsuario{
-    background-color: #D0D0D0;
-    width: 6rem;
-    border-radius: 25px; 
-}
-
 .menuDesp{
     position: absolute !important;
     z-index: 99;
-}
-
-.puntosUsuario p{
-    font-size: 15px;
-    font-family: Raleway;
-    font-weight: bold;
-    max-width: 230px;
-    overflow:hidden;
-}
-
-.bernatCoin{
-    height: 1.4rem;
-}
-
-.nivelInfo{
-    padding: 0 0.5rem 0 0.5rem;
-}
-
-.nivelInfo p{
-    color: black;
-    font-size: 10px;
-    font-family: Raleway;
-    font-weight: bold;
-    margin: 0px;
-}
-
-.barraNivel{
-    width: 100%;
-    border-radius: 25px;
-    padding: 0.15rem;
-    background-color: #D0D0D0;
-}
-
-.barraNivelReal{
-    height: 0.5rem;
-    border-radius: 25px;
-}
-
-.separador{
-    color: Red !important;
 }
 </style>
