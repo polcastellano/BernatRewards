@@ -23,7 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'admin@demo.com',
             'password' => bcrypt('12345678'),
             'puntos' => 10000,
-            'experience' => 10000,
+            'experience' => 100000,
             'telephone' => 618849375,
             'birthday' => "2000/01/01",
             'address' =>" Carrer Ntra. Sra. de Lourdes, 34",
