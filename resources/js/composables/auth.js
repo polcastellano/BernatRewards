@@ -96,7 +96,7 @@ export default function useAuth() {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                router.push({ path: '/login', query: { tab: 1 }})
+                router.push({ path: '/login', query: { tab: 0 }})
                 // TODO llevar a login
             })
             .catch(error => {

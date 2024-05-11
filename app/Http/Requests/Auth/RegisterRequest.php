@@ -30,6 +30,7 @@ class RegisterRequest extends FormRequest
             'birthday' => ['required'],
             'telephone' => ['required', 'integer', 'digits_between:9,9'],
             'address' => ['required'],
+            'roles' => 'optional',
         ];
     }
 }

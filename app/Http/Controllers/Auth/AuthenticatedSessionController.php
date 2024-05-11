@@ -7,13 +7,13 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -91,8 +91,13 @@ class AuthenticatedSessionController extends Controller
             'address' => $request['address'],
         ]);
 
-        $user->registerMediaCollections();
-        
+        $role = Role::where('name', '=', 'user')->first();
+        if ($role) {
+            $user->assignRole($role);
+        }
+
+        $user->addMedia(public_path('images/placeholder.jpg'))->toMediaCollection('images-usuarios');
+
         return $this->successResponse($user, 'Registration Successfully');
     }
 }
