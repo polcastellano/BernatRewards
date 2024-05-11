@@ -16,15 +16,15 @@ export default function usarRecompensas(){
     const cargando = ref(false)
     const swal = inject('$swal')
 
-    const getRecompensas = () =>{
-        axios.get('/api/recompensas')
+    const getRecompensas = async () =>{
+        await axios.get('/api/recompensas')
         .then(response => {
             recompensas.value = response.data;
         })
     }
 
     const getRecompensa = async (id) =>{
-        axios.get('/api/recompensas/' + id)
+        await axios.get('/api/recompensas/' + id)
             .then(response => {
                 if(response.data.status == 405){
                     router.push({ name: 'recompensas.index' })

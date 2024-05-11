@@ -96,8 +96,9 @@ class AuthenticatedSessionController extends Controller
             $user->assignRole($role);
         }
 
-        $user->addMedia(public_path('images/placeholder.jpg'))->toMediaCollection('images-usuarios');
-
+        // $user->addMedia(public_path('images/placeholder.jpg'))->toMediaCollection('images-usuarios');
+// TODO borra la foto del disco
+        
         return $this->successResponse($user, 'Registration Successfully');
     }
 }

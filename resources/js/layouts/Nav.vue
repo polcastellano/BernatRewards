@@ -18,11 +18,11 @@
                                             <div class="imgUsuario bg-gray-100 border-circle bg-cover bg-center bg-no-repeat"
                                                 :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }"
                                                 :class="{
-                                                    'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
-                                                    'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
-                                                    'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
-                                                    'border-comodidadesSubTone': user.experience >= 100000,
-                                                }">
+                        'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
+                        'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
+                        'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
+                        'border-comodidadesSubTone': user.experience >= 100000,
+                    }">
                                             </div>
                                         </div>
                                     </a>
@@ -39,15 +39,14 @@
                         $t('rewards') }}</router-link></li>
                                         <li>
                                         <li><router-link to="/admin/pedidos" class="dropdown-item">{{
-                                                $t('history') }}</router-link>
+                        $t('history') }}</router-link>
                                         </li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)"
-                                                @click="logout">Logout</a>
-                                        </li>
-                                    </ul>
+                                        <hr class="dropdown-divider">
                                 </li>
+                                <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a>
+                                </li>
+                            </ul>
+                            </li>
                             </ul>
                         </div>
                     </div>
@@ -65,10 +64,12 @@
                     <ul class="navbar-nav m-0 ps-4 d-lg-none">
                         <template v-if="!user?.name">
                             <li class="nav-item">
-                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 }}">{{ $t('login') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 } }">{{ $t('login')
+                                    }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 }}">{{ $t('register') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 } }">{{
+                        $t('register') }}</router-link>
                             </li>
                         </template>
                     </ul>
@@ -96,10 +97,12 @@
                     <ul class="navbar-nav m-0 ps-4">
                         <template v-if="!user?.name">
                             <li class="nav-item">
-                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 }}">{{ $t('login') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 0 } }">{{ $t('login')
+                                    }}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 }}">{{ $t('register') }}</router-link>
+                                <router-link class="nav-link" :to="{ path: '/login', query: { tab: 1 } }">{{
+                        $t('register') }}</router-link>
                             </li>
                         </template>
                     </ul>
@@ -112,13 +115,12 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="d-flex align-items-center">
                                         <div class="imgUsuario bg-gray-100 border-circle bg-cover bg-center bg-no-repeat"
-                                        :class="{
-                                            'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
-                                            'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
-                                            'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
-                                            'border-comodidadesSubTone': user.experience >= 100000,
-                                        }"
-                                            :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
+                                            :class="{
+                        'border-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
+                        'border-info': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 33 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 66,
+                        'border-success': ((user.experience - user.nextLevel.experiencia + 1000) / 10) > 66 && ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 100,
+                        'border-comodidadesSubTone': user.experience >= 100000,
+                    }" :style="{ 'background-image': `url('${user?.media[0]?.original_url}')` }">
                                         </div>
                                         <p class="ms-2 nombreUsu" style="font-weight: bold;">{{ user.name }}</p>
                                     </div>
@@ -166,7 +168,7 @@
 
                         <div class="barraNivel d-flex align-items-center">
 
-                            <div class="barraNivelReal" 
+                            <div class="barraNivelReal"
                                 :style="{ width: ((user.experience - user.nextLevel.experiencia + 1000) / 10) + '%' }"
                                 :class="{
                         'bg-warning': ((user.experience - user.nextLevel.experiencia + 1000) / 10) <= 33,
@@ -178,13 +180,15 @@
 
                     </div>
                     <div v-else class="nivelInfo d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p>Nv.{{ user.nivelActual.numero }}</p>
-                            <div class="d-flex align-items-center">
-                                <p>Nv.Max</p>
-                                <img src="/images/iconos/lvlMax.svg" class="logo d-none d-lg-block" style="height: 1.2rem;" alt="logo" />
-                            </div>
+                        <div class="d-flex justify-content-between align-items-end py-1">
+                                <p>Nv.{{ user.nivelActual.numero }}</p>
+                                <div class="d-flex align-items-center">
+                                    <p>Nv.Max</p>
+                                    <img src="/images/iconos/lvlMax.svg" class="logo d-none d-lg-block"
+                                        style="height: 1.2rem;" alt="logo" />
+                                </div>
                         </div>
+
 
                         <div class="barraNivel d-flex align-items-center">
                             <div class="barraNivelReal bg-comodidadesSubTone" style="width: 100%;">

@@ -156,7 +156,6 @@
                                         <span class="text-danger">*</span>
                                     </h6>
                                     <DropZone v-model="user.imagen" />
-                                    <!-- TODO revisar este modelo, no va bien -->
                                     <div class="text-danger mt-1">
                                         {{ errors.imagen }}
                                     </div>

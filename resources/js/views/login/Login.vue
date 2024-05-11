@@ -34,8 +34,7 @@
                                                     </div>
                                                 </div>
                                                 <router-link :to="{ name: 'auth.forgot-password' }"
-                                                    class="forgotPass">{{
-                    $t('forgot_password') }}
+                                                    class="forgotPass">{{$t('forgot_password') }}
                                                 </router-link>
 
                                             </div>
