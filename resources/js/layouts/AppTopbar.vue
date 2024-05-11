@@ -64,7 +64,7 @@
 
                         <span class="nav-link dropdown-toggle ms-3 me-2" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Hola, {{ user.name }}
+                            {{ $t('hello')}}, {{ user.name }}
                         </span>
                     </button>
                 </div>

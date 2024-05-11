@@ -105,7 +105,6 @@ const model = ref([
 ]);
 
 watchEffect(() => {
-    0
     model.value[0].items[0].label = 'BernatPoints: ' + user.value.puntos;
 })
 

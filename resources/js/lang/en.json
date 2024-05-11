@@ -74,5 +74,7 @@
     "all" : "All",  
     "Subastas" : "Auctions",
     "Ventajas" : "Advantages",
-    "Comodidades" : "Amenities"
+    "Comodidades" : "Amenities",
+    "hello" : "Hello"
+
 }

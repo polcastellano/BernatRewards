@@ -336,11 +336,11 @@
 
 }
 
-.background-profile{
+.background-profile {
+    position: relative; /* Asegura que el contenedor sea relativo para que el pseudo-elemento se posicione correctamente */
     background-image: url('/images/backgrounds/triangles2.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: bottom;
+    background-size: cover; /* Ajusta el tamaño de la imagen de fondo para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen de fondo */
 }
 
 .p-autocomplete.p-autocomplete-dd .p-autocomplete-loader {

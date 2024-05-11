@@ -74,5 +74,7 @@
     "all" : "Tot",  
     "Subastas" : "Subhastes",
     "Ventajas" : "Avantatges",
-    "Comodidades" : "Comoditats"
+    "Comodidades" : "Comoditats",
+    "hello" : "Hola"
+
 }

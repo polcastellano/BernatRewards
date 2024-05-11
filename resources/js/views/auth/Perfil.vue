@@ -188,14 +188,14 @@
                                     </div>
                                 </div>
 
-                                <h2 class="card-title">{{ authuser.name }}</h2>
+                                <h2 class="card-title fw-bold text-black">{{ authuser.name }}</h2>
 
                             </div>
                             <div class="mb-7">
-                                <p class="my-3">Correo electronico: {{ authuser.email }}</p>
-                                <p class="my-3">Fecha nacimiento: {{ authuser.birthday }}</p>
-                                <p class="my-3">Numero de telefono: {{ authuser.telephone }}</p>
-                                <p class="my-3">Direccion: {{ authuser.address }}</p>
+                                <p class="my-3 text-black">{{ $t('email')}}: <span class="fw-bold text-black">{{ authuser.email }}</span></p>
+                                <p class="my-3 text-black">{{ $t('birthday')}}: <span class="fw-bold text-black">{{ authuser.birthday }}</span></p>
+                                <p class="my-3 text-black">{{ $t('telephone')}}: <span class="fw-bold text-black">{{ authuser.telephone }}</span></p>
+                                <p class="my-3 text-black">{{ $t('address')}}: <span class="fw-bold text-black">{{ authuser.address }}</span></p>
                             </div>
                         </div>
 
