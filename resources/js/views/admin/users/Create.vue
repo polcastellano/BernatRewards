@@ -12,7 +12,7 @@
                         <div class="form-group mb-5">
                             <FloatLabel class="align-items-center">
                                 <InputText v-model="user.name" type="text" class="form-control" />
-                                <label class="font-bold block">Nombre<span class="text-danger"> *</span></label>
+                                <label class="font-bold block">{{ $t('name') }}<span class="text-danger"> *</span></label>
                             </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.nombre }}
@@ -22,7 +22,7 @@
                         <div class="form-group mb-5">
                             <FloatLabel class="align-items-center">
                                 <InputText v-model="user.email" type="text" class="form-control" />
-                                <label class="font-bold block">Email<span class="text-danger"> *</span></label>
+                                <label class="font-bold block">{{ $t('email') }}<span class="text-danger"> *</span></label>
                             </FloatLabel>
                             <div class="text-danger mt-1">
                                 {{ errors.email }}
@@ -65,7 +65,7 @@
                         <div class="form-group mb-5">
                             <FloatLabel class="align-items-center">
                                 <InputText v-model="user.password" type="text" class="form-control" />
-                                <label class="font-bold block">Password<span class="text-danger">
+                                <label class="font-bold block">{{ $t('password') }}<span class="text-danger">
                                         *</span></label>
                             </FloatLabel>
                             <div class="text-danger mt-1">

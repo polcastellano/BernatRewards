@@ -102,8 +102,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $usuario = User::find($request->id);
-
+        $usuario = User::with('media')->find($request->id);
+        
         $roles = Role::find($request->roles);
 
         $usuario->name = $request->name;
@@ -112,6 +112,8 @@ class UserController extends Controller
         $usuario->experience = $request->experience;
         $usuario->telephone = $request->telephone;
         $usuario->address = $request->address;
+        $usuario->birthday = date("Y-m-d", strtotime($request->birthday));
+
 
         if (!empty($request->password)) {
             $usuario->password = Hash::make($request->password) ?? $usuario->password;
@@ -121,14 +123,16 @@ class UserController extends Controller
         if ($request->hasFile('imagen')) {
             $usuario->media()->delete();
             $usuario->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
+
         }
-
-
 
         if ($usuario->save()) {
             if ($roles) {
                 $usuario->syncRoles($roles);
             }
+   
+            $usuario = User::with('media')->with('roles')->find($request->id);
+
             return $usuario;
             // return UserResource::collection($usuario);
         }

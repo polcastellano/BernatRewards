@@ -5,11 +5,11 @@
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm">
-
+{{ user }}
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.name" type="text" class="form-control" />
-                            <label class="font-bold block">Nombre<span class="text-danger"> *</span></label>
+                            <label class="font-bold block">{{ $t('name') }}<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
                             {{ errors.nombre }}
@@ -19,7 +19,7 @@
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.email" type="text" class="form-control" />
-                            <label class="font-bold block">Email<span class="text-danger"> *</span></label>
+                            <label class="font-bold block">{{ $t('email') }}<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
                             {{ errors.email }}
@@ -62,7 +62,7 @@
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.password" type="text" class="form-control" />
-                            <label class="font-bold block">Password<span class="text-danger">
+                            <label class="font-bold block">{{ $t('password') }}<span class="text-danger">
                                     *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -74,7 +74,7 @@
                         <FloatLabel class="align-items-center">
                             <InputText :disabled="authuser.roles[0]?.name != 'admin'" v-model="user.experience"
                                 type="text" class="form-control" />
-                            <label class="font-bold block">Experiencia<span class="text-danger">
+                            <label class="font-bold block">{{ $t('experience') }}<span class="text-danger">
                                     *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
@@ -86,7 +86,7 @@
                         <FloatLabel class="align-items-center">
                             <InputText :disabled="authuser.roles[0]?.name == 'user'" v-model="user.puntos" type="text"
                                 class="form-control" />
-                            <label class="font-bold block">Puntos<span class="text-danger"> *</span></label>
+                            <label class="font-bold block">{{ $t('points') }}<span class="text-danger"> *</span></label>
                         </FloatLabel>
                         <div class="text-danger mt-1">
                             {{ errors.puntos }}
@@ -124,7 +124,7 @@
                             <span class="text-danger">*</span>
                         </h6>
                         <div class="mb-3">
-                            <MultiSelect :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
+                            <MultiSelect appendTo="self" :disabled="authuser.roles[0]?.name == 'user'" v-model="user.roles"
                                 :options="roleList" filter dataKey="id" optionLabel="name"
                                 placeholder="Seleciona un rol" display="chip" class="w-full">
                             </MultiSelect>

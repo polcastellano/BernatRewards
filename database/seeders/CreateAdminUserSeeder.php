@@ -37,6 +37,7 @@ class CreateAdminUserSeeder extends Seeder
             'recompensa-list',
             'user-edit',
         ];
+        $role2->syncPermissions($permissions);
 
         $permissions_teacher = [
             'role-list',
@@ -45,34 +46,15 @@ class CreateAdminUserSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-            'user-all',
-            'post-list',
-            'post-create',
-            'post-edit',
-            'post-all',
-            'post-delete',
-            'exercise-list',
-            'exercise-create',
-            'exercise-edit',
-            'exercise-all',
-            'exercise-delete',
-            'category-list',
-            'category-create',
-            'category-edit',
-            'category-delete',
             'recompensa-list',
             'recompensa-create',
             'recompensa-edit',
-            'recompensa-all',
             'recompensa-delete'
         ];
-
-        $role2->syncPermissions($permissions);
-        Category::create(['name' => 'Vue.js']);
-        Category::create(['name' => 'Cat 2']);
-
         $role3->syncPermissions($permissions_teacher);
 
+        // Category::create(['name' => 'Vue.js']);
+        // Category::create(['name' => 'Cat 2']);
 
         $permissions = Permission::pluck('id','id')->all();
 
