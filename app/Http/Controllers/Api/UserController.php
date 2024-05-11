@@ -29,18 +29,16 @@ class UserController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $users = User::
-        when(request('search_id'), function ($query) {
-            $query->where('id', request('search_id'));
-        })
+        $users = User::when(request('search_id'), function ($query) {
+                $query->where('id', request('search_id'));
+            })
             ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%'.request('search_title').'%');
+                $query->where('name', 'like', '%' . request('search_title') . '%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%'.request('search_global').'%');
-
+                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
@@ -57,22 +55,27 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $role = Role::find($request->role_id);
         $user = new User();
         $user->name = $request->name;
-        $user->nivel_id = 1;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->birthday = date("Y-m-d", strtotime($request->birthday));
+        $user->address = $request->address;
+        $user->telephone = $request->telephone;
 
-        //Comprobar si tiene imagen y almacenarla
+        $roles = explode(",", $request->roles);
+        $role = Role::find($roles);
+
+        // Comprobar si tiene imagen y almacenarla
         if ($request->hasFile('imagen')) {
             $user->addMediaFromRequest('imagen')->preservingOriginal()->toMediaCollection('images-usuarios');
         }
 
         if ($user->save()) {
-            if ($role) {
-                $user->assignRole($role);
-            }
+                
+                if ($role) {
+                    $user->assignRole($role);
+                }
             return new UserResource($user);
         }
     }
@@ -107,6 +110,8 @@ class UserController extends Controller
         $usuario->email = $request->email;
         $usuario->puntos = $request->puntos;
         $usuario->experience = $request->experience;
+        $usuario->telephone = $request->telephone;
+        $usuario->address = $request->address;
 
         if (!empty($request->password)) {
             $usuario->password = Hash::make($request->password) ?? $usuario->password;
@@ -143,13 +148,13 @@ class UserController extends Controller
         return response()->noContent();
     }
 
-    public function getStudents(){
-        $users = User::whereHas('roles', function($query){
+    public function getStudents()
+    {
+        $users = User::whereHas('roles', function ($query) {
             $query->where('id', 2);
         })->get()->toArray();
 
         return $users;
-
     }
 
     public function updateExp($id, Request $request)
@@ -163,9 +168,8 @@ class UserController extends Controller
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
         return $usuario;
-
     }
-    
+
     public function updatePts($id, Request $request)
     {
         $usuario = User::find($id);
@@ -178,7 +182,6 @@ class UserController extends Controller
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
         return $usuario;
-
     }
 
     public function removePts($id, Request $request)
@@ -192,6 +195,5 @@ class UserController extends Controller
         $usuario = User::with('media')->with('niveles')->with('roles')->find($id);
 
         return $usuario;
-
     }
 }

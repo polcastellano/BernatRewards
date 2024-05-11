@@ -60,29 +60,31 @@ export default function useUsers() {
         console.log(user);
 
         if (cargando.value) return;
-        
+
         cargando.value = true
         validationErrors.value = {}
 
-        let serializedPost = new FormData()
+        let serializedUser = new FormData()
         for (let item in user) {
             if (user.hasOwnProperty(item)) {
-                serializedPost.append(item, user[item])
+                serializedUser.append(item, user[item])
             }
         }
 
         console.log("SERIAL:")
-        console.log(serializedPost);
-        
-        axios.post('/api/users', serializedPost,{
-                headers: {
-                    "content-type": "multipart/form-data"
-                }
-            })
-            .then(response =>{
-                router.push({ name: 'users.index' })
-                toast.add({ severity: 'success', summary: 'Usuario creado', detail: 'Usuario creado correctamente', life: 3050, closable: false });
+        console.log(serializedUser);
 
+        axios.post('/api/users', serializedUser, {
+            headers: {
+                "content-type": "multipart/form-data"
+            }
+        })
+            .then(response => {
+                toast.add({ severity: 'success', summary: 'Usuario creado', detail: 'Usuario creado correctamente', life: 1500, closable: false });
+                // Espera un momento antes de redirigir
+                setTimeout(() => {
+                    // router.push({ name: 'users.index' });
+                }, 1500); // 1500 ms para asegurar que el toast desaparezca antes de redirigir
             })
             .catch(error => {
                 swal({
@@ -105,21 +107,21 @@ export default function useUsers() {
             headers: {
                 "content-type": "multipart/form-data"
             }
-        })
-        .then(response => {
-            console.log(response)
-            router.push({ name: 'users.index' })
-            toast.add({ severity: 'info', summary: 'User editado', detail: 'User editado correctamente', life: 3050, closable: false });
+            }).then(response => {
+                toast.add({ severity: 'info', summary: 'User editado', detail: 'User editado correctamente', life: 1500, closable: false });
+                // Espera un momento antes de redirigir
+                setTimeout(() => {
+                    router.push({ name: 'users.index' });
+                }, 1500); // 1500 ms para asegurar que el toast desaparezca antes de redirigir
 
-        })
-        .catch(error => {
-            console.log(error)
-            swal({
-                icon: 'error',
-                title: 'User editado incorrectamente'
+            }).catch(error => {
+                console.log(error)
+                swal({
+                    icon: 'error',
+                    title: 'User editado incorrectamente'
+                })
             })
-        })
-        .finally(() => cargando.value = false)
+            .finally(() => cargando.value = false)
     }
 
     const deleteUser = async (id) => {
@@ -139,8 +141,11 @@ export default function useUsers() {
                     axios.delete('/api/users/' + id)
                         .then(response => {
                             getUsers()
-                            router.push({name: 'users.index'})
-                            toast.add({ severity: 'info', summary: 'User borrado', detail: 'User borrado correctamente', life: 3050, closable: false });
+                            toast.add({ severity: 'info', summary: 'User borrado', detail: 'User borrado correctamente', life: 1500, closable: false });
+                            // Espera un momento antes de redirigir
+                            setTimeout(() => {
+                                router.push({ name: 'users.index' });
+                            }, 1500); // 1500 ms para asegurar que el toast desaparezca antes de redirigir
                         })
                         .catch(error => {
                             swal({
@@ -154,7 +159,7 @@ export default function useUsers() {
 
 
     const addPts = async (id, nombre, pts) => {
-        if(pts == 0){
+        if (pts == 0) {
             swal({
                 title: "Cuantos puntos quieres sumar a " + nombre + "?",
                 input: "number",
@@ -170,7 +175,7 @@ export default function useUsers() {
                 },
             }).then(result => {
                 if (result.isConfirmed) {
-                    
+
                     pts = result.value;
 
                     axios.post('/api/users/updatePts/' + id, {
@@ -209,12 +214,12 @@ export default function useUsers() {
             })
                 .then(result => {
                     if (result.isConfirmed) {
-    
+
                         axios.post('/api/users/updatePts/' + id, {
                             puntos: pts,
-                          })
+                        })
                             .then(response => {
-                                
+
                                 students.value.data = students.value.filter(student => {
                                     if (student.id == response.data.id) {
                                         student.experience = Math.round(response.data.experience);
@@ -240,7 +245,8 @@ export default function useUsers() {
 
     }
 
-    const substractPts = async (id, nombre) => {;
+    const substractPts = async (id, nombre) => {
+        ;
         swal({
             title: "Cuantos puntos quieres restarle a " + nombre + "?",
             input: "number",
@@ -253,30 +259,30 @@ export default function useUsers() {
             reverseButtons: true,
             inputAttributes: {
                 min: 0
-              },
-          }).then(result => {
-                if (result.isConfirmed) {
-                    const pts = (result.value * -1); 
-                    
-                    axios.post('/api/users/removePts/' + id, {
-                        puntos: pts,
-                      })
-                        .then(response => {
-                            toast.add({ severity: 'info', summary: 'Puntos restados', detail: 'Puntos restados correctamente', life: 3050, closable: false });
+            },
+        }).then(result => {
+            if (result.isConfirmed) {
+                const pts = (result.value * -1);
 
+                axios.post('/api/users/removePts/' + id, {
+                    puntos: pts,
+                })
+                    .then(response => {
+                        toast.add({ severity: 'info', summary: 'Puntos restados', detail: 'Puntos restados correctamente', life: 3050, closable: false });
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        swal({
+                            icon: 'error',
+                            title: 'Error al restar puntos'
                         })
-                        .catch(error => {
-                            console.log(error)
-                            swal({
-                                icon: 'error',
-                                title: 'Error al restar puntos'
-                            })
-                        })
-                }
-            })
+                    })
+            }
+        })
     }
 
-    
+
 
     return {
         users,

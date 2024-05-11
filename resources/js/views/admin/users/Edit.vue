@@ -1,5 +1,7 @@
 <template>
+    
     <form @submit.prevent="submitForm">
+        <Toast />
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm">
@@ -11,6 +13,16 @@
                         </FloatLabel>
                         <div class="text-danger mt-1">
                             {{ errors.nombre }}
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-5">
+                        <FloatLabel class="align-items-center">
+                            <InputText v-model="user.email" type="text" class="form-control" />
+                            <label class="font-bold block">Email<span class="text-danger"> *</span></label>
+                        </FloatLabel>
+                        <div class="text-danger mt-1">
+                            {{ errors.email }}
                         </div>
                     </div>
 
