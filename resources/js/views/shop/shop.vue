@@ -77,8 +77,10 @@
                     </div>
                     <div class="flex flex-wrap w-full md:justify-content-start justify-content-center border-round-3xl">
                         <div v-for="item in recompensas.data" class="lg:w-4 md:w-6 w-11 lg:px-5 md:px-4 px-2 pb-6">
-                            <div class="bg-white block flex flex-column p-3 border-round-3xl flex-end">
-
+                            <div :class="{
+                                        'bg-restriction': authuser.nivelActual.numero < item.nivel_desbloqueo,
+                                        }"
+                            class="bg-white block flex flex-column p-3 border-round-3xl flex-end">
                                 <div class="bg-fondo h-20rem mb-3 border-round-3xl">
                                     <div class="h-full w-full bg-center bg-no-repeat flex justify-content-between bg-contain"
                                         :style="{ 'background-image': `url('${item.original_image}')` }">
@@ -343,7 +345,7 @@ const login = (() => {
     left: 25%;
     width: 50%;
     height: 50%;
-    background-image: url('/images/placeholder.jpg'); /* Ruta de la imagen de fondo */
+    background-image: url('/images/iconos/padlock.svg'); /* Ruta de la imagen de fondo */
     background-size: contain; /* Ajusta la imagen de fondo para que se ajuste dentro del contenedor */
     background-position: center center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
