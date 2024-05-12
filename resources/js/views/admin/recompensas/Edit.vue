@@ -3,7 +3,7 @@
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm"> 
-            {{ recompensa }} 
+            <!-- {{ recompensa }}  -->
                     <div class="card-body">
                         <div class="d-flex justify-content-between pb-2 mb-5">
                             <h5 class="card-title">Editar {{ recompensa.nombre }}</h5>

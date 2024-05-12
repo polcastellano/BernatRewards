@@ -3,7 +3,7 @@
         <Toast appendTo="self" />
         <div v-if="authuser.name != null">
             <div v-for="categoria in productosCategorias" class="flex justify-content-center align-items-center">
-                <div :class="'bg-' + categoria.nombre.toLowerCase()"
+                <div v-if="categoria.productos.length != 0" :class="'bg-' + categoria.nombre.toLowerCase()"
                     class="flex flex-wrap w-full lg:m-5 m-2 lg:p-5 p-3 md:justify-content-start justify-content-start border-round-3xl">
                     <div :class="'bg-' + categoria.nombre.toLowerCase() + 'SubTone'"
                         class="tituloCategoria flex align-items-center p-1 px-3 border-round-3xl lg:mb-6 mb-4">
@@ -341,10 +341,12 @@ const login = (() => {
 .bg-restriction::after {
     content: "";
     position: absolute;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
+    top: 35%;
+    left: 35%;
+    width: 30%;
+    height: 30%;
+    background-color: #27262665;
+    border-radius: 100%;
     background-image: url('/images/iconos/padlock.svg'); /* Ruta de la imagen de fondo */
     background-size: contain; /* Ajusta la imagen de fondo para que se ajuste dentro del contenedor */
     background-position: center center; /* Centra la imagen de fondo */

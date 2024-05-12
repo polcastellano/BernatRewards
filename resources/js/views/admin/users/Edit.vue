@@ -5,7 +5,7 @@
         <div class="row my-5">
             <div class="col-md-8">
                 <div class="card  border-0 shadow-sm">
-{{ user }}
+<!-- {{ user }} -->
                     <div class="form-group mb-5">
                         <FloatLabel class="align-items-center">
                             <InputText v-model="user.name" type="text" class="form-control" />
