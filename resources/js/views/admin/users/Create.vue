@@ -42,7 +42,8 @@
 
                         <div class="form-group mb-5 border-0">
                             <FloatLabel class="align-items-center">
-                                <Calendar v-model="user.birthday" class="form-control" />
+                                <Calendar v-model="user.birthday" class="p-component2"   id="birthday" showIcon
+                                                    iconDisplay="input"  />
                                 <label class="font-bold block">{{ $t('birthday') }}<span class="text-danger">
                                         *</span></label>
                             </FloatLabel>
