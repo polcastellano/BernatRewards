@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Recompensa;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,15 @@ class PedidoFactory extends Factory
      */
     public function definition(): array
     {
+        // Obtener un usuario existente
+        $user = User::inRandomOrder()->first();
+               
+        // Obtener una recompensa existente
+        $recompensa = Recompensa::inRandomOrder()->first();
+        
         return [
-            //
+            'usuario_id' => $user->id,
+            'recompensa_id' => $recompensa->id,
         ];
     }
 }

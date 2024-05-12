@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,14 +17,15 @@ class RecompensaFactory extends Factory
      */
     public function definition()
     {
-        // return [
-        //     'name' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //     'remember_token' => Str::random(10),
-        //     'puntos' => fake()->numberBetween(0, 1000),
-        //     'experience' => fake()->numberBetween(0, 5000),
-        // ];
+        // Obtener un usuario existente
+        $user = User::inRandomOrder()->first();
+
+        return [
+            'nombre' => "Recompensa " . $this->faker->unique()->numberBetween(1, 99999),
+            'descripcion' => "descripcion automatica",
+            'precio' => fake()->numberBetween(0, 1000),
+            'nivel_desbloqueo' => fake()->numberBetween(0, 100),
+            'usuario_id' => $user->id,
+        ];
     }
 }
