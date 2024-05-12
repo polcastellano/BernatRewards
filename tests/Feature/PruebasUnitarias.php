@@ -33,7 +33,6 @@ class PruebasUnitarias extends TestCase
 
     public function test_can_create_recompensa()
     {
-        // Crea un usuario
         $recompensa = Recompensa::factory()->create();
 
         // Verifica que el usuario se haya creado en la base de datos
@@ -43,11 +42,10 @@ class PruebasUnitarias extends TestCase
 
     public function test_can_buy()
     {
-        // Crea un usuario
         $pedido = Pedido::factory()->create();
 
         // Verifica que el usuario se haya creado en la base de datos
-        $this->assertDatabaseHas('recompensas', ['id' => $pedido->id,]);
+        $this->assertDatabaseHas('pedidos', ['id' => $pedido->id,]);
 
     }
 }
