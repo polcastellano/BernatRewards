@@ -30,7 +30,6 @@
                                                     alt="reloj de tiempo de descuento">
                                             </div>
                                         </div>
-
                                         <div class="bg-principal mt-2 me-2 border-circle flex justify-content-center align-items-center"
                                             style="height: 2.5rem; width: 2.5rem;">
                                             <p class="text-white text-center text-xs"
